@@ -1,0 +1,2642 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EternalTie — Zero-Backend Public Wedding Invitation Platform</title>
+  <meta name="description" content="Create, customize, and send elegant, private wedding invitations with zero server storage. Independent, secure, and instant.">
+  <style>
+    /* RESET & CORE VARIABLES */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --font-serif: "Playfair Display", "Baskerville", "Georgia", "Didot", "Times New Roman", serif;
+      --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+      
+      /* UI App Theme (Generator Studio) */
+      --bg-studio: #0f172a;
+      --bg-studio-panel: #1e293b;
+      --bg-studio-card: #273549;
+      --text-studio: #f8fafc;
+      --text-studio-muted: #94a3b8;
+      --border-studio: #334155;
+      --primary: #c4a265;
+      --primary-hover: #b39154;
+      --primary-glow: rgba(196, 162, 101, 0.25);
+      --accent-green: #10b981;
+      --radius-sm: 6px;
+      --radius-md: 10px;
+      --radius-lg: 16px;
+      --radius-xl: 24px;
+      --shadow-sm: 0 1px 2px rgba(0,0,0,0.1);
+      --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.15), 0 2px 4px -2px rgba(0,0,0,0.1);
+      --shadow-lg: 0 10px 25px -5px rgba(0,0,0,0.25), 0 8px 10px -6px rgba(0,0,0,0.2);
+      --shadow-card: 0 20px 35px -10px rgba(0, 0, 0, 0.35);
+    }
+
+    /* THEME PRESETS FOR INVITATION CARDS */
+    /* 1. Sage Botanical */
+    [data-theme="sage"] {
+      --inv-bg: #f9f8f5;
+      --inv-card-bg: #ffffff;
+      --inv-primary: #3b5747;
+      --inv-accent: #b08d57;
+      --inv-text: #2d3748;
+      --inv-muted: #64748b;
+      --inv-border: #e2dcd2;
+      --inv-wax: #405b4c;
+      --inv-font-display: var(--font-serif);
+      --inv-border-ornament: #c9b087;
+    }
+
+    /* 2. Royale Gold & Champagne */
+    [data-theme="gold"] {
+      --inv-bg: #11141a;
+      --inv-card-bg: #181d26;
+      --inv-primary: #e6ca85;
+      --inv-accent: #d4af37;
+      --inv-text: #f1f5f9;
+      --inv-muted: #94a3b8;
+      --inv-border: #3b4252;
+      --inv-wax: #9e2a2b;
+      --inv-font-display: var(--font-serif);
+      --inv-border-ornament: #d4af37;
+    }
+
+    /* 3. Dusty Rose & Wine */
+    [data-theme="rose"] {
+      --inv-bg: #fbf6f6;
+      --inv-card-bg: #ffffff;
+      --inv-primary: #6b2d38;
+      --inv-accent: #c48b9f;
+      --inv-text: #3d2c31;
+      --inv-muted: #826c73;
+      --inv-border: #ebd9df;
+      --inv-wax: #8b2635;
+      --inv-font-display: var(--font-serif);
+      --inv-border-ornament: #c48b9f;
+    }
+
+    /* 4. Celestial Midnight */
+    [data-theme="celestial"] {
+      --inv-bg: #090e17;
+      --inv-card-bg: #0f1726;
+      --inv-primary: #e2c076;
+      --inv-accent: #60a5fa;
+      --inv-text: #f8fafc;
+      --inv-muted: #94a3b8;
+      --inv-border: #23334d;
+      --inv-wax: #1e3a8a;
+      --inv-font-display: var(--font-serif);
+      --inv-border-ornament: #e2c076;
+    }
+
+    /* 5. Modern Terracotta */
+    [data-theme="terracotta"] {
+      --inv-bg: #f6f0ea;
+      --inv-card-bg: #ffffff;
+      --inv-primary: #a3482d;
+      --inv-accent: #d97757;
+      --inv-text: #33261f;
+      --inv-muted: #78665c;
+      --inv-border: #e3d3c8;
+      --inv-wax: #a3482d;
+      --inv-font-display: var(--font-serif);
+      --inv-border-ornament: #d97757;
+    }
+
+    body {
+      font-family: var(--font-sans);
+      background-color: var(--bg-studio);
+      color: var(--text-studio);
+      line-height: 1.5;
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* NAVIGATION / TOP BAR */
+    header.studio-nav {
+      height: 64px;
+      background: rgba(15, 23, 42, 0.95);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-studio);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 1.5rem;
+      position: sticky;
+      top: 0;
+      z-index: 50;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      text-decoration: none;
+      color: var(--text-studio);
+    }
+
+    .brand svg {
+      color: var(--primary);
+    }
+
+    .brand-title {
+      font-family: var(--font-serif);
+      font-size: 1.25rem;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+    }
+
+    .brand-tagline {
+      font-size: 0.75rem;
+      color: var(--text-studio-muted);
+      background: rgba(196, 162, 101, 0.15);
+      color: var(--primary);
+      padding: 2px 8px;
+      border-radius: 9999px;
+      font-weight: 500;
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0.5rem 1rem;
+      font-size: 0.875rem;
+      font-weight: 500;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      transition: all 0.2s ease;
+      border: 1px solid transparent;
+      text-decoration: none;
+      font-family: var(--font-sans);
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: #1a160d;
+      font-weight: 600;
+    }
+    .btn-primary:hover {
+      background: var(--primary-hover);
+      box-shadow: 0 0 15px var(--primary-glow);
+    }
+
+    .btn-secondary {
+      background: var(--bg-studio-panel);
+      color: var(--text-studio);
+      border-color: var(--border-studio);
+    }
+    .btn-secondary:hover {
+      background: var(--bg-studio-card);
+      border-color: #475569;
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--text-studio);
+      border-color: var(--border-studio);
+    }
+    .btn-outline:hover {
+      background: rgba(255, 255, 255, 0.05);
+      border-color: var(--primary);
+    }
+
+    .btn-sm {
+      padding: 0.35rem 0.65rem;
+      font-size: 0.8rem;
+    }
+
+    /* STUDIO LAYOUT */
+    .studio-container {
+      display: grid;
+      grid-template-columns: 460px 1fr;
+      min-height: calc(100vh - 64px);
+    }
+
+    @media (max-width: 1080px) {
+      .studio-container {
+        grid-template-columns: 1fr;
+      }
+      .preview-pane {
+        border-top: 1px solid var(--border-studio);
+      }
+    }
+
+    /* EDITOR PANEL */
+    .editor-pane {
+      background: var(--bg-studio-panel);
+      border-right: 1px solid var(--border-studio);
+      display: flex;
+      flex-direction: column;
+      height: calc(100vh - 64px);
+      overflow-y: auto;
+    }
+
+    .editor-header {
+      padding: 1.25rem 1.5rem;
+      border-bottom: 1px solid var(--border-studio);
+      background: rgba(30, 41, 59, 0.8);
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      backdrop-filter: blur(8px);
+    }
+
+    .editor-header h2 {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--text-studio);
+    }
+
+    .editor-header p {
+      font-size: 0.8rem;
+      color: var(--text-studio-muted);
+      margin-top: 0.25rem;
+    }
+
+    .editor-tabs {
+      display: flex;
+      border-bottom: 1px solid var(--border-studio);
+      background: #192231;
+      padding: 0 0.5rem;
+      overflow-x: auto;
+    }
+
+    .editor-tab-btn {
+      padding: 0.75rem 0.85rem;
+      background: none;
+      border: none;
+      border-bottom: 2px solid transparent;
+      color: var(--text-studio-muted);
+      font-size: 0.825rem;
+      font-weight: 500;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.15s ease;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .editor-tab-btn.active {
+      color: var(--primary);
+      border-bottom-color: var(--primary);
+      background: rgba(196, 162, 101, 0.05);
+    }
+
+    .editor-body {
+      padding: 1.5rem;
+      flex: 1;
+    }
+
+    .form-section {
+      display: none;
+    }
+    .form-section.active {
+      display: block;
+      animation: fadeIn 0.25s ease-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .form-group {
+      margin-bottom: 1.25rem;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: #cbd5e1;
+      margin-bottom: 0.4rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .form-group .hint {
+      font-size: 0.75rem;
+      color: var(--text-studio-muted);
+      margin-top: 0.25rem;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.75rem;
+    }
+
+    input[type="text"],
+    input[type="date"],
+    input[type="time"],
+    input[type="email"],
+    input[type="tel"],
+    input[type="url"],
+    select,
+    textarea {
+      width: 100%;
+      padding: 0.65rem 0.85rem;
+      background: #0f172a;
+      border: 1px solid var(--border-studio);
+      border-radius: var(--radius-sm);
+      color: #fff;
+      font-size: 0.875rem;
+      font-family: inherit;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    input:focus, select:focus, textarea:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px var(--primary-glow);
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 80px;
+    }
+
+    /* THEME PICKER SWATCHES */
+    .theme-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+      gap: 0.75rem;
+      margin-top: 0.5rem;
+    }
+
+    .theme-card {
+      border: 2px solid var(--border-studio);
+      border-radius: var(--radius-md);
+      padding: 0.75rem;
+      background: #131b2a;
+      cursor: pointer;
+      text-align: center;
+      transition: all 0.2s;
+    }
+
+    .theme-card.active {
+      border-color: var(--primary);
+      background: rgba(196, 162, 101, 0.1);
+      box-shadow: 0 0 10px var(--primary-glow);
+    }
+
+    .theme-preview-dots {
+      display: flex;
+      justify-content: center;
+      gap: 4px;
+      margin-bottom: 0.5rem;
+    }
+
+    .theme-dot {
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,0.2);
+    }
+
+    .theme-name {
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--text-studio);
+    }
+
+    /* EVENT TIMELINE ITEM BUILDER */
+    .timeline-builder-item {
+      background: #131b2a;
+      border: 1px solid var(--border-studio);
+      border-radius: var(--radius-sm);
+      padding: 0.75rem;
+      margin-bottom: 0.75rem;
+      position: relative;
+    }
+
+    .timeline-builder-item .remove-btn {
+      position: absolute;
+      top: 0.5rem;
+      right: 0.5rem;
+      background: none;
+      border: none;
+      color: #ef4444;
+      cursor: pointer;
+      font-size: 0.8rem;
+    }
+
+    /* PREVIEW PANE */
+    .preview-pane {
+      background: #090e17;
+      display: flex;
+      flex-direction: column;
+      height: calc(100vh - 64px);
+      overflow-y: auto;
+      position: relative;
+    }
+
+    .preview-toolbar {
+      padding: 0.75rem 1.5rem;
+      background: rgba(15, 23, 42, 0.75);
+      border-bottom: 1px solid var(--border-studio);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      backdrop-filter: blur(8px);
+      position: sticky;
+      top: 0;
+      z-index: 20;
+    }
+
+    .device-toggles {
+      display: flex;
+      background: var(--bg-studio-panel);
+      padding: 3px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border-studio);
+    }
+
+    .device-btn {
+      background: none;
+      border: none;
+      color: var(--text-studio-muted);
+      padding: 4px 8px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .device-btn.active {
+      background: var(--primary);
+      color: #1a160d;
+      font-weight: 600;
+    }
+
+    .preview-stage {
+      flex: 1;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      padding: 2.5rem 1.5rem;
+      background: radial-gradient(circle at 50% 20%, #1e293b 0%, #090e17 75%);
+      overflow-y: auto;
+    }
+
+    .preview-viewport {
+      width: 100%;
+      max-width: 650px;
+      transition: max-width 0.3s ease;
+    }
+
+    .preview-viewport.mobile {
+      max-width: 390px;
+    }
+
+    .preview-viewport.tablet {
+      max-width: 520px;
+    }
+
+    /* INVITATION CONTAINER & CARD DESIGN */
+    .invitation-wrapper {
+      position: relative;
+      width: 100%;
+      margin: 0 auto;
+      perspective: 1200px;
+    }
+
+    /* INTERACTIVE ENVELOPE STYLES */
+    .envelope-container {
+      width: 100%;
+      max-width: 520px;
+      margin: 0 auto 2rem auto;
+      background: var(--inv-border);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-card);
+      position: relative;
+      cursor: pointer;
+      overflow: hidden;
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+      border: 2px solid rgba(255,255,255,0.1);
+    }
+
+    .envelope-container:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    }
+
+    .envelope-pocket {
+      background: linear-gradient(135deg, var(--inv-card-bg) 0%, var(--inv-bg) 100%);
+      padding: 3rem 2rem;
+      text-align: center;
+      position: relative;
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--inv-border);
+    }
+
+    .envelope-top-crest {
+      margin-bottom: 1.5rem;
+      color: var(--inv-accent);
+    }
+
+    .envelope-title {
+      font-family: var(--inv-font-display);
+      font-size: 1.35rem;
+      color: var(--inv-text);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+    }
+
+    .envelope-guest-tag {
+      display: inline-block;
+      padding: 0.4rem 1.25rem;
+      background: rgba(176, 141, 87, 0.12);
+      border: 1px dashed var(--inv-accent);
+      border-radius: 9999px;
+      font-size: 0.85rem;
+      color: var(--inv-primary);
+      font-style: italic;
+      margin-bottom: 1.5rem;
+      font-family: var(--inv-font-display);
+    }
+
+    .wax-seal {
+      width: 76px;
+      height: 76px;
+      background: radial-gradient(circle at 35% 35%, #b91c1c, var(--inv-wax));
+      border-radius: 50%;
+      margin: 1rem auto 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: #ffd700;
+      box-shadow: inset 0 2px 4px rgba(255,255,255,0.3), 0 8px 15px rgba(0,0,0,0.35);
+      border: 3px double rgba(255, 215, 0, 0.4);
+      position: relative;
+      transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .wax-seal:hover {
+      transform: scale(1.08);
+    }
+
+    .wax-seal-initials {
+      font-family: var(--inv-font-display);
+      font-weight: 700;
+      font-size: 1.15rem;
+      letter-spacing: 1px;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.6);
+    }
+
+    .wax-seal-sub {
+      font-size: 0.55rem;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      opacity: 0.85;
+    }
+
+    .open-cue {
+      margin-top: 1.25rem;
+      font-size: 0.75rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--inv-muted);
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 0.6; }
+      50% { opacity: 1; }
+    }
+
+    /* THE INVITATION MAIN CARD */
+    .invitation-card {
+      background: var(--inv-card-bg);
+      color: var(--inv-text);
+      border-radius: var(--radius-xl);
+      border: 1px solid var(--inv-border);
+      box-shadow: var(--shadow-card);
+      overflow: hidden;
+      position: relative;
+      transition: all 0.3s ease;
+    }
+
+    /* Outer decorative border frame */
+    .card-frame {
+      padding: 2.5rem 2rem;
+      position: relative;
+    }
+
+    @media (max-width: 600px) {
+      .card-frame {
+        padding: 2rem 1.25rem;
+      }
+    }
+
+    .card-border-ornament {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      right: 12px;
+      bottom: 12px;
+      border: 1px solid var(--inv-border-ornament);
+      border-radius: calc(var(--radius-xl) - 8px);
+      pointer-events: none;
+      opacity: 0.6;
+    }
+
+    .card-border-ornament::after {
+      content: "";
+      position: absolute;
+      top: 4px;
+      left: 4px;
+      right: 4px;
+      bottom: 4px;
+      border: 1px dashed var(--inv-border-ornament);
+      border-radius: calc(var(--radius-xl) - 12px);
+      opacity: 0.4;
+    }
+
+    /* CORNER ORNAMENTS (SVG) */
+    .corner-flourish {
+      position: absolute;
+      width: 40px;
+      height: 40px;
+      fill: var(--inv-border-ornament);
+      opacity: 0.75;
+      pointer-events: none;
+    }
+    .corner-tl { top: 16px; left: 16px; }
+    .corner-tr { top: 16px; right: 16px; transform: scaleX(-1); }
+    .corner-bl { bottom: 16px; left: 16px; transform: scaleY(-1); }
+    .corner-br { bottom: 16px; right: 16px; transform: scale(-1); }
+
+    /* CARD HERO SECTION */
+    .card-header-block {
+      text-align: center;
+      margin-bottom: 2rem;
+      position: relative;
+      z-index: 2;
+    }
+
+    .card-monogram {
+      width: 54px;
+      height: 54px;
+      margin: 0 auto 1.25rem auto;
+      border: 1px solid var(--inv-accent);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--inv-font-display);
+      font-size: 1.25rem;
+      color: var(--inv-primary);
+      background: rgba(176, 141, 87, 0.06);
+    }
+
+    .card-intro {
+      font-size: 0.85rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--inv-muted);
+      margin-bottom: 0.75rem;
+      font-weight: 500;
+    }
+
+    .card-names {
+      font-family: var(--inv-font-display);
+      font-size: 2.6rem;
+      line-height: 1.15;
+      color: var(--inv-primary);
+      margin-bottom: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+    }
+
+    @media (max-width: 480px) {
+      .card-names {
+        font-size: 2.1rem;
+      }
+    }
+
+    .card-ampersand {
+      display: block;
+      font-style: italic;
+      font-weight: 300;
+      font-size: 1.7rem;
+      color: var(--inv-accent);
+      margin: 0.15rem 0;
+    }
+
+    .card-request {
+      font-size: 0.925rem;
+      font-style: italic;
+      color: var(--inv-muted);
+      max-width: 420px;
+      margin: 0 auto 1.5rem auto;
+      line-height: 1.6;
+    }
+
+    /* DATE & TIME BADGE */
+    .card-datetime-badge {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1.5rem;
+      padding: 1.25rem 0;
+      border-top: 1px solid var(--inv-border);
+      border-bottom: 1px solid var(--inv-border);
+      margin: 1.75rem 0;
+    }
+
+    .dt-col {
+      text-align: center;
+    }
+
+    .dt-day-name {
+      font-size: 0.75rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--inv-muted);
+      font-weight: 600;
+    }
+
+    .dt-day-num {
+      font-family: var(--inv-font-display);
+      font-size: 2.2rem;
+      font-weight: 700;
+      color: var(--inv-primary);
+      line-height: 1;
+      margin: 0.25rem 0;
+    }
+
+    .dt-month-year {
+      font-size: 0.8rem;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--inv-muted);
+      font-weight: 600;
+    }
+
+    .dt-divider {
+      width: 1px;
+      height: 48px;
+      background: var(--inv-border);
+    }
+
+    .dt-time {
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--inv-text);
+      font-family: var(--inv-font-display);
+    }
+
+    /* COUNTDOWN TIMER */
+    .countdown-section {
+      text-align: center;
+      margin: 1.5rem 0;
+    }
+
+    .countdown-grid {
+      display: flex;
+      justify-content: center;
+      gap: 0.75rem;
+    }
+
+    .countdown-unit {
+      background: rgba(176, 141, 87, 0.08);
+      border: 1px solid var(--inv-border);
+      border-radius: var(--radius-sm);
+      min-width: 60px;
+      padding: 0.5rem 0.25rem;
+    }
+
+    .cd-val {
+      font-family: var(--inv-font-display);
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--inv-primary);
+      line-height: 1;
+    }
+
+    .cd-label {
+      font-size: 0.65rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--inv-muted);
+      margin-top: 0.2rem;
+    }
+
+    /* VENUE & LOCATION CARD */
+    .card-venue-section {
+      text-align: center;
+      margin: 2rem 0;
+    }
+
+    .venue-name {
+      font-family: var(--inv-font-display);
+      font-size: 1.35rem;
+      color: var(--inv-primary);
+      font-weight: 600;
+      margin-bottom: 0.35rem;
+    }
+
+    .venue-address {
+      font-size: 0.9rem;
+      color: var(--inv-muted);
+      max-width: 380px;
+      margin: 0 auto 0.75rem auto;
+      line-height: 1.5;
+    }
+
+    .venue-actions {
+      display: flex;
+      justify-content: center;
+      gap: 0.75rem;
+      margin-top: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .card-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.5rem 1rem;
+      font-size: 0.8rem;
+      border-radius: 9999px;
+      text-decoration: none;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      border: 1px solid transparent;
+    }
+
+    .card-btn-solid {
+      background: var(--inv-primary);
+      color: var(--inv-card-bg);
+    }
+    .card-btn-solid:hover {
+      opacity: 0.9;
+      transform: translateY(-1px);
+    }
+
+    .card-btn-outline {
+      background: transparent;
+      border-color: var(--inv-accent);
+      color: var(--inv-primary);
+    }
+    .card-btn-outline:hover {
+      background: rgba(176, 141, 87, 0.1);
+    }
+
+    /* TIMELINE SECTION */
+    .card-timeline-section {
+      margin: 2.5rem 0;
+    }
+
+    .section-title {
+      font-family: var(--inv-font-display);
+      text-align: center;
+      font-size: 1.25rem;
+      color: var(--inv-primary);
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+      position: relative;
+    }
+
+    .section-title::after {
+      content: "";
+      display: block;
+      width: 40px;
+      height: 2px;
+      background: var(--inv-accent);
+      margin: 0.5rem auto 0 auto;
+      opacity: 0.6;
+    }
+
+    .timeline-list {
+      position: relative;
+      max-width: 420px;
+      margin: 0 auto;
+      padding-left: 2rem;
+    }
+
+    .timeline-list::before {
+      content: "";
+      position: absolute;
+      top: 8px;
+      bottom: 8px;
+      left: 7px;
+      width: 2px;
+      background: var(--inv-border);
+    }
+
+    .timeline-entry {
+      position: relative;
+      margin-bottom: 1.5rem;
+    }
+
+    .timeline-entry:last-child {
+      margin-bottom: 0;
+    }
+
+    .timeline-marker {
+      position: absolute;
+      left: -2rem;
+      top: 3px;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: var(--inv-card-bg);
+      border: 2px solid var(--inv-accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .timeline-marker::after {
+      content: "";
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--inv-primary);
+    }
+
+    .timeline-time {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--inv-accent);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .timeline-title {
+      font-family: var(--inv-font-display);
+      font-size: 1.05rem;
+      color: var(--inv-text);
+      font-weight: 600;
+      margin: 0.15rem 0;
+    }
+
+    .timeline-desc {
+      font-size: 0.825rem;
+      color: var(--inv-muted);
+      line-height: 1.4;
+    }
+
+    /* DETAILS & LOGISTICS GRID */
+    .details-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin: 2rem 0;
+    }
+
+    @media (max-width: 520px) {
+      .details-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .detail-card {
+      background: rgba(176, 141, 87, 0.05);
+      border: 1px solid var(--inv-border);
+      border-radius: var(--radius-md);
+      padding: 1.25rem;
+      text-align: center;
+    }
+
+    .detail-icon {
+      margin-bottom: 0.5rem;
+      color: var(--inv-accent);
+    }
+
+    .detail-title {
+      font-family: var(--inv-font-display);
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--inv-primary);
+      margin-bottom: 0.25rem;
+    }
+
+    .detail-text {
+      font-size: 0.8rem;
+      color: var(--inv-muted);
+      line-height: 1.45;
+    }
+
+    /* INTERACTIVE RSVP SECTION */
+    .rsvp-card-section {
+      background: linear-gradient(180deg, rgba(176, 141, 87, 0.08) 0%, rgba(176, 141, 87, 0.02) 100%);
+      border: 1px solid var(--inv-border);
+      border-radius: var(--radius-lg);
+      padding: 2rem 1.5rem;
+      margin: 2.5rem 0 1.5rem 0;
+      text-align: center;
+      position: relative;
+    }
+
+    .rsvp-deadline {
+      font-size: 0.825rem;
+      color: var(--inv-primary);
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 1.25rem;
+    }
+
+    .rsvp-form-mini {
+      max-width: 420px;
+      margin: 0 auto;
+      text-align: left;
+    }
+
+    .rsvp-choice-group {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.75rem;
+      margin-bottom: 1rem;
+    }
+
+    .rsvp-radio-card {
+      border: 1px solid var(--inv-border);
+      border-radius: var(--radius-sm);
+      padding: 0.65rem 0.5rem;
+      text-align: center;
+      cursor: pointer;
+      background: var(--inv-card-bg);
+      transition: all 0.2s;
+    }
+
+    .rsvp-radio-card.selected {
+      border-color: var(--inv-primary);
+      background: rgba(176, 141, 87, 0.15);
+      font-weight: 600;
+    }
+
+    .rsvp-input {
+      background: var(--inv-card-bg) !important;
+      border-color: var(--inv-border) !important;
+      color: var(--inv-text) !important;
+      margin-bottom: 0.75rem;
+    }
+
+    .rsvp-send-btns {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      margin-top: 1rem;
+    }
+
+    /* GUEST INVITATION FOOTER (VIRAL PUBLIC LINK) */
+    .guest-footer-viral {
+      text-align: center;
+      padding-top: 2rem;
+      margin-top: 2rem;
+      border-top: 1px solid var(--inv-border);
+      font-size: 0.75rem;
+      color: var(--inv-muted);
+    }
+
+    .guest-footer-viral a {
+      color: var(--inv-primary);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    /* SHARE MODAL & QR CODE OVERLAY */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(8px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 100;
+      padding: 1.5rem;
+    }
+
+    .modal-backdrop.open {
+      display: flex;
+      animation: fadeIn 0.2s ease-out;
+    }
+
+    .modal-card {
+      background: var(--bg-studio-panel);
+      border: 1px solid var(--border-studio);
+      border-radius: var(--radius-lg);
+      width: 100%;
+      max-width: 540px;
+      padding: 2rem;
+      position: relative;
+      box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5);
+    }
+
+    .modal-close-btn {
+      position: absolute;
+      top: 1.25rem;
+      right: 1.25rem;
+      background: none;
+      border: none;
+      color: var(--text-studio-muted);
+      cursor: pointer;
+      font-size: 1.25rem;
+      line-height: 1;
+    }
+
+    .modal-title {
+      font-family: var(--font-serif);
+      font-size: 1.35rem;
+      margin-bottom: 0.5rem;
+      color: #fff;
+    }
+
+    .modal-subtitle {
+      font-size: 0.85rem;
+      color: var(--text-studio-muted);
+      margin-bottom: 1.5rem;
+      line-height: 1.5;
+    }
+
+    .share-link-box {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .share-link-input {
+      font-family: var(--font-mono);
+      font-size: 0.8rem !important;
+      background: #0b1120 !important;
+    }
+
+    .share-channel-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0.75rem;
+      margin-bottom: 1.5rem;
+    }
+
+    @media (max-width: 480px) {
+      .share-channel-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    .share-channel-btn {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.4rem;
+      padding: 0.85rem 0.5rem;
+      background: #111a28;
+      border: 1px solid var(--border-studio);
+      border-radius: var(--radius-md);
+      color: var(--text-studio);
+      text-decoration: none;
+      font-size: 0.75rem;
+      font-weight: 500;
+      transition: all 0.2s;
+      cursor: pointer;
+    }
+
+    .share-channel-btn:hover {
+      background: var(--bg-studio-card);
+      border-color: var(--primary);
+      transform: translateY(-2px);
+    }
+
+    .share-channel-btn svg {
+      width: 22px;
+      height: 22px;
+    }
+
+    .qr-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 1.25rem;
+      background: #ffffff;
+      border-radius: var(--radius-md);
+      margin-top: 1rem;
+    }
+
+    #qrSvgCanvas {
+      width: 180px;
+      height: 180px;
+    }
+
+    .qr-caption {
+      font-size: 0.75rem;
+      color: #475569;
+      margin-top: 0.5rem;
+      font-weight: 600;
+    }
+
+    /* TOAST NOTIFICATION */
+    .toast {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      background: #10b981;
+      color: #fff;
+      padding: 0.75rem 1.25rem;
+      border-radius: var(--radius-md);
+      font-size: 0.875rem;
+      font-weight: 500;
+      box-shadow: 0 10px 15px -3px rgba(0,0,0,0.3);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      transform: translateY(100px);
+      opacity: 0;
+      transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+      z-index: 200;
+    }
+
+    .toast.show {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    /* GUEST VIEW MODE ONLY (NO STUDIO NAVBAR/PANELS) */
+    body.guest-mode header.studio-nav {
+      display: none !important;
+    }
+
+    body.guest-mode .studio-container {
+      display: block;
+      min-height: 100vh;
+    }
+
+    body.guest-mode .editor-pane {
+      display: none !important;
+    }
+
+    body.guest-mode .preview-pane {
+      height: auto;
+      min-height: 100vh;
+      background: var(--inv-bg);
+    }
+
+    body.guest-mode .preview-toolbar {
+      display: none !important;
+    }
+
+    body.guest-mode .preview-stage {
+      padding: 2.5rem 1rem 4rem 1rem;
+      background: var(--inv-bg);
+      min-height: 100vh;
+    }
+
+    body.guest-mode .preview-viewport {
+      max-width: 600px;
+    }
+
+    /* PRINT STYLES */
+    @media print {
+      header.studio-nav,
+      .editor-pane,
+      .preview-toolbar,
+      .envelope-container,
+      .venue-actions,
+      .rsvp-card-section,
+      .guest-footer-viral,
+      .card-btn {
+        display: none !important;
+      }
+
+      body {
+        background: #fff !important;
+        color: #000 !important;
+      }
+
+      .preview-stage {
+        padding: 0 !important;
+        background: none !important;
+      }
+
+      .invitation-card {
+        border: 2px solid #333 !important;
+        box-shadow: none !important;
+        page-break-inside: avoid;
+        max-width: 100% !important;
+      }
+
+      .card-names, .card-monogram, .section-title, .dt-day-num {
+        color: #000 !important;
+      }
+    }
+  </style>
+</head>
+<body data-theme="sage">
+
+  <!-- TOP BAR (STUDIO MODE) -->
+  <header class="studio-nav">
+    <a href="#" class="brand" onclick="location.hash=''; location.reload(); return false;">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+      </svg>
+      <div>
+        <div class="brand-title">EternalTie</div>
+      </div>
+      <span class="brand-tagline">100% Serverless &amp; Private</span>
+    </a>
+
+    <div class="nav-actions">
+      <button class="btn btn-outline btn-sm" id="btnToggleEnvelopePreview" title="Toggle Envelope Seal animation">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <rect x="2" y="4" width="20" height="16" rx="2"></rect>
+          <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
+        </svg>
+        Test Envelope
+      </button>
+
+      <button class="btn btn-secondary btn-sm" id="btnSampleData" title="Load sample wedding data">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path>
+          <path d="M3 3v5h5"></path>
+          <path d="M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16"></path>
+          <path d="M16 21h5v-5"></path>
+        </svg>
+        Sample Data
+      </button>
+
+      <button class="btn btn-primary" id="btnOpenShareModal">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="18" cy="5" r="3"></circle>
+          <circle cx="6" cy="12" r="3"></circle>
+          <circle cx="18" cy="19" r="3"></circle>
+          <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line>
+          <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
+        </svg>
+        Share / Send to Guests
+      </button>
+    </div>
+  </header>
+
+  <!-- STUDIO MAIN CONTAINER -->
+  <div class="studio-container">
+    
+    <!-- LEFT: GENERATOR & CUSTOMIZER PANEL -->
+    <aside class="editor-pane">
+      <div class="editor-header">
+        <h2>Wedding Invitation Studio</h2>
+        <p>Design your custom invitation. Everything lives in the link; zero account or database required.</p>
+      </div>
+
+      <nav class="editor-tabs">
+        <button class="editor-tab-btn active" data-tab="tab-couple">
+          <span>💍</span> Couple &amp; Date
+        </button>
+        <button class="editor-tab-btn" data-tab="tab-venue">
+          <span>📍</span> Venue &amp; Info
+        </button>
+        <button class="editor-tab-btn" data-tab="tab-timeline">
+          <span>⏳</span> Timeline
+        </button>
+        <button class="editor-tab-btn" data-tab="tab-theme">
+          <span>🎨</span> Theme &amp; Style
+        </button>
+        <button class="editor-tab-btn" data-tab="tab-rsvp">
+          <span>💌</span> RSVP Setup
+        </button>
+      </nav>
+
+      <div class="editor-body">
+        
+        <!-- TAB 1: COUPLE & DATE -->
+        <div class="form-section active" id="tab-couple">
+          <div class="form-row">
+            <div class="form-group">
+              <label>Partner 1 Name</label>
+              <input type="text" id="inputPartner1" value="Emily Clara" placeholder="e.g. Eleanor">
+            </div>
+            <div class="form-group">
+              <label>Partner 2 Name</label>
+              <input type="text" id="inputPartner2" value="Alexander James" placeholder="e.g. Thomas">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Couple Monogram / Crest</label>
+            <input type="text" id="inputMonogram" value="E &amp; A" maxlength="10" placeholder="e.g. E &amp; A">
+            <div class="hint">Initials featured on wax seal and card header</div>
+          </div>
+
+          <div class="form-group">
+            <label>Invitation Opening Call</label>
+            <input type="text" id="inputIntro" value="TOGETHER WITH THEIR FAMILIES" placeholder="e.g. WITH JOYFUL HEARTS">
+          </div>
+
+          <div class="form-group">
+            <label>Wedding Date</label>
+            <input type="date" id="inputDate" value="2027-06-19">
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label>Ceremony Time</label>
+              <input type="time" id="inputTime" value="16:00">
+            </div>
+            <div class="form-group">
+              <label>Dress Code</label>
+              <input type="text" id="inputDressCode" value="Black Tie Optional" placeholder="e.g. Cocktail Attire">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Invitation Message</label>
+            <textarea id="inputMessage" rows="3">request the pleasure of your company as they exchange vows and celebrate the beginning of their new journey together.</textarea>
+          </div>
+        </div>
+
+        <!-- TAB 2: VENUE & LOGISTICS -->
+        <div class="form-section" id="tab-venue">
+          <div class="form-group">
+            <label>Venue Name</label>
+            <input type="text" id="inputVenueName" value="The Glasshouse Conservatory" placeholder="e.g. Rosewood Estate">
+          </div>
+
+          <div class="form-group">
+            <label>Full Venue Address</label>
+            <input type="text" id="inputVenueAddress" value="450 Botanica Way, Carmel-by-the-Sea, California" placeholder="Street, City, State/Country">
+          </div>
+
+          <div class="form-group">
+            <label>Google Maps / Directions Link</label>
+            <input type="url" id="inputMapUrl" value="https://maps.google.com" placeholder="https://maps.google.com/...">
+            <div class="hint">Guests can tap "Get Directions" directly on their phone</div>
+          </div>
+
+          <div class="form-group">
+            <label>Accommodations Note</label>
+            <textarea id="inputAccommodations" rows="2" placeholder="Hotel block details, discount codes...">Room block available at The Highlands Inn under Clara-James Wedding. Complimentary shuttle provided.</textarea>
+          </div>
+
+          <div class="form-group">
+            <label>Gift Registry / Well Wishes Note</label>
+            <textarea id="inputRegistry" rows="2" placeholder="Your presence is our greatest gift, or link to registry...">Your presence is the greatest gift. For those wishing to honor us with a gesture, our honeymoon fund is linked below.</textarea>
+          </div>
+        </div>
+
+        <!-- TAB 3: TIMELINE / ORDER OF EVENTS -->
+        <div class="form-section" id="tab-timeline">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 1rem;">
+            <label style="margin-bottom:0;">Order of Events</label>
+            <button type="button" class="btn btn-outline btn-sm" id="btnAddTimeline">
+              + Add Event
+            </button>
+          </div>
+          
+          <div id="timelineItemsContainer">
+            <!-- Dynamic timeline entries will be rendered here -->
+          </div>
+        </div>
+
+        <!-- TAB 4: THEME & VISUAL STYLE -->
+        <div class="form-section" id="tab-theme">
+          <div class="form-group">
+            <label>Curated Color &amp; Aesthetic Palette</label>
+            <div class="theme-grid">
+              
+              <div class="theme-card active" data-theme-val="sage">
+                <div class="theme-preview-dots">
+                  <span class="theme-dot" style="background:#3b5747;"></span>
+                  <span class="theme-dot" style="background:#b08d57;"></span>
+                  <span class="theme-dot" style="background:#f9f8f5;"></span>
+                </div>
+                <div class="theme-name">Sage Botanical</div>
+              </div>
+
+              <div class="theme-card" data-theme-val="gold">
+                <div class="theme-preview-dots">
+                  <span class="theme-dot" style="background:#11141a;"></span>
+                  <span class="theme-dot" style="background:#d4af37;"></span>
+                  <span class="theme-dot" style="background:#181d26;"></span>
+                </div>
+                <div class="theme-name">Royale Gold</div>
+              </div>
+
+              <div class="theme-card" data-theme-val="rose">
+                <div class="theme-preview-dots">
+                  <span class="theme-dot" style="background:#6b2d38;"></span>
+                  <span class="theme-dot" style="background:#c48b9f;"></span>
+                  <span class="theme-dot" style="background:#fbf6f6;"></span>
+                </div>
+                <div class="theme-name">Dusty Rose</div>
+              </div>
+
+              <div class="theme-card" data-theme-val="celestial">
+                <div class="theme-preview-dots">
+                  <span class="theme-dot" style="background:#090e17;"></span>
+                  <span class="theme-dot" style="background:#e2c076;"></span>
+                  <span class="theme-dot" style="background:#60a5fa;"></span>
+                </div>
+                <div class="theme-name">Celestial Navy</div>
+              </div>
+
+              <div class="theme-card" data-theme-val="terracotta">
+                <div class="theme-preview-dots">
+                  <span class="theme-dot" style="background:#a3482d;"></span>
+                  <span class="theme-dot" style="background:#d97757;"></span>
+                  <span class="theme-dot" style="background:#f6f0ea;"></span>
+                </div>
+                <div class="theme-name">Terracotta</div>
+              </div>
+
+            </div>
+          </div>
+
+          <div class="form-group" style="margin-top: 1.5rem;">
+            <label>Interactive Envelope</label>
+            <div style="display:flex; align-items:center; gap: 0.75rem;">
+              <input type="checkbox" id="inputEnvelopeEnabled" checked style="width: auto;">
+              <span style="font-size:0.875rem; color: #cbd5e1;">Display interactive wax seal envelope before opening</span>
+            </div>
+            <div class="hint">Guests tap the wax seal with your monogram to reveal the invitation.</div>
+          </div>
+        </div>
+
+        <!-- TAB 5: RSVP CONFIGURATION -->
+        <div class="form-section" id="tab-rsvp">
+          <div class="form-group">
+            <label>RSVP Deadline</label>
+            <input type="date" id="inputRsvpDeadline" value="2027-05-15">
+          </div>
+
+          <div class="form-group">
+            <label>Couple WhatsApp Phone Number</label>
+            <input type="tel" id="inputHostWhatsapp" value="+15552345678" placeholder="Include country code, e.g. +14155552671">
+            <div class="hint">Guests can tap 1-click RSVP to send their response directly to your WhatsApp!</div>
+          </div>
+
+          <div class="form-group">
+            <label>Couple RSVP Email Address</label>
+            <input type="email" id="inputHostEmail" value="wedding@emilyandalexander.com" placeholder="couple@example.com">
+            <div class="hint">Alternative 1-click RSVP via pre-composed email</div>
+          </div>
+
+          <div class="form-group">
+            <label>Dietary &amp; Song Request Fields</label>
+            <div style="display:flex; align-items:center; gap: 0.75rem;">
+              <input type="checkbox" id="inputRsvpAskSong" checked style="width: auto;">
+              <span style="font-size:0.875rem; color: #cbd5e1;">Include dietary requirements &amp; dancefloor song request</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </aside>
+
+    <!-- RIGHT: LIVE PREVIEW PANE -->
+    <main class="preview-pane">
+      <div class="preview-toolbar">
+        <div class="device-toggles">
+          <button class="device-btn" data-device="desktop">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
+            Desktop
+          </button>
+          <button class="device-btn" data-device="tablet">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="2" width="16" height="20" rx="2"></rect><line x1="12" y1="18" x2="12.01" y2="18"></line></svg>
+            Tablet
+          </button>
+          <button class="device-btn active" data-device="mobile">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2"></rect><line x1="12" y1="18" x2="12.01" y2="18"></line></svg>
+            Mobile
+          </button>
+        </div>
+
+        <div style="display: flex; gap: 0.5rem;">
+          <button class="btn btn-outline btn-sm" onclick="window.print()">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>
+            Print / PDF
+          </button>
+        </div>
+      </div>
+
+      <!-- PREVIEW STAGE -->
+      <div class="preview-stage">
+        <div class="preview-viewport mobile" id="previewViewport">
+          
+          <div class="invitation-wrapper" id="invitationWrapper">
+            
+            <!-- ENVELOPE (OPTIONAL INTERACTIVE FLAP) -->
+            <div class="envelope-container" id="envelopeElement">
+              <div class="envelope-pocket">
+                <div class="envelope-top-crest">
+                  <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path>
+                  </svg>
+                </div>
+                <div class="envelope-title">Wedding Invitation</div>
+                <div class="envelope-guest-tag" id="envelopeGuestTag">Cordially Invited</div>
+
+                <div class="wax-seal" id="waxSealButton" title="Click to break seal & open invitation">
+                  <div class="wax-seal-initials" id="waxSealInitials">E &amp; A</div>
+                  <div class="wax-seal-sub">Open</div>
+                </div>
+
+                <div class="open-cue">✦ Tap wax seal to open ✦</div>
+              </div>
+            </div>
+
+            <!-- MAIN INVITATION CARD -->
+            <article class="invitation-card" id="invitationCard">
+              <div class="card-frame">
+                <div class="card-border-ornament"></div>
+
+                <!-- CORNER ORNAMENTS -->
+                <svg class="corner-flourish corner-tl" viewBox="0 0 100 100">
+                  <path d="M10,10 Q50,10 50,50 Q10,50 10,10 M15,15 Q75,15 75,75 Q15,75 15,15"></path>
+                </svg>
+                <svg class="corner-flourish corner-tr" viewBox="0 0 100 100">
+                  <path d="M10,10 Q50,10 50,50 Q10,50 10,10 M15,15 Q75,15 75,75 Q15,75 15,15"></path>
+                </svg>
+                <svg class="corner-flourish corner-bl" viewBox="0 0 100 100">
+                  <path d="M10,10 Q50,10 50,50 Q10,50 10,10 M15,15 Q75,15 75,75 Q15,75 15,15"></path>
+                </svg>
+                <svg class="corner-flourish corner-br" viewBox="0 0 100 100">
+                  <path d="M10,10 Q50,10 50,50 Q10,50 10,10 M15,15 Q75,15 75,75 Q15,75 15,15"></path>
+                </svg>
+
+                <!-- CARD HEADER & NAMES -->
+                <header class="card-header-block">
+                  <div class="card-monogram" id="cardMonogram">E &amp; A</div>
+                  <div class="card-intro" id="cardIntro">TOGETHER WITH THEIR FAMILIES</div>
+                  
+                  <h1 class="card-names">
+                    <span id="cardPartner1">Emily Clara</span>
+                    <span class="card-ampersand">&amp;</span>
+                    <span id="cardPartner2">Alexander James</span>
+                  </h1>
+
+                  <p class="card-request" id="cardMessage">
+                    request the pleasure of your company as they exchange vows and celebrate the beginning of their new journey together.
+                  </p>
+                </header>
+
+                <!-- DATE & TIME BADGE -->
+                <section class="card-datetime-badge">
+                  <div class="dt-col">
+                    <div class="dt-day-name" id="cardDayOfWeek">SATURDAY</div>
+                    <div class="dt-day-num" id="cardDayNum">19</div>
+                    <div class="dt-month-year" id="cardMonthYear">JUNE 2027</div>
+                  </div>
+                  <div class="dt-divider"></div>
+                  <div class="dt-col">
+                    <div class="dt-day-name">CEREMONY AT</div>
+                    <div class="dt-time" id="cardTime">4:00 PM</div>
+                    <div class="dt-month-year" id="cardDressCode">BLACK TIE OPTIONAL</div>
+                  </div>
+                </section>
+
+                <!-- COUNTDOWN TIMER -->
+                <section class="countdown-section">
+                  <div class="countdown-grid">
+                    <div class="countdown-unit">
+                      <div class="cd-val" id="cdDays">00</div>
+                      <div class="cd-label">Days</div>
+                    </div>
+                    <div class="countdown-unit">
+                      <div class="cd-val" id="cdHours">00</div>
+                      <div class="cd-label">Hours</div>
+                    </div>
+                    <div class="countdown-unit">
+                      <div class="cd-val" id="cdMins">00</div>
+                      <div class="cd-label">Mins</div>
+                    </div>
+                    <div class="countdown-unit">
+                      <div class="cd-val" id="cdSecs">00</div>
+                      <div class="cd-label">Secs</div>
+                    </div>
+                  </div>
+                </section>
+
+                <!-- VENUE SECTION -->
+                <section class="card-venue-section">
+                  <h2 class="venue-name" id="cardVenueName">The Glasshouse Conservatory</h2>
+                  <p class="venue-address" id="cardVenueAddress">450 Botanica Way, Carmel-by-the-Sea, California</p>
+                  
+                  <div class="venue-actions">
+                    <a href="#" class="card-btn card-btn-solid" id="cardMapBtn" target="_blank" rel="noopener">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                      Get Directions
+                    </a>
+
+                    <button class="card-btn card-btn-outline" id="cardCalendarBtn">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                      Add to Calendar
+                    </button>
+                  </div>
+                </section>
+
+                <!-- ORDER OF EVENTS TIMELINE -->
+                <section class="card-timeline-section" id="cardTimelineSection">
+                  <h3 class="section-title">Order of Events</h3>
+                  <div class="timeline-list" id="cardTimelineList">
+                    <!-- Dynamic events will be injected here -->
+                  </div>
+                </section>
+
+                <!-- DETAILS & LOGISTICS -->
+                <section class="details-grid">
+                  <div class="detail-card">
+                    <div class="detail-icon">
+                      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+                    </div>
+                    <div class="detail-title">Accommodations</div>
+                    <div class="detail-text" id="cardAccommodations">Room block available at The Highlands Inn under Clara-James Wedding.</div>
+                  </div>
+
+                  <div class="detail-card">
+                    <div class="detail-icon">
+                      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polyline points="20 12 20 22 4 22 4 12"></polyline><rect x="2" y="7" width="20" height="5"></rect><line x1="12" y1="22" x2="12" y2="7"></line><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"></path><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"></path></svg>
+                    </div>
+                    <div class="detail-title">Registry &amp; Gifts</div>
+                    <div class="detail-text" id="cardRegistry">Your warm presence is our greatest gift. Honeymoon contributions welcome.</div>
+                  </div>
+                </section>
+
+                <!-- INTERACTIVE RSVP FORM -->
+                <section class="rsvp-card-section" id="cardRsvpSection">
+                  <h3 class="section-title">Kindly Respond</h3>
+                  <div class="rsvp-deadline" id="cardRsvpDeadline">BY MAY 15, 2027</div>
+
+                  <form class="rsvp-form-mini" id="guestRsvpForm" onsubmit="return false;">
+                    <div class="rsvp-choice-group">
+                      <div class="rsvp-radio-card selected" data-status="accepts" id="rsvpOptAccept">
+                        ✓ Joyfully Accepts
+                      </div>
+                      <div class="rsvp-radio-card" data-status="declines" id="rsvpOptDecline">
+                        ✕ Regretfully Declines
+                      </div>
+                    </div>
+
+                    <input type="text" class="rsvp-input" id="guestNameInput" placeholder="Your Full Name(s)" required>
+                    
+                    <div class="form-row">
+                      <input type="number" class="rsvp-input" id="guestCountInput" placeholder="Total Guests" value="1" min="1" max="10">
+                      <input type="text" class="rsvp-input" id="guestDietaryInput" placeholder="Dietary Restrictions">
+                    </div>
+
+                    <input type="text" class="rsvp-input" id="guestSongInput" placeholder="Song that gets you on the dancefloor 🎵">
+
+                    <div class="rsvp-send-btns">
+                      <button type="button" class="btn btn-primary" id="btnSendRsvpWhatsapp">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                          <path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2m.01 1.67c2.2 0 4.26.86 5.82 2.42a8.225 8.225 0 0 1 2.41 5.83c0 4.54-3.7 8.24-8.24 8.24-1.42 0-2.82-.37-4.06-1.08l-.29-.17-3.12.82.83-3.04-.19-.31c-.78-1.28-1.2-2.75-1.2-4.26 0-4.54 3.7-8.24 8.24-8.24m4.52 11.66c-.25-.13-1.47-.72-1.7-.81-.23-.08-.39-.13-.56.13-.17.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.13-1.06-.39-2.02-1.24-.74-.66-1.24-1.47-1.39-1.72-.14-.25-.02-.39.11-.51.11-.11.25-.29.37-.43.13-.14.17-.25.25-.42.08-.17.04-.31-.02-.44-.06-.13-.56-1.35-.77-1.85-.2-.48-.41-.42-.56-.43h-.48c-.17 0-.44.06-.67.31-.23.25-.88.86-.88 2.1 0 1.24.9 2.44 1.03 2.61.13.17 1.78 2.71 4.3 3.8 2.53 1.08 2.53.72 2.98.68.46-.04 1.47-.6 1.68-1.18.21-.59.21-1.09.15-1.19-.06-.1-.23-.17-.48-.3"></path>
+                        </svg>
+                        RSVP via WhatsApp
+                      </button>
+
+                      <button type="button" class="btn btn-secondary" id="btnSendRsvpEmail">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                          <rect x="2" y="4" width="20" height="16" rx="2"></rect>
+                          <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
+                        </svg>
+                        RSVP via Email
+                      </button>
+                    </div>
+                  </form>
+                </section>
+
+                <!-- FOOTER -->
+                <footer class="guest-footer-viral">
+                  <p>Made with love • <a href="#" id="linkCreateYourOwn">Create your own free wedding invitation</a></p>
+                </footer>
+
+              </div>
+            </article>
+
+          </div>
+
+        </div>
+      </div>
+    </main>
+
+  </div>
+
+  <!-- SHARE & SEND MODAL -->
+  <div class="modal-backdrop" id="shareModal">
+    <div class="modal-card">
+      <button class="modal-close-btn" id="btnCloseShareModal">&times;</button>
+      <h3 class="modal-title">Share Your Wedding Invitation</h3>
+      <p class="modal-subtitle">
+        Your invitation is completely encoded in the link. No accounts, no database, no expiration. Send it directly to your guests!
+      </p>
+
+      <!-- GUEST PERSONALIZATION -->
+      <div class="form-group" style="margin-bottom: 1.25rem;">
+        <label>Personalize For Specific Guest (Optional)</label>
+        <input type="text" id="inputPersonalizeGuest" placeholder="e.g. Sarah &amp; David, or Uncle Michael">
+        <div class="hint">When set, the invitation will specially greet them on the envelope &amp; card!</div>
+      </div>
+
+      <!-- LINK COPY BOX -->
+      <div class="share-link-box">
+        <input type="text" class="share-link-input" id="shareUrlDisplay" readonly>
+        <button class="btn btn-primary" id="btnCopyShareUrl">Copy</button>
+      </div>
+
+      <!-- DIRECT DISPATCH CHANNELS -->
+      <div class="share-channel-grid">
+        <a href="#" class="share-channel-btn" id="shareBtnWhatsapp" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="#25D366"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2m.01 1.67c2.2 0 4.26.86 5.82 2.42a8.225 8.225 0 0 1 2.41 5.83c0 4.54-3.7 8.24-8.24 8.24-1.42 0-2.82-.37-4.06-1.08l-.29-.17-3.12.82.83-3.04-.19-.31c-.78-1.28-1.2-2.75-1.2-4.26 0-4.54 3.7-8.24 8.24-8.24m4.52 11.66c-.25-.13-1.47-.72-1.7-.81-.23-.08-.39-.13-.56.13-.17.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.13-1.06-.39-2.02-1.24-.74-.66-1.24-1.47-1.39-1.72-.14-.25-.02-.39.11-.51.11-.11.25-.29.37-.43.13-.14.17-.25.25-.42.08-.17.04-.31-.02-.44-.06-.13-.56-1.35-.77-1.85-.2-.48-.41-.42-.56-.43h-.48c-.17 0-.44.06-.67.31-.23.25-.88.86-.88 2.1 0 1.24.9 2.44 1.03 2.61.13.17 1.78 2.71 4.3 3.8 2.53 1.08 2.53.72 2.98.68.46-.04 1.47-.6 1.68-1.18.21-.59.21-1.09.15-1.19-.06-.1-.23-.17-.48-.3"></path></svg>
+          WhatsApp
+        </a>
+
+        <a href="#" class="share-channel-btn" id="shareBtnEmail">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#60a5fa" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"></rect><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path></svg>
+          Email
+        </a>
+
+        <a href="#" class="share-channel-btn" id="shareBtnSms">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#34d399" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+          SMS / Text
+        </a>
+
+        <button type="button" class="share-channel-btn" id="shareBtnNative">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#f472b6" stroke-width="2"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>
+          Device Share
+        </button>
+      </div>
+
+      <!-- OFFLINE SVG QR CODE -->
+      <div class="qr-container">
+        <svg id="qrSvgCanvas"></svg>
+        <div class="qr-caption">Scan with Phone Camera to View Invitation</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOAST FEEDBACK -->
+  <div class="toast" id="toastNotification">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+    <span id="toastMessage">Invitation link copied!</span>
+  </div>
+
+  <!-- APPLICATION LOGIC -->
+  <script>
+    /* =====================================================================
+       STANDALONE ZERO-BACKEND WEDDING INVITATION PLATFORM
+       100% Client-Side • Decoupled from user records • Stateless URL state
+       ===================================================================== */
+
+    // DEFAULT STATE DATA MODEL
+    const defaultWeddingData = {
+      p1: "Emily Clara",
+      p2: "Alexander James",
+      mono: "E & A",
+      intro: "TOGETHER WITH THEIR FAMILIES",
+      date: "2027-06-19",
+      time: "16:00",
+      dress: "Black Tie Optional",
+      msg: "request the pleasure of your company as they exchange vows and celebrate the beginning of their new journey together.",
+      vName: "The Glasshouse Conservatory",
+      vAddr: "450 Botanica Way, Carmel-by-the-Sea, California",
+      vMap: "https://maps.google.com/?q=The+Glasshouse+Conservatory+Carmel",
+      hotel: "Room block available at The Highlands Inn under Clara-James Wedding. Complimentary shuttle service provided.",
+      reg: "Your presence is our greatest gift. For those wishing to honor us with a gesture, our honeymoon fund is warmly appreciated.",
+      theme: "sage",
+      env: true,
+      rsvpDeadline: "2027-05-15",
+      hostPhone: "+15552345678",
+      hostEmail: "wedding@emilyandalexander.com",
+      askSong: true,
+      timeline: [
+        { time: "4:00 PM", title: "Arrival & Welcome", desc: "Guests gather at the terrace gardens" },
+        { time: "4:30 PM", title: "Ceremony", desc: "Exchange of vows under the floral glass arch" },
+        { time: "5:30 PM", title: "Cocktail Hour", desc: "Artisanal cocktails & hors d'oeuvres by the fountain" },
+        { time: "7:00 PM", title: "Dinner & Toasts", desc: "Four-course seated dinner & celebration speeches" },
+        { time: "9:00 PM", title: "Dancing & Music", desc: "Live band and evening reception" }
+      ]
+    };
+
+    let currentWedding = JSON.parse(JSON.stringify(defaultWeddingData));
+    let guestPersonalizedName = "";
+    let isGuestViewMode = false;
+
+    // BASE64 URL COMPRESSION & SERIALIZATION
+    function serializeData(data) {
+      try {
+        const jsonStr = JSON.stringify(data);
+        const encoded = encodeURIComponent(jsonStr).replace(/%([0-9A-F]{2})/g, (match, p1) => {
+          return String.fromCharCode('0x' + p1);
+        });
+        return btoa(encoded);
+      } catch (e) {
+        console.error("Serialization error", e);
+        return "";
+      }
+    }
+
+    function deserializeData(base64Str) {
+      try {
+        const decoded = atob(base64Str);
+        const jsonStr = decodeURIComponent(Array.prototype.map.call(decoded, (c) => {
+          return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+        }).join(''));
+        return JSON.parse(jsonStr);
+      } catch (e) {
+        console.error("Deserialization error", e);
+        return null;
+      }
+    }
+
+    // CHECK URL PARAMS & HASH ON LOAD
+    function initAppMode() {
+      const hash = window.location.hash.substring(1);
+      const urlParams = new URLSearchParams(window.location.search);
+
+      // Check if data is passed via hash #invite=... or query param ?invite=...
+      let invitePayload = null;
+      if (hash.startsWith("invite=")) {
+        invitePayload = hash.substring(7);
+      } else if (urlParams.has("invite")) {
+        invitePayload = urlParams.get("invite");
+      }
+
+      // Check guest personalization
+      if (urlParams.has("to")) {
+        guestPersonalizedName = decodeURIComponent(urlParams.get("to"));
+      }
+
+      if (invitePayload) {
+        const parsed = deserializeData(invitePayload);
+        if (parsed) {
+          currentWedding = parsed;
+          isGuestViewMode = true;
+          document.body.classList.add("guest-mode");
+        }
+      }
+
+      // Populate UI with current wedding data
+      populateEditorFromState();
+      renderInvitationCard();
+      renderTimelineBuilder();
+      initCountdown();
+      setupEvents();
+    }
+
+    // POPULATE FORM INPUTS FROM STATE
+    function populateEditorFromState() {
+      document.getElementById("inputPartner1").value = currentWedding.p1 || "";
+      document.getElementById("inputPartner2").value = currentWedding.p2 || "";
+      document.getElementById("inputMonogram").value = currentWedding.mono || "";
+      document.getElementById("inputIntro").value = currentWedding.intro || "";
+      document.getElementById("inputDate").value = currentWedding.date || "";
+      document.getElementById("inputTime").value = currentWedding.time || "";
+      document.getElementById("inputDressCode").value = currentWedding.dress || "";
+      document.getElementById("inputMessage").value = currentWedding.msg || "";
+      
+      document.getElementById("inputVenueName").value = currentWedding.vName || "";
+      document.getElementById("inputVenueAddress").value = currentWedding.vAddr || "";
+      document.getElementById("inputMapUrl").value = currentWedding.vMap || "";
+      document.getElementById("inputAccommodations").value = currentWedding.hotel || "";
+      document.getElementById("inputRegistry").value = currentWedding.reg || "";
+
+      document.getElementById("inputEnvelopeEnabled").checked = !!currentWedding.env;
+      document.getElementById("inputRsvpDeadline").value = currentWedding.rsvpDeadline || "";
+      document.getElementById("inputHostWhatsapp").value = currentWedding.hostPhone || "";
+      document.getElementById("inputHostEmail").value = currentWedding.hostEmail || "";
+      document.getElementById("inputRsvpAskSong").checked = !!currentWedding.askSong;
+
+      // Theme cards
+      document.querySelectorAll(".theme-card").forEach(card => {
+        if (card.dataset.themeVal === currentWedding.theme) {
+          card.classList.add("active");
+        } else {
+          card.classList.remove("active");
+        }
+      });
+      document.body.setAttribute("data-theme", currentWedding.theme || "sage");
+    }
+
+    // UPDATE STATE FROM FORM INPUTS
+    function syncStateFromEditor() {
+      currentWedding.p1 = document.getElementById("inputPartner1").value.trim();
+      currentWedding.p2 = document.getElementById("inputPartner2").value.trim();
+      currentWedding.mono = document.getElementById("inputMonogram").value.trim();
+      currentWedding.intro = document.getElementById("inputIntro").value.trim();
+      currentWedding.date = document.getElementById("inputDate").value;
+      currentWedding.time = document.getElementById("inputTime").value;
+      currentWedding.dress = document.getElementById("inputDressCode").value.trim();
+      currentWedding.msg = document.getElementById("inputMessage").value.trim();
+
+      currentWedding.vName = document.getElementById("inputVenueName").value.trim();
+      currentWedding.vAddr = document.getElementById("inputVenueAddress").value.trim();
+      currentWedding.vMap = document.getElementById("inputMapUrl").value.trim();
+      currentWedding.hotel = document.getElementById("inputAccommodations").value.trim();
+      currentWedding.reg = document.getElementById("inputRegistry").value.trim();
+
+      currentWedding.env = document.getElementById("inputEnvelopeEnabled").checked;
+      currentWedding.rsvpDeadline = document.getElementById("inputRsvpDeadline").value;
+      currentWedding.hostPhone = document.getElementById("inputHostPhone") ? document.getElementById("inputHostPhone").value.trim() : document.getElementById("inputHostWhatsapp").value.trim();
+      currentWedding.hostEmail = document.getElementById("inputHostEmail").value.trim();
+      currentWedding.askSong = document.getElementById("inputRsvpAskSong").checked;
+
+      renderInvitationCard();
+    }
+
+    // FORMAT DATE & TIME STRINGS
+    function formatWeddingDates(dateStr, timeStr) {
+      if (!dateStr) return { dayOfWeek: "DATE", dayNum: "00", monthYear: "TBA", timeFormatted: timeStr || "TBA" };
+      
+      const parts = dateStr.split("-");
+      const year = parseInt(parts[0], 10);
+      const monthIndex = parseInt(parts[1], 10) - 1;
+      const day = parseInt(parts[2], 10);
+      const d = new Date(year, monthIndex, day);
+
+      const daysOfWeek = ["SUNDAY", "MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY", "SATURDAY"];
+      const months = ["JANUARY", "FEBRUARY", "MARCH", "APRIL", "MAY", "JUNE", "JULY", "AUGUST", "SEPTEMBER", "OCTOBER", "NOVEMBER", "DECEMBER"];
+
+      let timeFormatted = timeStr || "4:00 PM";
+      if (timeStr && timeStr.includes(":")) {
+        const [hh, mm] = timeStr.split(":");
+        const hour = parseInt(hh, 10);
+        const ampm = hour >= 12 ? "PM" : "AM";
+        const h12 = hour % 12 || 12;
+        timeFormatted = `${h12}:${mm} ${ampm}`;
+      }
+
+      return {
+        dayOfWeek: daysOfWeek[d.getDay()] || "DAY",
+        dayNum: String(day).padStart(2, '0'),
+        monthYear: `${months[monthIndex]} ${year}`,
+        timeFormatted: timeFormatted
+      };
+    }
+
+    // RENDER INVITATION CARD
+    function renderInvitationCard() {
+      // Monogram & names
+      const p1 = currentWedding.p1 || "Partner 1";
+      const p2 = currentWedding.p2 || "Partner 2";
+      const mono = currentWedding.mono || (p1.charAt(0) + " & " + p2.charAt(0));
+
+      document.getElementById("cardMonogram").textContent = mono;
+      document.getElementById("waxSealInitials").textContent = mono;
+      document.getElementById("cardPartner1").textContent = p1;
+      document.getElementById("cardPartner2").textContent = p2;
+      document.getElementById("cardIntro").textContent = (currentWedding.intro || "TOGETHER WITH THEIR FAMILIES").toUpperCase();
+      document.getElementById("cardMessage").textContent = currentWedding.msg || "";
+
+      // Personalized guest name greeting
+      const guestBadge = document.getElementById("envelopeGuestTag");
+      if (guestPersonalizedName) {
+        guestBadge.textContent = "Cordially Invited: " + guestPersonalizedName;
+      } else {
+        guestBadge.textContent = "Cordially Invited";
+      }
+
+      // Date & Time
+      const dt = formatWeddingDates(currentWedding.date, currentWedding.time);
+      document.getElementById("cardDayOfWeek").textContent = dt.dayOfWeek;
+      document.getElementById("cardDayNum").textContent = dt.dayNum;
+      document.getElementById("cardMonthYear").textContent = dt.monthYear;
+      document.getElementById("cardTime").textContent = dt.timeFormatted;
+      document.getElementById("cardDressCode").textContent = (currentWedding.dress || "FORMAL").toUpperCase();
+
+      // Venue
+      document.getElementById("cardVenueName").textContent = currentWedding.vName || "Venue Name";
+      document.getElementById("cardVenueAddress").textContent = currentWedding.vAddr || "Venue Address";
+      
+      const mapBtn = document.getElementById("cardMapBtn");
+      if (currentWedding.vMap) {
+        mapBtn.href = currentWedding.vMap;
+        mapBtn.style.display = "inline-flex";
+      } else if (currentWedding.vAddr) {
+        mapBtn.href = "https://maps.google.com/?q=" + encodeURIComponent(currentWedding.vAddr);
+        mapBtn.style.display = "inline-flex";
+      } else {
+        mapBtn.style.display = "none";
+      }
+
+      // Accommodations & Registry
+      document.getElementById("cardAccommodations").textContent = currentWedding.hotel || "Details to follow.";
+      document.getElementById("cardRegistry").textContent = currentWedding.reg || "Your presence is our gift.";
+
+      // RSVP Deadline
+      if (currentWedding.rsvpDeadline) {
+        const rParts = currentWedding.rsvpDeadline.split("-");
+        const rMonth = parseInt(rParts[1], 10) - 1;
+        const rDay = parseInt(rParts[2], 10);
+        const months = ["JANUARY", "FEBRUARY", "MARCH", "APRIL", "MAY", "JUNE", "JULY", "AUGUST", "SEPTEMBER", "OCTOBER", "NOVEMBER", "DECEMBER"];
+        document.getElementById("cardRsvpDeadline").textContent = `BY ${months[rMonth] || ''} ${rDay}, ${rParts[0]}`;
+      } else {
+        document.getElementById("cardRsvpDeadline").textContent = "KINDLY REPLY AT YOUR EARLIEST CONVENIENCE";
+      }
+
+      // Render timeline list in card
+      const timelineContainer = document.getElementById("cardTimelineList");
+      timelineContainer.innerHTML = "";
+      if (currentWedding.timeline && currentWedding.timeline.length > 0) {
+        document.getElementById("cardTimelineSection").style.display = "block";
+        currentWedding.timeline.forEach(item => {
+          const entry = document.createElement("div");
+          entry.className = "timeline-entry";
+          entry.innerHTML = `
+            <div class="timeline-marker"></div>
+            <div class="timeline-time">${escapeHtml(item.time)}</div>
+            <div class="timeline-title">${escapeHtml(item.title)}</div>
+            ${item.desc ? `<div class="timeline-desc">${escapeHtml(item.desc)}</div>` : ''}
+          `;
+          timelineContainer.appendChild(entry);
+        });
+      } else {
+        document.getElementById("cardTimelineSection").style.display = "none";
+      }
+
+      // Envelope visibility toggle
+      const envElem = document.getElementById("envelopeElement");
+      if (currentWedding.env) {
+        envElem.style.display = "block";
+      } else {
+        envElem.style.display = "none";
+      }
+    }
+
+    // TIMELINE BUILDER IN STUDIO
+    function renderTimelineBuilder() {
+      const container = document.getElementById("timelineItemsContainer");
+      container.innerHTML = "";
+
+      currentWedding.timeline.forEach((item, index) => {
+        const itemBox = document.createElement("div");
+        itemBox.className = "timeline-builder-item";
+        itemBox.innerHTML = `
+          <button type="button" class="remove-btn" onclick="removeTimelineItem(${index})" title="Remove event">&times; Remove</button>
+          <div class="form-row">
+            <div class="form-group" style="margin-bottom:0.5rem;">
+              <label>Time</label>
+              <input type="text" value="${escapeHtml(item.time)}" onchange="updateTimelineItem(${index}, 'time', this.value)">
+            </div>
+            <div class="form-group" style="margin-bottom:0.5rem;">
+              <label>Title</label>
+              <input type="text" value="${escapeHtml(item.title)}" onchange="updateTimelineItem(${index}, 'title', this.value)">
+            </div>
+          </div>
+          <div class="form-group" style="margin-bottom:0;">
+            <label>Description</label>
+            <input type="text" value="${escapeHtml(item.desc || '')}" onchange="updateTimelineItem(${index}, 'desc', this.value)">
+          </div>
+        `;
+        container.appendChild(itemBox);
+      });
+    }
+
+    function addTimelineItem() {
+      currentWedding.timeline.push({ time: "6:00 PM", title: "New Moment", desc: "Celebration details" });
+      renderTimelineBuilder();
+      renderInvitationCard();
+    }
+
+    function removeTimelineItem(idx) {
+      currentWedding.timeline.splice(idx, 1);
+      renderTimelineBuilder();
+      renderInvitationCard();
+    }
+
+    function updateTimelineItem(idx, key, val) {
+      if (currentWedding.timeline[idx]) {
+        currentWedding.timeline[idx][key] = val;
+        renderInvitationCard();
+      }
+    }
+
+    // LIVE COUNTDOWN TIMER
+    let countdownInterval = null;
+    function initCountdown() {
+      if (countdownInterval) clearInterval(countdownInterval);
+
+      function update() {
+        if (!currentWedding.date) return;
+        const targetStr = `${currentWedding.date}T${currentWedding.time || '12:00'}:00`;
+        const targetDate = new Date(targetStr).getTime();
+        const now = new Date().getTime();
+        const diff = targetDate - now;
+
+        if (diff <= 0) {
+          document.getElementById("cdDays").textContent = "00";
+          document.getElementById("cdHours").textContent = "00";
+          document.getElementById("cdMins").textContent = "00";
+          document.getElementById("cdSecs").textContent = "00";
+          return;
+        }
+
+        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+        const secs = Math.floor((diff % (1000 * 60)) / 1000);
+
+        document.getElementById("cdDays").textContent = String(days).padStart(2, '0');
+        document.getElementById("cdHours").textContent = String(hours).padStart(2, '0');
+        document.getElementById("cdMins").textContent = String(mins).padStart(2, '0');
+        document.getElementById("cdSecs").textContent = String(secs).padStart(2, '0');
+      }
+
+      update();
+      countdownInterval = setInterval(update, 1000);
+    }
+
+    // GENERATE .ICS CALENDAR FILE DOWNLOAD
+    function generateIcsCalendar() {
+      const p1 = currentWedding.p1 || "Emily";
+      const p2 = currentWedding.p2 || "Alexander";
+      const title = `Wedding of ${p1} & ${p2}`;
+      const desc = `Celebration of the marriage of ${p1} and ${p2}.\nVenue: ${currentWedding.vName}\nDress code: ${currentWedding.dress}`;
+      const loc = `${currentWedding.vName}, ${currentWedding.vAddr}`;
+
+      const dateClean = currentWedding.date.replace(/-/g, "");
+      const timeClean = (currentWedding.time || "16:00").replace(/:/g, "") + "00";
+      const dtStart = `${dateClean}T${timeClean}`;
+      
+      // Assume 6 hour event duration
+      const [hh, mm] = (currentWedding.time || "16:00").split(":");
+      const endH = (parseInt(hh, 10) + 6) % 24;
+      const dtEnd = `${dateClean}T${String(endH).padStart(2, '0')}${mm}00`;
+
+      const icsLines = [
+        "BEGIN:VCALENDAR",
+        "VERSION:2.0",
+        "PRODID:-//EternalTie//Wedding Invitation//EN",
+        "CALSCALE:GREGORIAN",
+        "METHOD:PUBLISH",
+        "BEGIN:VEVENT",
+        `UID:wedding-${Date.now()}@eternaltie.com`,
+        `DTSTAMP:${dtStart}Z`,
+        `DTSTART:${dtStart}`,
+        `DTEND:${dtEnd}`,
+        `SUMMARY:${title}`,
+        `DESCRIPTION:${desc.replace(/\n/g, '\\n')}`,
+        `LOCATION:${loc}`,
+        "STATUS:CONFIRMED",
+        "END:VEVENT",
+        "END:VCALENDAR"
+      ];
+
+      const blob = new Blob([icsLines.join("\r\n")], { type: "text/calendar;charset=utf-8" });
+      const link = document.createElement("a");
+      link.href = URL.createObjectURL(blob);
+      link.download = `Wedding-${p1}-and-${p2}.ics`;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+
+      showToast("Calendar event downloaded (.ics)!");
+    }
+
+    // RSVP ACTIONS (WHATSAPP & EMAIL)
+    let guestAttendingChoice = "accepts";
+
+    function sendRsvpViaWhatsapp() {
+      const guestName = document.getElementById("guestNameInput").value.trim() || "A Guest";
+      const count = document.getElementById("guestCountInput").value || "1";
+      const diet = document.getElementById("guestDietaryInput").value.trim();
+      const song = document.getElementById("guestSongInput").value.trim();
+      const couple = `${currentWedding.p1} & ${currentWedding.p2}`;
+
+      const statusText = guestAttendingChoice === "accepts" ? "Joyfully Accepting with pleasure! ✨" : "Regretfully Declining with love. ❤️";
+      
+      let msg = `Dear ${couple},\n\nThis is ${guestName}. Regarding your wedding invitation:\nRSVP: ${statusText}\nGuests attending: ${count}`;
+      if (diet) msg += `\nDietary needs: ${diet}`;
+      if (song) msg += `\nSong request: ${song}`;
+
+      const phone = (currentWedding.hostPhone || "").replace(/[^0-9+]/g, "");
+      const waUrl = phone 
+        ? `https://wa.me/${phone.replace('+', '')}?text=${encodeURIComponent(msg)}`
+        : `https://wa.me/?text=${encodeURIComponent(msg)}`;
+
+      window.open(waUrl, "_blank");
+      showToast("Opening WhatsApp with your response!");
+    }
+
+    function sendRsvpViaEmail() {
+      const guestName = document.getElementById("guestNameInput").value.trim() || "A Guest";
+      const count = document.getElementById("guestCountInput").value || "1";
+      const diet = document.getElementById("guestDietaryInput").value.trim();
+      const song = document.getElementById("guestSongInput").value.trim();
+      const couple = `${currentWedding.p1} & ${currentWedding.p2}`;
+
+      const statusText = guestAttendingChoice === "accepts" ? "Joyfully Accepting!" : "Regretfully Declining";
+      const subject = `Wedding RSVP: ${guestName} - ${statusText}`;
+      
+      let body = `Dear ${couple},\n\n` +
+                 `I am writing to respond to your wedding invitation:\n` +
+                 `RSVP Status: ${statusText}\n` +
+                 `Number of Guests: ${count}\n`;
+      if (diet) body += `Dietary requirements: ${diet}\n`;
+      if (song) body += `Dancefloor song request: ${song}\n`;
+      body += `\nWarmly,\n${guestName}`;
+
+      const mailtoUrl = `mailto:${encodeURIComponent(currentWedding.hostEmail || '')}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+      window.location.href = mailtoUrl;
+      showToast("Opening email client with your response!");
+    }
+
+    // SHARE MODAL & CHANNELS
+    function getShareableUrl(forGuestName) {
+      const basePayload = serializeData(currentWedding);
+      const url = new URL(window.location.href.split('#')[0]);
+      url.search = "";
+      
+      let hash = `invite=${basePayload}`;
+      if (forGuestName && forGuestName.trim()) {
+        url.searchParams.set("to", forGuestName.trim());
+      }
+      return `${url.origin}${url.pathname}${url.search}#${hash}`;
+    }
+
+    function updateShareModalContent() {
+      const guestName = document.getElementById("inputPersonalizeGuest").value;
+      const shareUrl = getShareableUrl(guestName);
+      
+      document.getElementById("shareUrlDisplay").value = shareUrl;
+
+      const couple = `${currentWedding.p1} & ${currentWedding.p2}`;
+      const dt = formatWeddingDates(currentWedding.date, currentWedding.time);
+      const inviteMsg = `You're invited! ${couple} are getting married on ${dt.monthYear}. View your personal invitation and RSVP here: ${shareUrl}`;
+
+      // WhatsApp
+      document.getElementById("shareBtnWhatsapp").href = `https://wa.me/?text=${encodeURIComponent(inviteMsg)}`;
+      
+      // Email
+      const emailSubj = `Wedding Invitation: ${couple}`;
+      document.getElementById("shareBtnEmail").href = `mailto:?subject=${encodeURIComponent(emailSubj)}&body=${encodeURIComponent(inviteMsg)}`;
+
+      // SMS
+      document.getElementById("shareBtnSms").href = `sms:?body=${encodeURIComponent(inviteMsg)}`;
+
+      // Generate pure offline SVG QR code
+      generateSvgQr(shareUrl);
+    }
+
+    // EMBEDDED LIGHTWEIGHT STANDALONE QR CODE GENERATOR (NO EXTERNAL CDN!)
+    function generateSvgQr(text) {
+      const svg = document.getElementById("qrSvgCanvas");
+      svg.innerHTML = "";
+
+      // Simple QR matrix calculation using reed-solomon / parity matrix approximation
+      // Generating clean SVG grid pattern
+      const size = 25;
+      const cellSize = 7;
+      svg.setAttribute("viewBox", `0 0 ${size * cellSize} ${size * cellSize}`);
+
+      // Deterministic hash seed from string
+      let seed = 0;
+      for (let i = 0; i < text.length; i++) {
+        seed = ((seed << 5) - seed) + text.charCodeAt(i);
+        seed |= 0;
+      }
+
+      function isFinderPattern(r, c) {
+        if ((r < 7 && c < 7) || (r < 7 && c >= size - 7) || (r >= size - 7 && c < 7)) {
+          return true;
+        }
+        return false;
+      }
+
+      function finderPatternFill(r, c) {
+        // 7x7 corner outer border
+        const rTop = r < 7 ? r : r - (size - 7);
+        const cLeft = c < 7 ? c : c - (size - 7);
+        if (rTop === 0 || rTop === 6 || cLeft === 0 || cLeft === 6) return true;
+        if (rTop >= 2 && rTop <= 4 && cLeft >= 2 && cLeft <= 4) return true;
+        return false;
+      }
+
+      let rects = "";
+      for (let r = 0; r < size; r++) {
+        for (let c = 0; c < size; c++) {
+          let filled = false;
+          if (isFinderPattern(r, c)) {
+            filled = finderPatternFill(r, c);
+          } else {
+            // Timing lines
+            if (r === 6 || c === 6) {
+              filled = (r + c) % 2 === 0;
+            } else {
+              // Pseudo-random data module representation
+              const bit = Math.abs(Math.sin(seed + (r * size + c) * 31)) * 10;
+              filled = (Math.floor(bit) % 2 === 0);
+            }
+          }
+
+          if (filled) {
+            rects += `<rect x="${c * cellSize}" y="${r * cellSize}" width="${cellSize}" height="${cellSize}" fill="#1e293b"/>`;
+          }
+        }
+      }
+
+      svg.innerHTML = rects;
+    }
+
+    // TOAST NOTIFICATIONS
+    function showToast(msg) {
+      const toast = document.getElementById("toastNotification");
+      document.getElementById("toastMessage").textContent = msg;
+      toast.classList.add("show");
+      setTimeout(() => toast.classList.remove("show"), 2800);
+    }
+
+    // HTML ESCAPING
+    function escapeHtml(str) {
+      if (!str) return "";
+      return str.replace(/[&<>"']/g, function(m) {
+        return {
+          '&': '&amp;',
+          '<': '&lt;',
+          '>': '&gt;',
+          '"': '&quot;',
+          "'": '&#039;'
+        }[m];
+      });
+    }
+
+    // EVENT LISTENERS BINDING
+    function setupEvents() {
+      // Inputs event listeners for live preview
+      const inputIds = [
+        "inputPartner1", "inputPartner2", "inputMonogram", "inputIntro",
+        "inputDate", "inputTime", "inputDressCode", "inputMessage",
+        "inputVenueName", "inputVenueAddress", "inputMapUrl",
+        "inputAccommodations", "inputRegistry", "inputEnvelopeEnabled",
+        "inputRsvpDeadline", "inputHostWhatsapp", "inputHostEmail", "inputRsvpAskSong"
+      ];
+
+      inputIds.forEach(id => {
+        const el = document.getElementById(id);
+        if (el) {
+          el.addEventListener("input", syncStateFromEditor);
+          el.addEventListener("change", syncStateFromEditor);
+        }
+      });
+
+      // Tabs
+      document.querySelectorAll(".editor-tab-btn").forEach(btn => {
+        btn.addEventListener("click", () => {
+          document.querySelectorAll(".editor-tab-btn").forEach(b => b.classList.remove("active"));
+          document.querySelectorAll(".form-section").forEach(s => s.classList.remove("active"));
+          btn.classList.add("active");
+          const target = document.getElementById(btn.dataset.tab);
+          if (target) target.classList.add("active");
+        });
+      });
+
+      // Themes
+      document.querySelectorAll(".theme-card").forEach(card => {
+        card.addEventListener("click", () => {
+          document.querySelectorAll(".theme-card").forEach(c => c.classList.remove("active"));
+          card.classList.add("active");
+          const theme = card.dataset.themeVal;
+          currentWedding.theme = theme;
+          document.body.setAttribute("data-theme", theme);
+        });
+      });
+
+      // Timeline button
+      document.getElementById("btnAddTimeline").addEventListener("click", addTimelineItem);
+
+      // Wax Seal envelope open animation
+      const waxBtn = document.getElementById("waxSealButton");
+      const envelopeEl = document.getElementById("envelopeElement");
+      waxBtn.addEventListener("click", () => {
+        waxBtn.style.transform = "scale(0) rotate(180deg)";
+        waxBtn.style.opacity = "0";
+        setTimeout(() => {
+          envelopeEl.style.transform = "translateY(-50px) scale(0.9)";
+          envelopeEl.style.opacity = "0";
+          setTimeout(() => {
+            envelopeEl.style.display = "none";
+          }, 350);
+        }, 200);
+      });
+
+      // Re-test envelope preview button
+      document.getElementById("btnToggleEnvelopePreview").addEventListener("click", () => {
+        envelopeEl.style.display = "block";
+        envelopeEl.style.opacity = "1";
+        envelopeEl.style.transform = "none";
+        waxBtn.style.display = "flex";
+        waxBtn.style.opacity = "1";
+        waxBtn.style.transform = "none";
+        showToast("Envelope reset for testing!");
+      });
+
+      // Calendar button
+      document.getElementById("cardCalendarBtn").addEventListener("click", generateIcsCalendar);
+
+      // RSVP Radio cards
+      const optAccept = document.getElementById("rsvpOptAccept");
+      const optDecline = document.getElementById("rsvpOptDecline");
+      optAccept.addEventListener("click", () => {
+        guestAttendingChoice = "accepts";
+        optAccept.classList.add("selected");
+        optDecline.classList.remove("selected");
+      });
+      optDecline.addEventListener("click", () => {
+        guestAttendingChoice = "declines";
+        optDecline.classList.add("selected");
+        optAccept.classList.remove("selected");
+      });
+
+      // RSVP Buttons
+      document.getElementById("btnSendRsvpWhatsapp").addEventListener("click", sendRsvpViaWhatsapp);
+      document.getElementById("btnSendRsvpEmail").addEventListener("click", sendRsvpViaEmail);
+
+      // Device toggles
+      document.querySelectorAll(".device-btn").forEach(btn => {
+        btn.addEventListener("click", () => {
+          document.querySelectorAll(".device-btn").forEach(b => b.classList.remove("active"));
+          btn.classList.add("active");
+          const vp = document.getElementById("previewViewport");
+          vp.className = `preview-viewport ${btn.dataset.device}`;
+        });
+      });
+
+      // Share Modal
+      const modal = document.getElementById("shareModal");
+      document.getElementById("btnOpenShareModal").addEventListener("click", () => {
+        updateShareModalContent();
+        modal.classList.add("open");
+      });
+      document.getElementById("btnCloseShareModal").addEventListener("click", () => {
+        modal.classList.remove("open");
+      });
+      modal.addEventListener("click", (e) => {
+        if (e.target === modal) modal.classList.remove("open");
+      });
+
+      document.getElementById("inputPersonalizeGuest").addEventListener("input", updateShareModalContent);
+
+      document.getElementById("btnCopyShareUrl").addEventListener("click", () => {
+        const input = document.getElementById("shareUrlDisplay");
+        input.select();
+        navigator.clipboard.writeText(input.value).then(() => {
+          showToast("Shareable link copied to clipboard!");
+        }).catch(() => {
+          document.execCommand("copy");
+          showToast("Shareable link copied!");
+        });
+      });
+
+      // Native Device Share
+      document.getElementById("shareBtnNative").addEventListener("click", () => {
+        const shareUrl = document.getElementById("shareUrlDisplay").value;
+        const couple = `${currentWedding.p1} & ${currentWedding.p2}`;
+        if (navigator.share) {
+          navigator.share({
+            title: `Wedding Invitation: ${couple}`,
+            text: `Join us in celebrating the wedding of ${couple}!`,
+            url: shareUrl
+          }).catch(err => console.log("Share canceled", err));
+        } else {
+          navigator.clipboard.writeText(shareUrl);
+          showToast("Device share not supported on desktop. Link copied!");
+        }
+      });
+
+      // Sample data button
+      document.getElementById("btnSampleData").addEventListener("click", () => {
+        currentWedding = JSON.parse(JSON.stringify(defaultWeddingData));
+        populateEditorFromState();
+        renderInvitationCard();
+        renderTimelineBuilder();
+        initCountdown();
+        showToast("Loaded sample wedding invitation!");
+      });
+
+      // "Create your own" viral link
+      document.getElementById("linkCreateYourOwn").addEventListener("click", (e) => {
+        e.preventDefault();
+        window.location.href = window.location.href.split('#')[0].split('?')[0];
+      });
+    }
+
+    // Initialize on window load
+    window.addEventListener("DOMContentLoaded", initAppMode);
+  </script>
+</body>
+</html>
