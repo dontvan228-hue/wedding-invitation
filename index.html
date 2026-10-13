@@ -1,0 +1,2989 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>Свадебное приглашение</title>
+  
+  <!-- Web Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Marck+Script&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* RESET & CORE VARIABLES */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --font-serif: 'Cormorant Garamond', Georgia, serif;
+      --font-script: 'Marck Script', cursive;
+      --font-modern: 'Montserrat', sans-serif;
+      --font-body: 'Montserrat', -apple-system, sans-serif;
+      
+      /* THEME: 1. Royale Gold & Champagne (Default) */
+      --bg-page: #fbf9f5;
+      --bg-card: #ffffff;
+      --bg-card-alt: #f6f1e8;
+      --text-main: #272320;
+      --text-muted: #787068;
+      --accent: #c5a059;
+      --accent-light: #eeddbb;
+      --accent-dark: #967433;
+      --card-border: #ebdcc9;
+      --card-shadow: 0 12px 35px rgba(180, 155, 120, 0.12);
+      --seal-bg: radial-gradient(circle at 35% 35%, #d49845 0%, #aa6c28 65%, #6a3d10 100%);
+      --seal-text: #fff6e0;
+    }
+
+    /* THEME 2: Sage Botanical */
+    body[data-theme="sage"] {
+      --bg-page: #f2f5f1;
+      --bg-card: #f9fbf8;
+      --bg-card-alt: #e3ebe1;
+      --text-main: #232d25;
+      --text-muted: #5e6d61;
+      --accent: #5a7d62;
+      --accent-light: #cdd9cf;
+      --accent-dark: #3a5740;
+      --card-border: #d2ded0;
+      --card-shadow: 0 12px 35px rgba(90, 125, 98, 0.12);
+      --seal-bg: radial-gradient(circle at 35% 35%, #6e9477 0%, #45664c 65%, #2a4030 100%);
+      --seal-text: #eef5ef;
+    }
+
+    /* THEME 3: Dusty Rose */
+    body[data-theme="rose"] {
+      --bg-page: #fcf4f5;
+      --bg-card: #ffffff;
+      --bg-card-alt: #f8e5e8;
+      --text-main: #332024;
+      --text-muted: #7d5e64;
+      --accent: #b05c6d;
+      --accent-light: #f0cfd6;
+      --accent-dark: #7a3240;
+      --card-border: #edd2d7;
+      --card-shadow: 0 12px 35px rgba(176, 92, 109, 0.14);
+      --seal-bg: radial-gradient(circle at 35% 35%, #d17586 0%, #993b4d 65%, #631b28 100%);
+      --seal-text: #fdf2f4;
+    }
+
+    /* THEME 4: Celestial Midnight */
+    body[data-theme="midnight"] {
+      --bg-page: #0a0f18;
+      --bg-card: #131c2a;
+      --bg-card-alt: #1c2738;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #e2c076;
+      --accent-light: #3e506d;
+      --accent-dark: #bba057;
+      --card-border: #29384e;
+      --card-shadow: 0 18px 45px rgba(0, 0, 0, 0.45);
+      --seal-bg: radial-gradient(circle at 35% 35%, #e6ca85 0%, #b8984e 65%, #6c5421 100%);
+      --seal-text: #1a160d;
+    }
+
+    /* THEME 5: Terracotta Boho */
+    body[data-theme="terracotta"] {
+      --bg-page: #f8f1eb;
+      --bg-card: #ffffff;
+      --bg-card-alt: #fae8dc;
+      --text-main: #38251e;
+      --text-muted: #7d5f53;
+      --accent: #b85d3b;
+      --accent-light: #f2cbbe;
+      --accent-dark: #82381c;
+      --card-border: #edd5c7;
+      --card-shadow: 0 12px 35px rgba(184, 93, 59, 0.14);
+      --seal-bg: radial-gradient(circle at 35% 35%, #c96e4c 0%, #944021 65%, #59200b 100%);
+      --seal-text: #fff3ec;
+    }
+
+    /* PRO THEMES */
+    body[data-theme="gold_foil"] {
+      --bg-page: #0d131a;
+      --bg-card: #151e29;
+      --bg-card-alt: #1e2a38;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #d4af37;
+      --accent-light: #52637a;
+      --accent-dark: #f3e5ab;
+      --card-border: #33445c;
+      --card-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+      --seal-bg: radial-gradient(circle at 35% 35%, #f6d365 0%, #d4af37 60%, #8a6a1a 100%);
+      --seal-text: #1a160d;
+    }
+
+    /* FONT SELECTIONS */
+    body[data-font="serif"] h1, body[data-font="serif"] h2, body[data-font="serif"] h3, body[data-font="serif"] .font-title {
+      font-family: var(--font-serif);
+      font-weight: 400;
+    }
+    body[data-font="script"] h1, body[data-font="script"] h2, body[data-font="script"] h3, body[data-font="script"] .font-title {
+      font-family: var(--font-script);
+      font-weight: 400;
+    }
+    body[data-font="modern"] h1, body[data-font="modern"] h2, body[data-font="modern"] h3, body[data-font="modern"] .font-title {
+      font-family: var(--font-modern);
+      font-weight: 600;
+      letter-spacing: 0.04em;
+    }
+
+    /* BUTTON SHAPES */
+    body[data-btn-shape="pill"] .btn { border-radius: 9999px; }
+    body[data-btn-shape="soft"] .btn { border-radius: 12px; }
+    body[data-btn-shape="sharp"] .btn { border-radius: 2px; }
+
+    /* HARDENED ULTRA-SMOOTH RESPONSIVE VIEWPORT */
+    html {
+      scroll-behavior: smooth;
+      overflow-x: hidden !important;
+      width: 100% !important;
+      max-width: 100vw !important;
+      overscroll-behavior-x: none !important;
+      -webkit-text-size-adjust: 100%;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background-color: var(--bg-page);
+      color: var(--text-main);
+      line-height: 1.6;
+      overflow-x: hidden !important;
+      width: 100% !important;
+      max-width: 100vw !important;
+      position: relative;
+      overscroll-behavior-x: none !important;
+      touch-action: pan-y !important;
+      -webkit-font-smoothing: antialiased;
+      transition: background 0.3s ease, color 0.3s ease;
+    }
+
+    /* GPU-ACCELERATED ULTRA-LIGHT PETALS (0% CPU, NO LAG) */
+    .petals-container {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 1;
+      overflow: hidden;
+    }
+    .petal {
+      position: absolute;
+      background: radial-gradient(circle, rgba(230, 180, 190, 0.45) 0%, rgba(212, 175, 55, 0.25) 100%);
+      border-radius: 15px 1px;
+      opacity: 0.6;
+      animation: floatPetal 10s linear infinite;
+      will-change: transform;
+    }
+    .petal:nth-child(1) { left: 10%; width: 12px; height: 16px; animation-duration: 9s; animation-delay: 0s; }
+    .petal:nth-child(2) { left: 30%; width: 10px; height: 14px; animation-duration: 11s; animation-delay: 2s; }
+    .petal:nth-child(3) { left: 55%; width: 14px; height: 18px; animation-duration: 13s; animation-delay: 4s; }
+    .petal:nth-child(4) { left: 75%; width: 11px; height: 15px; animation-duration: 10s; animation-delay: 1s; }
+    .petal:nth-child(5) { left: 90%; width: 13px; height: 17px; animation-duration: 12s; animation-delay: 3s; }
+    
+    @keyframes floatPetal {
+      0% { transform: translateY(-50px) rotate(0deg); opacity: 0; }
+      10% { opacity: 0.7; }
+      90% { opacity: 0.7; }
+      100% { transform: translateY(105vh) rotate(360deg); opacity: 0; }
+    }
+
+    /* CONTAINER */
+    .container {
+      width: 100%;
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 0 1.25rem;
+      position: relative;
+      z-index: 2;
+    }
+
+    /* FLOATING BUTTONS */
+    .floating-bar {
+      position: fixed;
+      top: 1rem;
+      right: 1rem;
+      display: flex;
+      gap: 0.5rem;
+      z-index: 100;
+    }
+
+    .btn-circle {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(10px);
+      border: 1px solid var(--card-border);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-main);
+      cursor: pointer;
+      transition: transform 0.2s ease, border-color 0.2s ease;
+    }
+
+    body[data-theme="midnight"] .btn-circle,
+    body[data-theme="gold_foil"] .btn-circle {
+      background: rgba(25, 35, 50, 0.92);
+      color: #ffffff;
+      border-color: #384860;
+    }
+
+    .btn-circle:hover {
+      transform: scale(1.06);
+      border-color: var(--accent);
+    }
+
+    .btn-circle svg {
+      width: 20px;
+      height: 20px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 1.8;
+    }
+
+    /* HERO SECTION */
+    .hero-section {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 4rem 1.25rem 2.5rem 1.25rem;
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero-monogram-circle {
+      width: 76px;
+      height: 76px;
+      border-radius: 50%;
+      border: 1.5px solid var(--accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1.5rem auto;
+      background: var(--bg-card);
+      position: relative;
+    }
+
+    .hero-monogram-circle::after {
+      content: '';
+      position: absolute;
+      inset: 4px;
+      border-radius: 50%;
+      border: 1px dashed var(--accent-light);
+    }
+
+    .hero-monogram {
+      font-size: 1.6rem;
+      color: var(--accent-dark);
+      font-weight: 600;
+    }
+
+    .hero-badge {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.25em;
+      color: var(--text-muted);
+      margin-bottom: 0.75rem;
+    }
+
+    .hero-names {
+      font-size: clamp(2.4rem, 8vw, 3.8rem);
+      line-height: 1.15;
+      color: var(--text-main);
+      margin-bottom: 0.5rem;
+    }
+
+    .hero-names .amp {
+      font-style: italic;
+      color: var(--accent);
+      padding: 0 0.35rem;
+    }
+
+    .hero-date {
+      font-size: 1.1rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--accent-dark);
+      font-weight: 500;
+      margin-top: 0.5rem;
+      margin-bottom: 2rem;
+    }
+
+    /* ENVELOPE */
+    .envelope-box {
+      width: 100%;
+      max-width: 440px;
+      margin: 0 auto 2rem auto;
+      cursor: pointer;
+    }
+
+    .envelope-card {
+      background: var(--bg-card);
+      border-radius: 20px;
+      border: 1px solid var(--card-border);
+      box-shadow: var(--card-shadow);
+      padding: 2.2rem 1.5rem;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.25s ease;
+    }
+
+    .envelope-card:hover {
+      transform: translateY(-3px);
+    }
+
+    .envelope-border-inner {
+      position: absolute;
+      inset: 8px;
+      border: 1px solid var(--accent-light);
+      border-radius: 14px;
+      pointer-events: none;
+    }
+
+    .envelope-guest-tag {
+      display: inline-block;
+      font-size: 1.25rem;
+      font-style: italic;
+      color: var(--accent-dark);
+      padding: 0.2rem 1rem;
+      border-bottom: 1px solid var(--accent-light);
+      margin-bottom: 1.5rem;
+    }
+
+    .wax-seal {
+      width: 82px;
+      height: 82px;
+      border-radius: 50%;
+      background: var(--seal-bg);
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2), inset 0 2px 4px rgba(255, 255, 255, 0.4), inset 0 -3px 6px rgba(0, 0, 0, 0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0.5rem auto;
+      color: var(--seal-text);
+      font-size: 1.4rem;
+      font-weight: 700;
+      transition: transform 0.25s ease;
+    }
+
+    .wax-seal:hover {
+      transform: scale(1.06) rotate(-3deg);
+    }
+
+    .seal-cue {
+      margin-top: 1rem;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: var(--accent-dark);
+      font-weight: 600;
+    }
+
+    .scroll-arrow {
+      margin-top: 1rem;
+      color: var(--text-muted);
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.4rem;
+      cursor: pointer;
+    }
+
+    /* CARD BLOCKS */
+    .card-block {
+      background: var(--bg-card);
+      border-radius: 24px;
+      border: 1px solid var(--card-border);
+      box-shadow: var(--card-shadow);
+      padding: 3rem 1.75rem;
+      text-align: center;
+      position: relative;
+      margin-bottom: 2rem;
+    }
+
+    .block-title {
+      font-size: clamp(1.9rem, 5vw, 2.6rem);
+      color: var(--text-main);
+      margin-bottom: 0.5rem;
+      line-height: 1.2;
+    }
+
+    .block-subtitle {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: var(--text-muted);
+      margin-bottom: 1.75rem;
+    }
+
+    .invitation-text {
+      font-size: 1.3rem;
+      line-height: 1.7;
+      max-width: 520px;
+      margin: 0 auto 2rem auto;
+      font-style: italic;
+    }
+
+    /* COUNTDOWN */
+    .countdown-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0.75rem;
+      max-width: 440px;
+      margin: 1.5rem auto 0 auto;
+    }
+
+    .countdown-item {
+      background: var(--bg-card-alt);
+      border-radius: 14px;
+      padding: 1rem 0.5rem;
+      border: 1px solid var(--card-border);
+    }
+
+    .countdown-num {
+      font-size: 1.85rem;
+      font-weight: 600;
+      color: var(--accent-dark);
+      line-height: 1;
+      margin-bottom: 0.25rem;
+    }
+
+    .countdown-lbl {
+      font-size: 0.65rem;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--text-muted);
+    }
+
+    /* LOVE STORY */
+    .lovestory-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      margin: 2rem auto 0 auto;
+    }
+
+    @media (max-width: 600px) {
+      .lovestory-grid { grid-template-columns: 1fr; }
+    }
+
+    .story-card {
+      background: var(--bg-card-alt);
+      border-radius: 18px;
+      overflow: hidden;
+      border: 1px solid var(--card-border);
+      text-align: center;
+      transition: transform 0.25s ease;
+    }
+
+    .story-card:hover { transform: translateY(-3px); }
+
+    .story-img-placeholder {
+      height: 150px;
+      background: linear-gradient(135deg, rgba(197, 160, 89, 0.2) 0%, rgba(255, 255, 255, 0.4) 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.2rem;
+      border-bottom: 1px solid var(--card-border);
+    }
+
+    .story-body { padding: 1.25rem 1rem; }
+
+    .story-date {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--accent-dark);
+      font-weight: 700;
+      margin-bottom: 0.25rem;
+    }
+
+    .story-title {
+      font-size: 1.25rem;
+      color: var(--text-main);
+      margin-bottom: 0.5rem;
+    }
+
+    .story-desc {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      line-height: 1.45;
+    }
+
+    /* TIMELINE */
+    .timeline-container {
+      position: relative;
+      max-width: 480px;
+      margin: 2rem auto 0 auto;
+      text-align: left;
+    }
+
+    .timeline-container::before {
+      content: '';
+      position: absolute;
+      top: 15px;
+      bottom: 15px;
+      left: 23px;
+      width: 1px;
+      background: linear-gradient(180deg, transparent 0%, var(--accent) 15%, var(--accent) 85%, transparent 100%);
+    }
+
+    .timeline-row {
+      display: flex;
+      align-items: flex-start;
+      margin-bottom: 1.8rem;
+      position: relative;
+    }
+
+    .timeline-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: var(--bg-card);
+      border: 1.5px solid var(--accent);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      z-index: 2;
+      color: var(--accent-dark);
+      font-size: 1.2rem;
+    }
+
+    .timeline-content {
+      padding-left: 1.25rem;
+      flex: 1;
+    }
+
+    .timeline-time {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--accent-dark);
+      letter-spacing: 0.1em;
+    }
+
+    .timeline-name {
+      font-size: 1.3rem;
+      color: var(--text-main);
+      margin: 0.1rem 0;
+    }
+
+    .timeline-desc {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    /* BUTTONS */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0.9rem 1.6rem;
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      border: 1.5px solid transparent;
+      width: 100%;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #ffffff;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.12);
+    }
+
+    .btn-primary:hover {
+      background: var(--accent-dark);
+      transform: translateY(-2px);
+    }
+
+    .btn-outline {
+      background: transparent;
+      border-color: var(--card-border);
+      color: var(--text-main);
+    }
+
+    .btn-outline:hover {
+      border-color: var(--accent);
+      color: var(--accent-dark);
+    }
+
+    /* DRESS CODE SWATCHES */
+    .color-swatches {
+      display: flex;
+      justify-content: center;
+      gap: 0.75rem;
+      margin: 1.5rem auto;
+      flex-wrap: wrap;
+    }
+
+    .swatch-col {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.35rem;
+    }
+
+    .swatch-circle {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      border: 2px solid #ffffff;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .swatch-name {
+      font-size: 0.65rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-muted);
+    }
+
+    /* WISHES */
+    .wish-card {
+      background: var(--bg-card-alt);
+      border-radius: 16px;
+      padding: 1.25rem;
+      border: 1px solid var(--card-border);
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+      text-align: left;
+      margin-bottom: 1rem;
+    }
+
+    .wish-icon-box {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      color: var(--accent-dark);
+      font-size: 1.2rem;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+    }
+
+    /* T-BANK CARD WIDGET */
+    .bank-card-wrapper {
+      max-width: 360px;
+      margin: 1.5rem auto;
+    }
+
+    .bank-card-box {
+      background: linear-gradient(135deg, #222934 0%, #151b24 50%, #0d121a 100%);
+      border: 1px solid rgba(212, 175, 55, 0.45);
+      border-radius: 18px;
+      padding: 1.5rem 1.4rem;
+      color: #ffffff;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
+      text-align: left;
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+    }
+
+    .bank-card-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.2rem;
+    }
+
+    .bank-brand {
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      font-size: 1.1rem;
+      color: #fcd34d;
+    }
+
+    .sbp-badge {
+      background: #ffffff;
+      color: #000000;
+      font-size: 0.75rem;
+      font-weight: 800;
+      padding: 2px 8px;
+      border-radius: 6px;
+    }
+
+    .bank-card-num {
+      font-family: 'Courier New', monospace;
+      font-size: 1.3rem;
+      letter-spacing: 0.12em;
+      color: #f9fafb;
+      margin-bottom: 1.2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .bank-card-bottom {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.7rem;
+      color: #9ca3af;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    /* RSVP */
+    .rsvp-form {
+      max-width: 480px;
+      margin: 1.5rem auto 0 auto;
+      text-align: left;
+    }
+
+    .form-group { margin-bottom: 1.2rem; }
+
+    .form-label {
+      display: block;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-muted);
+      margin-bottom: 0.4rem;
+      font-weight: 600;
+    }
+
+    .form-input {
+      width: 100%;
+      padding: 0.85rem 1rem;
+      border-radius: 10px;
+      border: 1px solid var(--card-border);
+      background: var(--bg-card-alt);
+      color: var(--text-main);
+      font-size: 16px !important;
+    }
+
+    .form-input:focus {
+      outline: none;
+      border-color: var(--accent);
+      background: #ffffff;
+    }
+
+    .radio-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.5rem;
+    }
+
+    .radio-pill {
+      border: 1px solid var(--card-border);
+      padding: 0.75rem 0.5rem;
+      border-radius: 10px;
+      text-align: center;
+      cursor: pointer;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      background: var(--bg-card-alt);
+    }
+
+    input[type="radio"]:checked + .radio-pill {
+      border-color: var(--accent);
+      background: var(--accent);
+      color: #ffffff;
+      font-weight: 600;
+    }
+
+    .choice-chips-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+      gap: 0.5rem;
+      margin-top: 0.35rem;
+    }
+
+    .chip-item {
+      border: 1.5px solid var(--card-border);
+      background: var(--bg-card-alt);
+      border-radius: 12px;
+      padding: 0.65rem 0.5rem;
+      text-align: center;
+      cursor: pointer;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.35rem;
+    }
+
+    .chip-item:hover { border-color: var(--accent); }
+    .chip-item.active {
+      background: var(--accent);
+      color: #ffffff;
+      border-color: var(--accent);
+      font-weight: 600;
+    }
+
+    /* FOOTER */
+    footer {
+      text-align: center;
+      padding: 3rem 1rem 4rem 1rem;
+      color: var(--text-muted);
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      border-top: 1px solid var(--card-border);
+    }
+
+    /* MODAL BASE */
+    .studio-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(10, 15, 24, 0.75);
+      backdrop-filter: blur(8px);
+      z-index: 1000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+    }
+
+    .studio-overlay.active { display: flex; }
+
+    .studio-modal {
+      background: #ffffff;
+      width: 100%;
+      max-width: 580px;
+      max-height: 90vh;
+      border-radius: 24px;
+      padding: 2rem 1.5rem;
+      overflow-y: auto;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.35);
+      position: relative;
+      color: #272320;
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 1.25rem;
+      right: 1.25rem;
+      background: none;
+      border: none;
+      font-size: 1.6rem;
+      color: #888;
+      cursor: pointer;
+    }
+
+    .studio-tabs {
+      display: flex;
+      gap: 0.4rem;
+      border-bottom: 1px solid #e5e7eb;
+      padding-bottom: 0.75rem;
+      margin-bottom: 1.5rem;
+      overflow-x: auto;
+    }
+
+    .studio-tab-btn {
+      padding: 0.5rem 0.85rem;
+      border-radius: 9999px;
+      border: 1px solid #e5e7eb;
+      background: #f9fafb;
+      font-size: 0.75rem;
+      font-weight: 600;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    .studio-tab-btn.active {
+      background: #272320;
+      color: #ffffff;
+      border-color: #272320;
+    }
+
+    .studio-section { display: none; }
+    .studio-section.active { display: block; }
+
+    .theme-card-picker {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.75rem;
+      margin-bottom: 1rem;
+    }
+
+    .theme-opt-card {
+      border: 2px solid #e5e7eb;
+      border-radius: 12px;
+      padding: 0.75rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      transition: border-color 0.2s ease;
+    }
+
+    .theme-opt-card.active {
+      border-color: #c5a059;
+      background: #fdfaf5;
+    }
+
+    .theme-dot {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .color-picker-row {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 0.5rem;
+      margin: 0.75rem 0 1.25rem 0;
+    }
+
+    .color-picker-box {
+      border: 1px solid #d1d5db;
+      border-radius: 10px;
+      padding: 0.5rem 0.25rem;
+      text-align: center;
+      background: #f9fafb;
+    }
+
+    .color-picker-box input[type="color"] {
+      -webkit-appearance: none;
+      border: none;
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      cursor: pointer;
+      background: none;
+    }
+
+    .color-picker-box input[type="color"]::-webkit-color-swatch-wrapper { padding: 0; }
+    .color-picker-box input[type="color"]::-webkit-color-swatch {
+      border: 1.5px solid #ffffff;
+      border-radius: 50%;
+    }
+
+    .color-picker-name {
+      width: 100%;
+      border: none;
+      background: transparent;
+      font-size: 0.7rem;
+      text-align: center;
+      color: #374151;
+      margin-top: 0.25rem;
+      outline: none;
+    }
+
+    .btn-shape-box {
+      border: 2px solid #e5e7eb;
+      padding: 0.6rem 0.2rem;
+      text-align: center;
+      cursor: pointer;
+      font-size: 0.75rem;
+      border-radius: 8px;
+    }
+
+    .btn-shape-box.active {
+      border-color: #c5a059;
+      background: #fdfaf5;
+      font-weight: 600;
+    }
+
+    .module-toggle-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: #f9fafb;
+      border: 1px solid #e5e7eb;
+      border-radius: 10px;
+      padding: 0.75rem 1rem;
+      margin-bottom: 0.5rem;
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: #1f2937;
+    }
+
+    .toggle-switch {
+      position: relative;
+      display: inline-block;
+      width: 44px;
+      height: 24px;
+    }
+
+    .toggle-switch input { opacity: 0; width: 0; height: 0; }
+
+    .toggle-slider {
+      position: absolute;
+      cursor: pointer;
+      inset: 0;
+      background-color: #d1d5db;
+      transition: .25s;
+      border-radius: 24px;
+    }
+
+    .toggle-slider:before {
+      position: absolute;
+      content: "";
+      height: 18px;
+      width: 18px;
+      left: 3px;
+      bottom: 3px;
+      background-color: white;
+      transition: .25s;
+      border-radius: 50%;
+    }
+
+    .toggle-switch input:checked + .toggle-slider { background-color: #10b981; }
+    .toggle-switch input:checked + .toggle-slider:before { transform: translateX(20px); }
+
+    .pro-badge {
+      background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+      color: #ffffff;
+      font-size: 0.65rem;
+      font-weight: 800;
+      padding: 2px 7px;
+      border-radius: 6px;
+      margin-left: 0.35rem;
+    }
+
+    .free-badge {
+      background: #10b981;
+      color: #ffffff;
+      font-size: 0.65rem;
+      font-weight: 800;
+      padding: 2px 6px;
+      border-radius: 6px;
+      margin-left: 0.35rem;
+    }
+
+    .admin-pill-btn {
+      background: #4f46e5;
+      color: #ffffff;
+      padding: 3px 12px;
+      border-radius: 9999px;
+      border: none;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 0.75rem;
+    }
+
+    .promo-list-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #f3f4f6;
+      padding: 0.6rem 0.85rem;
+      border-radius: 8px;
+      margin-bottom: 0.5rem;
+      font-size: 0.85rem;
+    }
+
+    .promo-del-btn {
+      background: none;
+      border: none;
+      color: #ef4444;
+      cursor: pointer;
+      font-size: 1.1rem;
+      font-weight: 700;
+    }
+
+    /* TOAST */
+    .toast {
+      position: fixed;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%) translateY(100px);
+      background: #1f2937;
+      color: #ffffff;
+      padding: 0.75rem 1.5rem;
+      border-radius: 9999px;
+      font-size: 0.85rem;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+      z-index: 2000;
+      opacity: 0;
+      transition: all 0.3s ease;
+    }
+
+    .toast.show {
+      transform: translateX(-50%) translateY(0);
+      opacity: 1;
+    }
+
+    /* INLINE DIRECT VISUAL BUILDER */
+    .block-toolbar {
+      display: none;
+      position: absolute;
+      top: 0.75rem;
+      right: 0.75rem;
+      gap: 0.35rem;
+      z-index: 10;
+      background: rgba(255, 255, 255, 0.95);
+      border: 1px solid var(--card-border);
+      border-radius: 9999px;
+      padding: 3px 6px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    body.edit-mode .block-toolbar {
+      display: flex !important;
+    }
+
+    body.edit-mode [data-editable="true"] {
+      outline: 1.5px dashed var(--accent);
+      outline-offset: 4px;
+      border-radius: 4px;
+      cursor: text;
+    }
+
+    body.edit-mode [data-editable="true"]:focus {
+      outline: 2px solid var(--accent);
+      background: rgba(197, 160, 89, 0.08);
+    }
+
+    .toolbar-btn {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      border: none;
+      background: #f3f4f6;
+      color: #374151;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 0.8rem;
+      font-weight: 700;
+      transition: all 0.2s ease;
+    }
+
+    .toolbar-btn:hover {
+      background: var(--accent);
+      color: #ffffff;
+    }
+
+    .toolbar-btn.btn-remove:hover {
+      background: #ef4444;
+      color: #ffffff;
+    }
+
+    .restore-blocks-box {
+      display: none;
+      text-align: center;
+      margin: 1.5rem auto 2.5rem auto;
+    }
+
+    body.edit-mode .restore-blocks-box.has-hidden {
+      display: block;
+    }
+
+  </style>
+</head>
+<body data-theme="gold" data-font="serif" data-btn-shape="pill">
+
+  <!-- LIGHTWEIGHT ACCELERATED PETALS -->
+  <div class="petals-container">
+    <div class="petal"></div>
+    <div class="petal"></div>
+    <div class="petal"></div>
+    <div class="petal"></div>
+    <div class="petal"></div>
+  </div>
+
+  <!-- FLOATING TOP BAR -->
+  <div class="floating-bar">
+    <button class="btn-circle" id="btnUserAccount" title="Личный кабинет (Вход / Регистрация)" onclick="openUserCabinetModal()">
+      <span style="font-size:1.2rem;">👤</span>
+    </button>
+    <button class="btn-circle" id="btnMusic" title="Включить / Выключить музыку" onclick="toggleWeddingMusic()">
+      <svg viewBox="0 0 24 24">
+        <path d="M9 18V5l12-2v13"></path>
+        <circle cx="6" cy="18" r="3"></circle>
+        <circle cx="18" cy="16" r="3"></circle>
+      </svg>
+    </button>
+    <button class="btn-circle" id="btnOpenStudio" title="Конструктор свадьбы" onclick="openStudio()">
+      <svg viewBox="0 0 24 24">
+        <circle cx="12" cy="12" r="3"></circle>
+        <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+      </svg>
+    </button>
+  </div>
+
+  <!-- HERO SECTION -->
+  <header class="hero-section">
+    <div class="hero-monogram-circle">
+      <div class="hero-monogram font-title" id="dispMonogram">А &amp; Е</div>
+    </div>
+    
+    <div class="hero-badge">ПРИГЛАШЕНИЕ НА СВАДЬБУ</div>
+
+    <h1 class="hero-names font-title">
+      <span id="dispP1" contenteditable="true" data-editable="true" onblur="saveInlineEdits()">Александр</span>
+      <span class="amp">&amp;</span>
+      <span id="dispP2" contenteditable="true" data-editable="true" onblur="saveInlineEdits()">Екатерина</span>
+    </h1>
+
+    <div class="hero-date" id="dispDateBadge">19 ИЮНЯ 2027</div>
+
+    <!-- ENVELOPE -->
+    <div class="envelope-box" onclick="openEnvelope()">
+      <div class="envelope-card">
+        <div class="envelope-border-inner"></div>
+        <div class="hero-badge">ДЕНЬ НАШЕЙ ЛЮБВИ</div>
+        <div class="envelope-guest-tag font-title" id="dispGuestTag" contenteditable="true" data-editable="true" onblur="saveInlineEdits()">Дорогие гости!</div>
+        
+        <div class="wax-seal" id="dispSeal">А&amp;Е</div>
+        <div class="seal-cue">✦ Нажмите, чтобы открыть приглашение ✦</div>
+      </div>
+    </div>
+
+    <div class="scroll-arrow" onclick="openEnvelope()">
+      <span>Листать дальше</span>
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+    </div>
+  </header>
+
+  <main class="container" id="contentSection">
+    
+    <!-- MESSAGE CARD -->
+    <section class="card-block">
+      <!-- BLOCK ACTION TOOLBAR (UP / DOWN / HIDE) -->
+      <div class="block-toolbar">
+        <button type="button" class="toolbar-btn" onclick="moveBlockUp(this)" title="Поднять блок выше">▲</button>
+        <button type="button" class="toolbar-btn" onclick="moveBlockDown(this)" title="Опустить блок ниже">▼</button>
+        <button type="button" class="toolbar-btn btn-remove" onclick="removeBlock(this)" title="Скрыть этот блок">&times;</button>
+      </div>
+      <h2 class="block-title font-title" contenteditable="true" data-editable="true" onblur="saveInlineEdits()">Дорогие и близкие!</h2>
+      <p class="invitation-text font-title" id="dispMessage" contenteditable="true" data-editable="true" onblur="saveInlineEdits()">
+        В нашей жизни наступает особенный и трепетный момент — день создания нашей семьи. Мы будем счастливы разделить эту радость и теплые мгновения с вами!
+      </p>
+
+      <div class="block-subtitle">ДО НАШЕЙ СВАДЬБЫ ОСТАЛОСЬ:</div>
+      <div class="countdown-grid">
+        <div class="countdown-item">
+          <div class="countdown-num font-title" id="cdDays">00</div>
+          <div class="countdown-lbl">Дней</div>
+        </div>
+        <div class="countdown-item">
+          <div class="countdown-num font-title" id="cdHours">00</div>
+          <div class="countdown-lbl">Часов</div>
+        </div>
+        <div class="countdown-item">
+          <div class="countdown-num font-title" id="cdMinutes">00</div>
+          <div class="countdown-lbl">Минут</div>
+        </div>
+        <div class="countdown-item">
+          <div class="countdown-num font-title" id="cdSeconds">00</div>
+          <div class="countdown-lbl">Секунд</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- LOVE STORY & PHOTO ALBUM -->
+    <section class="card-block" id="secStory">
+      <!-- BLOCK ACTION TOOLBAR (UP / DOWN / HIDE) -->
+      <div class="block-toolbar">
+        <button type="button" class="toolbar-btn" onclick="moveBlockUp(this)" title="Поднять блок выше">▲</button>
+        <button type="button" class="toolbar-btn" onclick="moveBlockDown(this)" title="Опустить блок ниже">▼</button>
+        <button type="button" class="toolbar-btn btn-remove" onclick="removeBlock(this)" title="Скрыть этот блок">&times;</button>
+      </div>
+      <h2 class="block-title font-title" contenteditable="true" data-editable="true" onblur="saveInlineEdits()">Наша история</h2>
+      <div class="block-subtitle">LOVE STORY</div>
+
+      <p style="font-size:0.95rem; color:var(--text-muted); max-width:500px; margin:0 auto;">
+        Каждая история любви прекрасна, но наша — самая любимая. Несколько памятных моментов, которые привели нас к этому дню:
+      </p>
+
+      <div class="lovestory-grid">
+        <div class="story-card">
+          <div class="story-img-placeholder">✨</div>
+          <div class="story-body">
+            <div class="story-date">МАЙ 2022</div>
+            <div class="story-title font-title">Первая встреча</div>
+            <div class="story-desc">Случайный взгляд в кофейне, переросший в трехчасовой разговор о всем на свете.</div>
+          </div>
+        </div>
+
+        <div class="story-card">
+          <div class="story-img-placeholder">✈️</div>
+          <div class="story-body">
+            <div class="story-date">АВГУСТ 2024</div>
+            <div class="story-title font-title">Первое путешествие</div>
+            <div class="story-desc">Совместная поездка к морю, где мы окончательно поняли, что хотим быть вместе всегда.</div>
+          </div>
+        </div>
+
+        <div class="story-card">
+          <div class="story-img-placeholder">💍</div>
+          <div class="story-body">
+            <div class="story-date">ДЕКАБРЬ 2025</div>
+            <div class="story-title font-title">Она сказала «Да!»</div>
+            <div class="story-desc">Самый волнительный закат, трепетные слова и заветное согласие стать семьей.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TIMELINE -->
+    <section class="card-block" id="secTimeline">
+      <!-- BLOCK ACTION TOOLBAR (UP / DOWN / HIDE) -->
+      <div class="block-toolbar">
+        <button type="button" class="toolbar-btn" onclick="moveBlockUp(this)" title="Поднять блок выше">▲</button>
+        <button type="button" class="toolbar-btn" onclick="moveBlockDown(this)" title="Опустить блок ниже">▼</button>
+        <button type="button" class="toolbar-btn btn-remove" onclick="removeBlock(this)" title="Скрыть этот блок">&times;</button>
+      </div>
+      <h2 class="block-title font-title" contenteditable="true" data-editable="true" onblur="saveInlineEdits()">Программа дня</h2>
+      <div class="block-subtitle">ТАЙМИНГ ТОРЖЕСТВА</div>
+
+      <div class="timeline-container">
+        
+        <div class="timeline-row">
+          <div class="timeline-icon">🍸</div>
+          <div class="timeline-content">
+            <div class="timeline-time">15:30</div>
+            <div class="timeline-name font-title">Сбор гостей &amp; Welcome</div>
+            <div class="timeline-desc">Легкие напитки, живая музыка и объятия перед началом церемонии.</div>
+          </div>
+        </div>
+
+        <div class="timeline-row">
+          <div class="timeline-icon">💍</div>
+          <div class="timeline-content">
+            <div class="timeline-time" id="dispTime">16:30</div>
+            <div class="timeline-name font-title">Свадебная церемония</div>
+            <div class="timeline-desc">Трогательный момент обмена свадебными клятвами и кольцами.</div>
+          </div>
+        </div>
+
+        <div class="timeline-row">
+          <div class="timeline-icon">🥂</div>
+          <div class="timeline-content">
+            <div class="timeline-time">17:30</div>
+            <div class="timeline-name font-title">Праздничный банкет</div>
+            <div class="timeline-desc">Уютный праздничный ужин, поздравления, тосты и танцы.</div>
+          </div>
+        </div>
+
+        <div class="timeline-row">
+          <div class="timeline-icon">🎂</div>
+          <div class="timeline-content">
+            <div class="timeline-time">21:30</div>
+            <div class="timeline-name font-title">Свадебный торт</div>
+            <div class="timeline-desc">Сладкая кульминация вечера под сияние бенгальских огней.</div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- VENUE & MAP -->
+    <section class="card-block">
+      <h2 class="block-title font-title" contenteditable="true" data-editable="true" onblur="saveInlineEdits()">Место встречи</h2>
+      <!-- BLOCK ACTION TOOLBAR (UP / DOWN / HIDE) -->
+      <div class="block-toolbar">
+        <button type="button" class="toolbar-btn" onclick="moveBlockUp(this)" title="Поднять блок выше">▲</button>
+        <button type="button" class="toolbar-btn" onclick="moveBlockDown(this)" title="Опустить блок ниже">▼</button>
+        <button type="button" class="toolbar-btn btn-remove" onclick="removeBlock(this)" title="Скрыть этот блок">&times;</button>
+      </div>
+      <div class="block-subtitle">ЛОКАЦИЯ ТОРЖЕСТВА</div>
+
+      <div class="font-title" style="font-size:1.75rem; margin-bottom:0.5rem;" id="dispVenue">Усадьба «Вилла Ротонда»</div>
+      <div style="color:var(--text-muted); font-size:0.9rem; margin-bottom:1.75rem;" id="dispAddress">Московская область, поселок Довиль, Приозерная ул., 1</div>
+
+      <div style="display:flex; flex-direction:column; gap:0.75rem; max-width:380px; margin:0 auto;">
+        <a href="https://maps.yandex.ru" target="_blank" rel="noopener" class="btn btn-primary" id="btnYandexMap">
+          Открыть в Яндекс Картах
+        </a>
+        <button class="btn btn-outline" onclick="downloadIcs()">
+          Сохранить в календарь (.ics)
+        </button>
+      </div>
+    </section>
+
+    <!-- DRESS CODE -->
+    <section class="card-block" id="secDress">
+      <!-- BLOCK ACTION TOOLBAR (UP / DOWN / HIDE) -->
+      <div class="block-toolbar">
+        <button type="button" class="toolbar-btn" onclick="moveBlockUp(this)" title="Поднять блок выше">▲</button>
+        <button type="button" class="toolbar-btn" onclick="moveBlockDown(this)" title="Опустить блок ниже">▼</button>
+        <button type="button" class="toolbar-btn btn-remove" onclick="removeBlock(this)" title="Скрыть этот блок">&times;</button>
+      </div>
+      <h2 class="block-title font-title" contenteditable="true" data-editable="true" onblur="saveInlineEdits()">Дресс-код</h2>
+      <div class="block-subtitle" id="dispDressCodeTitle">BLACK TIE OPTIONAL &amp; ПАСТЕЛЬ</div>
+      
+      <p style="font-size:0.9rem; color:var(--text-muted); max-width:480px; margin:0 auto;" id="dispDressCodeDesc">
+        Мы будем признательны, если вы поддержите спокойную благородную палитру праздника в своих нарядах:
+      </p>
+
+      <div class="color-swatches" id="swatchList">
+        <div class="swatch-col"><div class="swatch-circle" style="background:#5e725d;"></div><div class="swatch-name">Шалфей</div></div>
+        <div class="swatch-col"><div class="swatch-circle" style="background:#d9af7a;"></div><div class="swatch-name">Золото</div></div>
+        <div class="swatch-col"><div class="swatch-circle" style="background:#ecd8cc;"></div><div class="swatch-name">Пудра</div></div>
+        <div class="swatch-col"><div class="swatch-circle" style="background:#d2baa6;"></div><div class="swatch-name">Беж</div></div>
+        <div class="swatch-col"><div class="swatch-circle" style="background:#3b444b;"></div><div class="swatch-name">Графит</div></div>
+      </div>
+    </section>
+
+    <!-- DETAILS & WISHES -->
+    <section class="card-block" id="secWishes">
+      <!-- BLOCK ACTION TOOLBAR (UP / DOWN / HIDE) -->
+      <div class="block-toolbar">
+        <button type="button" class="toolbar-btn" onclick="moveBlockUp(this)" title="Поднять блок выше">▲</button>
+        <button type="button" class="toolbar-btn" onclick="moveBlockDown(this)" title="Опустить блок ниже">▼</button>
+        <button type="button" class="toolbar-btn btn-remove" onclick="removeBlock(this)" title="Скрыть этот блок">&times;</button>
+      </div>
+      <h2 class="block-title font-title" contenteditable="true" data-editable="true" onblur="saveInlineEdits()">Детали и пожелания</h2>
+      <div class="block-subtitle">ВАЖНАЯ ИНФОРМАЦИЯ</div>
+
+      <div class="wish-card">
+        <div class="wish-icon-box">🌸</div>
+        <div>
+          <h4 style="font-size:1.05rem; margin-bottom:0.25rem;">О цветах</h4>
+          <p style="font-size:0.8rem; color:var(--text-muted);">Пожалуйста, воздержитесь от покупки срезанных цветов. Мы не успеем насладиться их красотой. Если вы хотите сделать приятное — бутылка любимого вина или книга для библиотеки порадуют нас намного дольше.</p>
+        </div>
+      </div>
+
+      <div class="wish-card">
+        <div class="wish-icon-box">🎁</div>
+        <div>
+          <h4 style="font-size:1.05rem; margin-bottom:0.25rem;">О подарках</h4>
+          <p style="font-size:0.8rem; color:var(--text-muted);">Главный подарок для нас — ваше присутствие! А если вы захотите поддержать начало нашей семейной истории, мы будем искренне рады вкладу в конверте или переводу на карту.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- T-BANK / SBP PAYMENT BLOCK FOR COUPLE -->
+    <section class="card-block" id="bankSection">
+      <!-- BLOCK ACTION TOOLBAR (UP / DOWN / HIDE) -->
+      <div class="block-toolbar">
+        <button type="button" class="toolbar-btn" onclick="moveBlockUp(this)" title="Поднять блок выше">▲</button>
+        <button type="button" class="toolbar-btn" onclick="moveBlockDown(this)" title="Опустить блок ниже">▼</button>
+        <button type="button" class="toolbar-btn btn-remove" onclick="removeBlock(this)" title="Скрыть этот блок">&times;</button>
+      </div>
+      <h2 class="block-title font-title" contenteditable="true" data-editable="true" onblur="saveInlineEdits()">Свадебный подарок</h2>
+      <div class="block-subtitle">ВКЛАД В НАШУ СЕМЬЮ</div>
+
+      <p style="font-size:0.9rem; color:var(--text-muted); max-width:480px; margin:0 auto 1.5rem auto;">
+        Если вы хотите поздравить нас дистанционно или подарить вклад в наше свадебное путешествие, вы можете сделать перевод на карту или через СБП:
+      </p>
+
+      <div class="bank-card-wrapper">
+        <div class="bank-card-box" onclick="copyCard()" title="Нажмите, чтобы скопировать номер">
+          <div class="bank-card-top">
+            <div class="bank-brand">Т-БАНК</div>
+            <div class="sbp-badge">СБП ⚡</div>
+          </div>
+          
+          <div style="font-size:0.75rem; color:#9ca3af; margin-bottom:0.5rem;">НОМЕР КАРТЫ МОЛОДОЖЕНОВ:</div>
+          <div class="bank-card-num" id="dispCardNum">
+            <span>4276 1234 5678 9012</span>
+            <span style="font-size:0.9rem; opacity:0.8;">📋</span>
+          </div>
+
+          <div class="bank-card-bottom">
+            <div>СВАДЕБНЫЙ ФОНД</div>
+            <div>МИР / СБП</div>
+          </div>
+        </div>
+      </div>
+
+      <div style="display:flex; flex-direction:column; gap:0.75rem; max-width:380px; margin:1.5rem auto 0 auto;">
+        <button class="btn btn-primary" onclick="copyCard()">
+          Скопировать номер карты
+        </button>
+        <a href="https://www.tbank.ru/card2card/" target="_blank" rel="noopener" class="btn btn-outline" id="btnSbpLink">
+          Оплатить / Перевести в Т-Банк
+        </a>
+      </div>
+      
+      <div style="font-size:0.75rem; color:var(--text-muted); margin-top:1rem;">
+        ✦ Переводы через СБП из любых банков зачисляются моментально и без комиссии
+      </div>
+    </section>
+
+    <!-- RSVP -->
+    <section class="card-block">
+      <h2 class="block-title font-title" contenteditable="true" data-editable="true" onblur="saveInlineEdits()">Подтверждение</h2>
+      <!-- BLOCK ACTION TOOLBAR (UP / DOWN / HIDE) -->
+      <div class="block-toolbar">
+        <button type="button" class="toolbar-btn" onclick="moveBlockUp(this)" title="Поднять блок выше">▲</button>
+        <button type="button" class="toolbar-btn" onclick="moveBlockDown(this)" title="Опустить блок ниже">▼</button>
+        <button type="button" class="toolbar-btn btn-remove" onclick="removeBlock(this)" title="Скрыть этот блок">&times;</button>
+      </div>
+      <div class="block-subtitle">ПОЖАЛУЙСТА, ДАЙТЕ ЗНАТЬ ДО 1 МАЯ</div>
+
+      <form class="rsvp-form" onsubmit="sendRsvp(event)">
+        <div class="form-group">
+          <label class="form-label">Ваше Имя и Фамилия</label>
+          <input type="text" class="form-input" id="rsvpName" placeholder="Анна и Михаил" required>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Сможете ли вы прийти?</label>
+          <div class="radio-grid">
+            <div>
+              <input type="radio" name="rsvpStatus" id="optYes" value="Буду с удовольствием" checked style="display:none;">
+              <label class="radio-pill" for="optYes" style="display:block;">✓ С удовольствием буду</label>
+            </div>
+            <div>
+              <input type="radio" name="rsvpStatus" id="optNo" value="К сожалению, не смогу" style="display:none;">
+              <label class="radio-pill" for="optNo" style="display:block;">✕ К сожалению, не смогу</label>
+            </div>
+          </div>
+        </div>
+
+        <!-- MENU CHOICE -->
+        <div class="form-group">
+          <label class="form-label">Предпочтение по горячему блюду:</label>
+          <div class="choice-chips-grid">
+            <div class="chip-item active" onclick="selectChip(this, 'food')">🥩 Нежное мясо</div>
+            <div class="chip-item" onclick="selectChip(this, 'food')">🐟 Филе рыбы</div>
+            <div class="chip-item" onclick="selectChip(this, 'food')">🥗 Вегетарианское</div>
+          </div>
+        </div>
+
+        <!-- BAR CHOICE -->
+        <div class="form-group">
+          <label class="form-label">Что вам налить в бокал?</label>
+          <div class="choice-chips-grid">
+            <div class="chip-item active" onclick="selectChip(this, 'drink')">🥂 Белое &amp; Игристое</div>
+            <div class="chip-item" onclick="selectChip(this, 'drink')">🍷 Красное сухое</div>
+            <div class="chip-item" onclick="selectChip(this, 'drink')">🥃 Крепкое</div>
+            <div class="chip-item" onclick="selectChip(this, 'drink')">🧃 Безалкогольное</div>
+          </div>
+        </div>
+
+        <!-- TRANSFER CHOICE -->
+        <div class="form-group">
+          <label class="form-label">Нужен ли вам свадебный трансфер?</label>
+          <div class="choice-chips-grid">
+            <div class="chip-item active" onclick="selectChip(this, 'transfer')">🚗 Приеду сам(а)</div>
+            <div class="chip-item" onclick="selectChip(this, 'transfer')">🚌 Нужен трансфер</div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Любимый трек для диджея</label>
+          <input type="text" class="form-input" id="rsvpTrack" placeholder="Исполнитель и название песни">
+        </div>
+
+        <button type="submit" class="btn btn-primary" style="margin-top:1rem;">
+          Отправить ответ молодоженам
+        </button>
+      </form>
+    </section>
+
+  
+    <!-- RESTORE HIDDEN BLOCKS BUTTON -->
+    <div class="restore-blocks-box" id="restoreBlocksBox">
+      <button type="button" class="btn btn-outline" style="max-width:280px; margin:0 auto;" onclick="restoreAllBlocks()">
+        + Показать все скрытые блоки
+      </button>
+    </div>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="font-title" style="font-size:1.6rem; color:var(--accent-dark); margin-bottom:0.5rem;">
+      <span id="footerP1">Александр</span> &amp; <span id="footerP2">Екатерина</span>
+    </div>
+    <div>ЖДЁМ ВАС С НЕТЕРПЕНИЕМ!</div>
+  </footer>
+
+  <!-- ADVANCED CUSTOMIZER STUDIO MODAL -->
+  <div class="studio-overlay" id="studioModal">
+    <div class="studio-modal">
+      <button class="modal-close" onclick="closeStudio()">&times;</button>
+      
+      <h3 style="font-size:1.4rem; margin-bottom:0.25rem;">Конструктор свадьбы</h3>
+      <p style="font-size:0.8rem; color:#666; margin-bottom:1.25rem;">Настройте внешний вид, шрифты, кнопки и тексты. Все изменения сохраняются мгновенно!</p>
+
+      <!-- NAVIGATION TABS -->
+      <div class="studio-tabs">
+        <button class="studio-tab-btn active" onclick="switchTab('tabTheme', this)">🎨 Темы</button>
+        <button class="studio-tab-btn" onclick="switchTab('tabDress', this)">👗 Дресс-код</button>
+        <button class="studio-tab-btn" onclick="switchTab('tabBlocks', this)">🧩 Блоки сайта</button>
+        <button class="studio-tab-btn" onclick="switchTab('tabTimelineEdit', this)">⏳ Тайминг</button>
+        <button class="studio-tab-btn" onclick="switchTab('tabFont', this)">🔤 Шрифты</button>
+        <button class="studio-tab-btn" onclick="switchTab('tabInfo', this)">💍 Имена и Дата</button>
+        <button class="studio-tab-btn" onclick="switchTab('tabPayment', this)">💳 Карта пары</button>
+      </div>
+
+      <!-- TAB 1: THEMES -->
+      <div class="studio-section active" id="tabTheme">
+        <div style="font-size:0.8rem; font-weight:700; color:#10b981; margin-bottom:0.4rem;">БЕСПЛАТНЫЕ ШАБЛОНЫ:</div>
+        <div class="theme-card-picker" style="margin-bottom:1.25rem;">
+          
+          <div class="theme-opt-card active" onclick="selectThemeWithCheck('gold', false, this)">
+            <div class="theme-dot" style="background:#c5a059;"></div>
+            <div>
+              <div style="font-weight:600; font-size:0.85rem;">Золото &amp; Шампань <span class="free-badge">FREE</span></div>
+              <div style="font-size:0.7rem; color:#777;">Классическая роскошь</div>
+            </div>
+          </div>
+
+          <div class="theme-opt-card" onclick="selectThemeWithCheck('sage', false, this)">
+            <div class="theme-dot" style="background:#5a7d62;"></div>
+            <div>
+              <div style="font-weight:600; font-size:0.85rem;">Шалфейный Сад <span class="free-badge">FREE</span></div>
+              <div style="font-size:0.7rem; color:#777;">Оливковая природная свежесть</div>
+            </div>
+          </div>
+
+          <div class="theme-opt-card" onclick="selectThemeWithCheck('rose', false, this)">
+            <div class="theme-dot" style="background:#b05c6d;"></div>
+            <div>
+              <div style="font-weight:600; font-size:0.85rem;">Пыльная Роза <span class="free-badge">FREE</span></div>
+              <div style="font-size:0.7rem; color:#777;">Нежный пудровый романтизм</div>
+            </div>
+          </div>
+
+          <div class="theme-opt-card" onclick="selectThemeWithCheck('terracotta', false, this)">
+            <div class="theme-dot" style="background:#b85d3b;"></div>
+            <div>
+              <div style="font-weight:600; font-size:0.85rem;">Терракот Бохо <span class="free-badge">FREE</span></div>
+              <div style="font-size:0.7rem; color:#777;">Средиземноморский закат</div>
+            </div>
+          </div>
+
+        </div>
+
+        <div style="font-size:0.8rem; font-weight:700; color:#d97706; margin-bottom:0.4rem;">ПРЕМИУМ ШАБЛОНЫ (👑 PRO):</div>
+        <div class="theme-card-picker">
+
+          <div class="theme-opt-card" onclick="selectThemeWithCheck('gold_foil', true, this)">
+            <div class="theme-dot" style="background:linear-gradient(135deg,#f6d365,#d4af37);"></div>
+            <div>
+              <div style="font-weight:600; font-size:0.85rem;">Royale Gold Foil <span class="pro-badge">👑 PRO</span></div>
+              <div style="font-size:0.7rem; color:#777;">Мерцающее сусальное золото</div>
+            </div>
+          </div>
+
+          <div class="theme-opt-card" onclick="selectThemeWithCheck('midnight', true, this)">
+            <div class="theme-dot" style="background:#0d121f; border:1.5px solid #93c5fd;"></div>
+            <div>
+              <div style="font-weight:600; font-size:0.85rem;">Diamond Celestial <span class="pro-badge">👑 PRO</span></div>
+              <div style="font-size:0.7rem; color:#777;">Алмазное звездное сияние</div>
+            </div>
+          </div>
+
+        </div>
+
+        <label class="form-label" style="margin-top:1.25rem;">Сургучная печать на конверте:</label>
+        <div style="display:flex; gap:0.5rem;">
+          <button type="button" class="btn-shape-box active" onclick="setSeal('mono', this)">Монограмма (А&amp;Е)</button>
+          <button type="button" class="btn-shape-box" onclick="setSeal('rings', this)">Кольца 💍</button>
+          <button type="button" class="btn-shape-box" onclick="setSeal('heart', this)">Сердце ❤️</button>
+        </div>
+      </div>
+
+      <!-- TAB 2: DRESS CODE BUILDER -->
+      <div class="studio-section" id="tabDress">
+        <div style="font-weight:700; font-size:1.05rem; margin-bottom:0.25rem;">Конструктор дресс-кода</div>
+        <p style="font-size:0.8rem; color:#6b7280; margin-bottom:1rem;">
+          Выберите готовый стиль одежды или настройте свой собственный:
+        </p>
+
+        <label class="form-label">Готовые стили дресс-кода:</label>
+        <div style="display:grid; grid-template-columns:repeat(2, 1fr); gap:0.6rem; margin-bottom:1.25rem;">
+          
+          <div class="theme-opt-card active" onclick="setDressPreset('BLACK TIE OPTIONAL', 'Смокинги или классические темные костюмы для джентльменов, вечерние или коктейльные платья для дам.', this)">
+            <span style="font-size:1.5rem;">🎩</span>
+            <div>
+              <div style="font-weight:700; font-size:0.85rem;">Black Tie</div>
+              <div style="font-size:0.7rem; color:#777;">Торжественный вечерний</div>
+            </div>
+          </div>
+
+          <div class="theme-opt-card" onclick="setDressPreset('COCKTAIL CHIC', 'Элегантные платья миди для дам, классические брюки и рубашки с пиджаком для мужчин.', this)">
+            <span style="font-size:1.5rem;">🍸</span>
+            <div>
+              <div style="font-weight:700; font-size:0.85rem;">Cocktail Chic</div>
+              <div style="font-size:0.7rem; color:#777;">Стильный коктейль</div>
+            </div>
+          </div>
+
+          <div class="theme-opt-card" onclick="setDressPreset('BOHO & RUSTIC', 'Легкие струящиеся платья, натуральные льняные и хлопковые ткани, природные оттенки.', this)">
+            <span style="font-size:1.5rem;">🌾</span>
+            <div>
+              <div style="font-weight:700; font-size:0.85rem;">Boho &amp; Nature</div>
+              <div style="font-size:0.7rem; color:#777;">Природный бохо</div>
+            </div>
+          </div>
+
+          <div class="theme-opt-card" onclick="setDressPreset('TOTAL WHITE & CREAM', 'Будем рады видеть всех гостей в белых, молочных, кремовых и бежевых нарядах.', this)">
+            <span style="font-size:1.5rem;">🤍</span>
+            <div>
+              <div style="font-weight:700; font-size:0.85rem;">Total White</div>
+              <div style="font-size:0.7rem; color:#777;">Светлая монохромность</div>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Заголовок стиля:</label>
+          <input type="text" class="form-input" id="inpDressTitle" value="BLACK TIE OPTIONAL &amp; ПАСТЕЛЬ" oninput="liveUpdate()">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Пожелание молодоженов к нарядам:</label>
+          <textarea class="form-input" id="inpDressDesc" rows="2" style="font-size:14px !important;" oninput="liveUpdate()">Будем искренне благодарны, если при выборе нарядов вы поддержите спокойную благородную палитру нашего праздника:</textarea>
+        </div>
+
+        <label class="form-label">Быстрые дизайнерские палитры цветов:</label>
+        <div style="display:flex; gap:0.4rem; flex-wrap:wrap; margin-bottom:1rem;">
+          <button type="button" class="btn-shape-box active" onclick="applyPresetPalette(['#5e725d','#d9af7a','#ecd8cc','#d2baa6','#3b444b'], ['Шалфей','Золото','Пудра','Беж','Графит'], this)">🌿 Шалфей</button>
+          <button type="button" class="btn-shape-box" onclick="applyPresetPalette(['#b05c6d','#f0cfd6','#e8b4b8','#a84255','#4a1f28'], ['Роза','Пудра','Зефир','Винный','Марсала'], this)">🌸 Пыльная Роза</button>
+          <button type="button" class="btn-shape-box" onclick="applyPresetPalette(['#b85d3b','#e09f7a','#f4d0b8','#8a4427','#45271a'], ['Терракот','Персик','Крем','Какао','Шоколад'], this)">🏺 Терракот</button>
+          <button type="button" class="btn-shape-box" onclick="applyPresetPalette(['#1e3a5f','#5b84b1','#bcd2e8','#d4af37','#f5f7fa'], ['Сапфир','Небо','Лед','Золото','Жемчуг'], this)">🌊 Морской</button>
+          <button type="button" class="btn-shape-box" onclick="applyPresetPalette(['#1a1a1a','#ffffff','#d4af37','#737373','#e5e5e5'], ['Black','White','Gold','Silver','Nude'], this)">🖤 Black &amp; Gold</button>
+        </div>
+
+        <label class="form-label">Индивидуальные 5 цветов (кликните, чтобы изменить):</label>
+        <div class="color-picker-row">
+          <div class="color-picker-box">
+            <input type="color" id="colPick0" value="#5e725d" onchange="previewColors()">
+            <input type="text" class="color-picker-name" id="colName0" value="Шалфей" oninput="previewColors()">
+          </div>
+          <div class="color-picker-box">
+            <input type="color" id="colPick1" value="#d9af7a" onchange="previewColors()">
+            <input type="text" class="color-picker-name" id="colName1" value="Золото" oninput="previewColors()">
+          </div>
+          <div class="color-picker-box">
+            <input type="color" id="colPick2" value="#ecd8cc" onchange="previewColors()">
+            <input type="text" class="color-picker-name" id="colName2" value="Пудра" oninput="previewColors()">
+          </div>
+          <div class="color-picker-box">
+            <input type="color" id="colPick3" value="#d2baa6" onchange="previewColors()">
+            <input type="text" class="color-picker-name" id="colName3" value="Беж" oninput="previewColors()">
+          </div>
+          <div class="color-picker-box">
+            <input type="color" id="colPick4" value="#3b444b" onchange="previewColors()">
+            <input type="text" class="color-picker-name" id="colName4" value="Графит" oninput="previewColors()">
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB 3: BLOCKS BUILDER -->
+      <div class="studio-section" id="tabBlocks">
+        <div style="font-weight:700; font-size:1.05rem; margin-bottom:0.25rem;">Конструктор секций сайта</div>
+        <p style="font-size:0.8rem; color:#6b7280; margin-bottom:1rem;">
+          Молодожены могут сами решать, какие блоки показывать, а какие скрыть:
+        </p>
+
+        <div class="module-toggle-item">
+          <span>💖 Блок «Наша история» (Love Story)</span>
+          <label class="toggle-switch">
+            <input type="checkbox" id="chkStory" checked onchange="toggleModulePreview('secStory', this.checked)">
+            <span class="toggle-slider"></span>
+          </label>
+        </div>
+
+        <div class="module-toggle-item">
+          <span>⏳ Блок «Программа дня» (Тайминг)</span>
+          <label class="toggle-switch">
+            <input type="checkbox" id="chkTimeline" checked onchange="toggleModulePreview('secTimeline', this.checked)">
+            <span class="toggle-slider"></span>
+          </label>
+        </div>
+
+        <div class="module-toggle-item">
+          <span>👗 Блок «Дресс-код и палитра цветов»</span>
+          <label class="toggle-switch">
+            <input type="checkbox" id="chkDress" checked onchange="toggleModulePreview('secDress', this.checked)">
+            <span class="toggle-slider"></span>
+          </label>
+        </div>
+
+        <div class="module-toggle-item">
+          <span>💳 Блок «Свадебный подарок» (карта пары)</span>
+          <label class="toggle-switch">
+            <input type="checkbox" id="chkGift" checked onchange="toggleModulePreview('bankSection', this.checked)">
+            <span class="toggle-slider"></span>
+          </label>
+        </div>
+
+        <div class="module-toggle-item">
+          <span>🌸 Блок «Детали о цветах и подарках»</span>
+          <label class="toggle-switch">
+            <input type="checkbox" id="chkWishes" checked onchange="toggleModulePreview('secWishes', this.checked)">
+            <span class="toggle-slider"></span>
+          </label>
+        </div>
+      </div>
+
+      <!-- TAB 4: TIMELINE BUILDER -->
+      <div class="studio-section" id="tabTimelineEdit">
+        <div style="font-weight:700; font-size:1.05rem; margin-bottom:0.25rem;">Настройка программы свадебного дня</div>
+        <p style="font-size:0.8rem; color:#6b7280; margin-bottom:1rem;">
+          Выберите готовый сценарий дня в 1 клик или отредактируйте этапы:
+        </p>
+
+        <label class="form-label">Готовые сценарии свадьбы:</label>
+        <div style="display:grid; grid-template-columns:repeat(2, 1fr); gap:0.6rem; margin-bottom:1.25rem;">
+          
+          <div class="theme-opt-card active" onclick="applyTimelinePreset([
+            {t:'15:30', n:'Сбор гостей & Welcome', d:'Легкие напитки, живая музыка и объятия перед началом церемонии.'},
+            {t:'16:30', n:'Свадебная церемония', d:'Трогательный момент обмена клятвами и кольцами.'},
+            {t:'17:30', n:'Праздничный банкет', d:'Уютный праздничный ужин, тосты и танцы.'},
+            {t:'21:30', n:'Свадебный торт', d:'Сладкая кульминация вечера под сияние бенгальских огней.'}
+          ], this)">
+            <span style="font-size:1.5rem;">🏛</span>
+            <div>
+              <div style="font-weight:700; font-size:0.85rem;">Классический</div>
+              <div style="font-size:0.7rem; color:#777;">Традиционный банкет</div>
+            </div>
+          </div>
+
+          <div class="theme-opt-card" onclick="applyTimelinePreset([
+            {t:'17:00', n:'Welcome-drink', d:'Сбор гостей, бокал игристого на открытой террасе.'},
+            {t:'18:00', n:'Церемония на закате', d:'Роспись в лучах заходящего солнца.'},
+            {t:'19:00', n:'Ужин под звездами', d:'Праздничный гала-ужин, акустическая музыка.'},
+            {t:'22:00', n:'Торт & Салют', d:'Разрезание торта и праздничный фейерверк.'}
+          ], this)">
+            <span style="font-size:1.5rem;">🌅</span>
+            <div>
+              <div style="font-weight:700; font-size:0.85rem;">Закатная роспись</div>
+              <div style="font-size:0.7rem; color:#777;">Вечерняя церемония</div>
+            </div>
+          </div>
+
+        </div>
+
+        <label class="form-label">Точное время и названия этапов дня:</label>
+        <div style="display:grid; grid-template-columns: 80px 1fr; gap:0.5rem; margin-bottom:0.6rem;">
+          <input type="text" class="form-input" id="timeStep0" value="15:30" oninput="liveUpdate()">
+          <input type="text" class="form-input" id="nameStep0" value="Сбор гостей &amp; Welcome" oninput="liveUpdate()">
+        </div>
+        <div style="display:grid; grid-template-columns: 80px 1fr; gap:0.5rem; margin-bottom:0.6rem;">
+          <input type="text" class="form-input" id="timeStep1" value="16:30" oninput="liveUpdate()">
+          <input type="text" class="form-input" id="nameStep1" value="Свадебная церемония" oninput="liveUpdate()">
+        </div>
+        <div style="display:grid; grid-template-columns: 80px 1fr; gap:0.5rem; margin-bottom:0.6rem;">
+          <input type="text" class="form-input" id="timeStep2" value="17:30" oninput="liveUpdate()">
+          <input type="text" class="form-input" id="nameStep2" value="Праздничный банкет" oninput="liveUpdate()">
+        </div>
+        <div style="display:grid; grid-template-columns: 80px 1fr; gap:0.5rem; margin-bottom:0.6rem;">
+          <input type="text" class="form-input" id="timeStep3" value="21:30" oninput="liveUpdate()">
+          <input type="text" class="form-input" id="nameStep3" value="Свадебный торт" oninput="liveUpdate()">
+        </div>
+      </div>
+
+      <!-- TAB 5: FONTS & BUTTONS -->
+      <div class="studio-section" id="tabFont">
+        <label class="form-label">Стиль шрифтов заголовков (3 варианта):</label>
+        
+        <div class="font-opt-card active" onclick="setFont('serif', this)">
+          <div>
+            <div style="font-family:var(--font-serif); font-size:1.3rem;">Cormorant Garamond</div>
+            <div style="font-size:0.75rem; color:#666;">Аристократичная классика с засечками</div>
+          </div>
+          <span style="font-size:1.2rem;">Aa</span>
+        </div>
+
+        <div class="font-opt-card" onclick="setFont('script', this)">
+          <div>
+            <div style="font-family:var(--font-script); font-size:1.5rem;">Marck Script (Каллиграфия)</div>
+            <div style="font-size:0.75rem; color:#666;">Изящный рукописный курсив</div>
+          </div>
+          <span style="font-size:1.2rem;">Aa</span>
+        </div>
+
+        <div class="font-opt-card" onclick="setFont('modern', this)">
+          <div>
+            <div style="font-family:var(--font-modern); font-size:1.1rem; font-weight:600;">Montserrat Modern</div>
+            <div style="font-size:0.75rem; color:#666;">Чистый современный стиль без засечек</div>
+          </div>
+          <span style="font-size:1.2rem;">Aa</span>
+        </div>
+
+        <label class="form-label" style="margin-top:1.25rem;">Форма кнопок на сайте:</label>
+        <div class="button-shape-options">
+          <div class="btn-shape-box active" onclick="setBtnShape('pill', this)">Круглые (Pill)</div>
+          <div class="btn-shape-box" onclick="setBtnShape('soft', this)">Мягкие (Soft)</div>
+          <div class="btn-shape-box" onclick="setBtnShape('sharp', this)">Строгие (Sharp)</div>
+        </div>
+      </div>
+
+      <!-- TAB 6: TEXTS & INFO -->
+      <div class="studio-section" id="tabInfo">
+        <div class="form-group">
+          <label class="form-label">Имя жениха</label>
+          <input type="text" class="form-input" id="inpP1" value="Александр" oninput="onCoupleNameChange()">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Имя невесты</label>
+          <input type="text" class="form-input" id="inpP2" value="Екатерина" oninput="onCoupleNameChange()">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Монограмма (инициалы)</label>
+          <input type="text" class="form-input" id="inpMono" value="А &amp; Е" maxlength="8" oninput="liveUpdate()">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Обращение на конверте (гость):</label>
+          <input type="text" class="form-input" id="inpGuest" placeholder="Например: Дорогие гости!" oninput="liveUpdate()">
+          
+          <div style="display:flex; gap:0.35rem; flex-wrap:wrap; margin-top:0.4rem;">
+            <button type="button" class="btn-shape-box" style="padding:3px 8px;" onclick="setGuestPreset('Дорогие гости!')">Дорогие гости!</button>
+            <button type="button" class="btn-shape-box" style="padding:3px 8px;" onclick="setGuestPreset('Любимые мама и папа!')">Мама и папа</button>
+            <button type="button" class="btn-shape-box" style="padding:3px 8px;" onclick="setGuestPreset('Дорогие друзья!')">Друзья</button>
+            <button type="button" class="btn-shape-box" style="padding:3px 8px;" onclick="setGuestPreset('Любимая бабушка!')">Бабушка</button>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Дата свадьбы</label>
+          <input type="date" class="form-input" id="inpDate" value="2027-06-19" onchange="liveUpdate()">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Время церемонии</label>
+          <input type="text" class="form-input" id="inpTime" value="16:30" oninput="liveUpdate()">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Площадка</label>
+          <input type="text" class="form-input" id="inpVenue" value="Усадьба «Вилла Ротонда»" oninput="liveUpdate()">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Адрес площадки</label>
+          <input type="text" class="form-input" id="inpAddress" value="Московская область, поселок Довиль, Приозерная ул., 1" oninput="liveUpdate()">
+        </div>
+      </div>
+
+      <!-- TAB 7: COUPLE PAYMENT -->
+      <div class="studio-section" id="tabPayment">
+        <div style="font-weight:700; font-size:1.05rem; margin-bottom:0.25rem;">Сбор подарков молодоженов</div>
+        <p style="font-size:0.8rem; color:#6b7280; margin-bottom:1rem;">
+          Сюда пара вводит номер СВОЕЙ карты, на которую гости будут переводить подарки:
+        </p>
+
+        <div class="form-group">
+          <label class="form-label">Номер карты молодоженов:</label>
+          <input type="text" class="form-input" id="inpCard" value="4276123456789012" oninput="liveUpdate()">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Номер WhatsApp для получения RSVP (только цифры):</label>
+          <input type="tel" class="form-input" id="inpWa" value="79991234567" oninput="liveUpdate()">
+        </div>
+      </div>
+
+      <button type="button" class="btn btn-primary" onclick="saveStudioChanges()" style="margin-top:1.5rem;">
+        Сохранить и скопировать ссылку для гостей
+      </button>
+    </div>
+  </div>
+
+  <!-- UNIFIED USER CABINET & AUTH MODAL -->
+  <div class="studio-overlay" id="cabinetModal">
+    <div class="studio-modal" style="max-width:500px;">
+      <button class="modal-close" onclick="closeUserCabinetModal()">&times;</button>
+
+      <!-- AUTH VIEW (LOGIN / REGISTER) -->
+      <div id="cabinetAuthView">
+        <div style="text-align:center; margin-bottom:1.25rem;">
+          <div style="font-size:2.5rem; margin-bottom:0.25rem;">👤</div>
+          <h3 style="font-size:1.4rem;">Личный кабинет</h3>
+          <p style="font-size:0.8rem; color:#6b7280;">Единый вход для гостей и администратора</p>
+        </div>
+
+        <div style="display:flex; gap:0.5rem; margin-bottom:1.25rem; border-bottom:1px solid #e5e7eb; padding-bottom:0.75rem;">
+          <button type="button" class="studio-tab-btn active" id="tabBtnLogin" onclick="switchAuthTab('login')">Войти</button>
+          <button type="button" class="studio-tab-btn" id="tabBtnRegister" onclick="switchAuthTab('register')">Регистрация</button>
+        </div>
+
+        <!-- LOGIN FORM -->
+        <div id="formLoginTab">
+          <div class="form-group">
+            <label class="form-label">Ваш логин:</label>
+            <input type="text" class="form-input" id="authLoginInput" placeholder="Введите логин">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Пароль:</label>
+            <input type="password" class="form-input" id="authPassInput" placeholder="Введите пароль">
+          </div>
+          <button type="button" class="btn btn-primary" onclick="handleUserLogin()" style="margin-top:1rem;">Войти в кабинет</button>
+        </div>
+
+        <!-- REGISTER FORM -->
+        <div id="formRegisterTab" style="display:none;">
+          <div class="form-group">
+            <label class="form-label">Придумайте логин:</label>
+            <input type="text" class="form-input" id="regLoginInput" placeholder="Например: vasskass или +79789981150">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Придумайте пароль:</label>
+            <input type="password" class="form-input" id="regPassInput" placeholder="Любой ваш пароль">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Ваше имя:</label>
+            <input type="text" class="form-input" id="regNameInput" placeholder="Например: Екатерина">
+          </div>
+          <button type="button" class="btn btn-primary" onclick="handleUserRegister()" style="margin-top:1rem;">Зарегистрироваться</button>
+        </div>
+      </div>
+
+      <!-- LOGGED IN VIEW -->
+      <div id="cabinetProfileView" style="display:none;">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1.25rem; border-bottom:1px solid #e5e7eb; padding-bottom:0.75rem;">
+          <div>
+            <div style="font-size:0.75rem; text-transform:uppercase; color:#6b7280; font-weight:700;">Пользователь:</div>
+            <h3 style="font-size:1.35rem;" id="userProfileName">Екатерина</h3>
+            <div id="userProfileBadge" style="display:inline-block; font-size:0.75rem; font-weight:700; padding:2px 8px; border-radius:6px; margin-top:2px;"></div>
+          </div>
+          <button class="admin-pill-btn" style="background:#ef4444;" onclick="handleUserLogout()">Выйти</button>
+        </div>
+
+        <!-- ADMIN CONTROLS -->
+        <div id="adminPanelInProfile" style="display:none;">
+          <div style="background:#fef3c7; border:1px solid #fde68a; border-radius:12px; padding:0.85rem; margin-bottom:1.25rem;">
+            <div style="font-weight:700; color:#92400e; font-size:0.85rem;">👑 ПАНЕЛЬ ВЛАДЕЛЬЦА САЙТА</div>
+            <div style="font-size:0.75rem; color:#78350f;">Полный доступ активен: все PRO-шаблоны открыты.</div>
+          </div>
+
+          <div style="margin-bottom:1.25rem;">
+            <label class="form-label">Создать новый промокод для клиентов:</label>
+            <div style="display:flex; gap:0.5rem; margin-bottom:0.75rem;">
+              <input type="text" class="form-input" id="inpProfileNewPromo" placeholder="КОД (например, MARIA2026)" style="text-transform:uppercase;">
+              <button class="btn btn-primary" style="width:auto; padding:0.6rem 1rem; white-space:nowrap;" onclick="createProfilePromo()">Создать</button>
+            </div>
+            
+            <label class="form-label">Действующие промокоды на сайте:</label>
+            <div id="profilePromoListContainer"></div>
+          </div>
+
+          <div style="border-top:1px solid #e5e7eb; padding-top:1rem;">
+            <div class="form-group">
+              <label class="form-label">Карта Т-Банка администратора (для подписок):</label>
+              <input type="text" class="form-input" id="inpProfileAdminCard" value="2200701041704252">
+            </div>
+            <button class="btn btn-outline" onclick="saveProfileAdminCard()">Сохранить карту</button>
+          </div>
+        </div>
+
+        <!-- GUEST CONTROLS -->
+        <div id="guestPanelInProfile">
+          <div style="background:#f3f4f6; border-radius:12px; padding:1rem; margin-bottom:1.25rem;">
+            <div style="font-weight:700; font-size:0.9rem; margin-bottom:0.25rem;">Мой статус:</div>
+            <div style="font-size:0.8rem; color:#4b5563;">Вы можете ответить на приглашение в блоке RSVP ниже на странице.</div>
+          </div>
+
+          <!-- UPGRADE TO ADMIN / PROMO INPUT -->
+          <div style="border-top:1px solid #e5e7eb; padding-top:1rem;">
+            <label class="form-label">Сделать этот аккаунт Администратором (ввести ключ):</label>
+            <div style="display:flex; gap:0.5rem; margin-bottom:0.5rem;">
+              <input type="password" class="form-input" id="inpUpgradeAdminPass" placeholder="Ключ администратора (kar10022006)">
+              <button class="btn btn-outline" style="width:auto; padding:0.6rem 0.85rem; white-space:nowrap;" onclick="upgradeAccountToAdmin()">Активировать</button>
+            </div>
+            <div style="font-size:0.7rem; color:#6b7280;">Или введите промокод для бесплатного PRO-доступа:</div>
+            <div style="display:flex; gap:0.5rem; margin-top:0.35rem;">
+              <input type="text" class="form-input" id="inpProfilePromoInput" placeholder="Промокод (например: LOVE100)" style="text-transform:uppercase;">
+              <button class="btn btn-primary" style="width:auto; padding:0.6rem 0.85rem; white-space:nowrap;" onclick="applyProfilePromo()">Применить</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PRO PURCHASE MODAL -->
+  <div class="studio-overlay" id="proUnlockModal">
+    <div class="studio-modal" style="max-width:480px; text-align:center;">
+      <button class="modal-close" onclick="closeProModal()">&times;</button>
+      <div style="font-size:2.8rem; margin-bottom:0.25rem;">👑</div>
+      <h3 style="font-size:1.5rem; margin-bottom:0.25rem;">Оплата подписки PRO</h3>
+      <p style="font-size:0.85rem; color:#6b7280; margin-bottom:1.25rem;">
+        Доступ ко всем премиум-шаблонам платформы.
+      </p>
+
+      <div style="background:#fef3c7; border:1px solid #fde68a; border-radius:14px; padding:0.85rem; margin-bottom:1.25rem;">
+        <div style="font-size:0.75rem; color:#92400e; font-weight:700; text-transform:uppercase;">Стоимость PRO-доступа:</div>
+        <div style="font-size:1.8rem; font-weight:800; color:#b45309;" id="proPriceDisplay">990 ₽ / 490 ₴</div>
+        <div style="font-size:0.75rem; color:#78350f;">Оплата администратору платформы один раз — навсегда</div>
+      </div>
+
+      <!-- ADMIN PAYMENT CARD WIDGET -->
+      <div style="background:#111827; border:1.5px solid #d4af37; border-radius:16px; padding:1.25rem; color:#fff; text-align:left; margin-bottom:1.25rem;">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.8rem;">
+          <span style="font-weight:800; color:#fcd34d; font-size:0.95rem;">Т-БАНК (СБП)</span>
+          <span style="background:#fff; color:#000; font-size:0.7rem; font-weight:800; padding:2px 6px; border-radius:4px;">СБП ⚡</span>
+        </div>
+
+        <div style="font-size:0.7rem; color:#9ca3af; margin-bottom:0.3rem;">КАРТА АДМИНИСТРАТОРА ДЛЯ ОПЛАТЫ:</div>
+        <div style="font-family:'Courier New', monospace; font-size:1.25rem; font-weight:700; color:#f9fafb; margin-bottom:0.75rem; display:flex; justify-content:space-between; align-items:center;">
+          <span id="dispAdminCardInModal">2200 7010 4170 4252</span>
+          <button type="button" onclick="copyAdminPaymentCard()" style="background:#374151; color:#fff; border:none; padding:4px 8px; border-radius:6px; cursor:pointer; font-size:0.75rem;">Скопировать</button>
+        </div>
+
+        <div style="display:flex; align-items:center; gap:0.75rem; background:#1f2937; padding:0.6rem; border-radius:10px;">
+          <div style="font-size:0.75rem; color:#d1d5db; line-height:1.35;">
+            Переведите оплату через приложение любого банка по СБП на карту Т-Банка или введите промокод
+          </div>
+        </div>
+      </div>
+
+      <div style="display:flex; flex-direction:column; gap:0.6rem;">
+        <button class="btn btn-primary" onclick="confirmPaymentSent()">Я оплатил(а) подписку</button>
+        <button class="btn btn-outline" onclick="openPromoInputModal()">У меня есть промокод</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- PROMO INPUT MODAL -->
+  <div class="studio-overlay" id="promoInputModal">
+    <div class="studio-modal" style="max-width:420px; text-align:center;">
+      <button class="modal-close" onclick="closePromoModal()">&times;</button>
+      <div style="font-size:2.5rem; margin-bottom:0.25rem;">🎟</div>
+      <h3 style="font-size:1.4rem; margin-bottom:0.25rem;">Активация промокода</h3>
+      <p style="font-size:0.8rem; color:#6b7280; margin-bottom:1.25rem;">
+        Введите промокод для бесплатной разблокировки всех PRO-шаблонов:
+      </p>
+
+      <div class="form-group" style="margin-bottom:1.25rem;">
+        <input type="text" class="form-input" id="inpUserPromo" placeholder="Например: LOVE100" style="text-transform:uppercase; text-align:center; font-weight:700; font-size:18px !important;">
+      </div>
+
+      <button class="btn btn-primary" onclick="applyUserPromo()">Активировать промокод</button>
+    </div>
+  </div>
+
+  <!-- TOAST NOTIFICATION -->
+  <div class="toast" id="toast">
+    <span>✓ Уведомление</span>
+  </div>
+
+  <script>
+    /* =========================================================
+       ULTRA-FAST HIGH-PERFORMANCE WEDDING ENGINE
+       ========================================================= */
+
+    const STORAGE_KEY = 'wedding_persistent_v4';
+    const DEFAULT_ADMIN_PASS = 'admin2026';
+    const ADMIN_OFFICIAL_CARD = '2200701041704252';
+
+    let config = {
+      p1: 'Александр',
+      p2: 'Екатерина',
+      mono: 'А & Е',
+      date: '2027-06-19',
+      time: '16:30',
+      venue: 'Усадьба «Вилла Ротонда»',
+      address: 'Московская область, поселок Довиль, Приозерная ул., 1',
+      guest: '',
+      theme: 'gold',
+      font: 'serif',
+      btnShape: 'pill',
+      seal: 'mono',
+      card: '4276123456789012',
+      wa: '79991234567',
+      dressTitle: 'BLACK TIE OPTIONAL & ПАСТЕЛЬ',
+      dressDesc: 'Мы будем признательны, если вы поддержите спокойную благородную палитру праздника в своих нарядах:',
+      dressColors: ['#5e725d', '#d9af7a', '#ecd8cc', '#d2baa6', '#3b444b'],
+      dressNames: ['Шалфей', 'Золото', 'Пудра', 'Беж', 'Графит'],
+      showStory: true,
+      showTimeline: true,
+      showDress: true,
+      showGift: true,
+      showWishes: true,
+      timelineSteps: [
+        { t: '15:30', n: 'Сбор гостей & Welcome', d: 'Легкие напитки, живая музыка и объятия перед началом церемонии.' },
+        { t: '16:30', n: 'Свадебная церемония', d: 'Трогательный момент обмена клятвами и кольцами.' },
+        { t: '17:30', n: 'Праздничный банкет', d: 'Уютный праздничный ужин, тосты и танцы.' },
+        { t: '21:30', n: 'Свадебный торт', d: 'Сладкая кульминация вечера под сияние бенгальских огней.' }
+      ],
+      msg: 'В нашей жизни наступает особенный и трепетный момент — день создания нашей семьи. Мы будем счастливы разделить эту радость и теплые мгновения с вами!'
+    };
+
+    // USER & ADMIN STATE
+    let registeredUsers = JSON.parse(localStorage.getItem('wedding_all_users') || '{"admin":{"pass":"admin2026","name":"Главный Администратор","isAdmin":true}}');
+    let currentUser = JSON.parse(localStorage.getItem('wedding_current_user') || 'null');
+    let adminUsernames = JSON.parse(localStorage.getItem('wedding_admin_usernames') || '["admin"]');
+    let isAdminLoggedIn = (currentUser && currentUser.isAdmin) || localStorage.getItem('wedding_is_admin') === 'true';
+    let isProUnlocked = localStorage.getItem('wedding_pro_unlocked') === 'true' || isAdminLoggedIn;
+    let activePromos = JSON.parse(localStorage.getItem('wedding_promos') || '["LOVE100", "WEDDING2026", "VIP100", "ADMIN"]');
+    let proPrice = '990 ₽ / 490 ₴';
+
+    // LOAD & SAVE STATE
+    function loadState() {
+      try {
+        const hash = window.location.hash.substring(1);
+        if (hash.startsWith('d=')) {
+          const json = decodeURIComponent(escape(atob(hash.substring(2))));
+          config = { ...config, ...JSON.parse(json) };
+          applyConfig();
+          return;
+        }
+      } catch (e) {}
+
+      try {
+        const saved = localStorage.getItem(STORAGE_KEY);
+        if (saved) {
+          config = { ...config, ...JSON.parse(saved) };
+        }
+      } catch (e) {}
+
+      applyConfig();
+    }
+
+    function saveState() {
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(config));
+        const str = unescape(encodeURIComponent(JSON.stringify(config)));
+        const hash = '#d=' + btoa(str);
+        history.replaceState(null, '', hash);
+        return window.location.origin + window.location.pathname + hash;
+      } catch (e) {
+        return window.location.href;
+      }
+    }
+
+    // APPLY CONFIG TO DOM (GUARANTEED VISIBILITY & NO LAG)
+    function applyConfig() {
+      document.body.setAttribute('data-theme', config.theme || 'gold');
+      document.body.setAttribute('data-font', config.font || 'serif');
+      document.body.setAttribute('data-btn-shape', config.btnShape || 'pill');
+
+      // Names & Monogram
+      document.getElementById('dispP1').textContent = config.p1;
+      document.getElementById('dispP2').textContent = config.p2;
+      document.getElementById('footerP1').textContent = config.p1;
+      document.getElementById('footerP2').textContent = config.p2;
+      document.getElementById('dispMonogram').textContent = config.mono;
+      document.getElementById('dispVenue').textContent = config.venue;
+      document.getElementById('dispAddress').textContent = config.address;
+      document.getElementById('dispTime').textContent = config.time;
+      document.getElementById('dispMessage').textContent = config.msg;
+
+      // Guest Tag
+      document.getElementById('dispGuestTag').textContent = (config.guest && config.guest.trim()) ? config.guest : 'Дорогие гости!';
+
+      // Seal Symbol
+      const sealEl = document.getElementById('dispSeal');
+      if (config.seal === 'rings') sealEl.textContent = '💍';
+      else if (config.seal === 'heart') sealEl.textContent = '❤️';
+      else sealEl.textContent = config.mono.replace(/\s+/g, '');
+
+      // Dress Code
+      if (document.getElementById('dispDressCodeTitle')) document.getElementById('dispDressCodeTitle').textContent = config.dressTitle;
+      if (document.getElementById('dispDressCodeDesc')) document.getElementById('dispDressCodeDesc').textContent = config.dressDesc;
+      if (document.getElementById('inpDressTitle')) document.getElementById('inpDressTitle').value = config.dressTitle;
+      if (document.getElementById('inpDressDesc')) document.getElementById('inpDressDesc').value = config.dressDesc;
+
+      // Swatches
+      const swatches = document.getElementById('swatchList');
+      if (swatches && config.dressColors) {
+        swatches.innerHTML = '';
+        config.dressColors.forEach((col, idx) => {
+          const nm = (config.dressNames && config.dressNames[idx]) ? config.dressNames[idx] : '';
+          const el = document.createElement('div');
+          el.className = 'swatch-col';
+          el.innerHTML = `<div class="swatch-circle" style="background:${col};"></div><div class="swatch-name">${nm}</div>`;
+          swatches.appendChild(el);
+          if (document.getElementById('colPick' + idx)) document.getElementById('colPick' + idx).value = col;
+          if (document.getElementById('colName' + idx)) document.getElementById('colName' + idx).value = nm;
+        });
+      }
+
+      // Modular Sections Visibility (ALWAYS DEFAULTS TO VISIBLE)
+      const secStory = document.getElementById('secStory');
+      const secTimeline = document.getElementById('secTimeline');
+      const secDress = document.getElementById('secDress');
+      const bankSec = document.getElementById('bankSection');
+      const secWishes = document.getElementById('secWishes');
+
+      if (secStory) secStory.style.display = (config.showStory !== false) ? 'block' : 'none';
+      if (secTimeline) secTimeline.style.display = (config.showTimeline !== false) ? 'block' : 'none';
+      if (secDress) secDress.style.display = (config.showDress !== false) ? 'block' : 'none';
+      if (bankSec) bankSec.style.display = (config.showGift !== false) ? 'block' : 'none';
+      if (secWishes) secWishes.style.display = (config.showWishes !== false) ? 'block' : 'none';
+
+      if (document.getElementById('chkStory')) document.getElementById('chkStory').checked = (config.showStory !== false);
+      if (document.getElementById('chkTimeline')) document.getElementById('chkTimeline').checked = (config.showTimeline !== false);
+      if (document.getElementById('chkDress')) document.getElementById('chkDress').checked = (config.showDress !== false);
+      if (document.getElementById('chkGift')) document.getElementById('chkGift').checked = (config.showGift !== false);
+      if (document.getElementById('chkWishes')) document.getElementById('chkWishes').checked = (config.showWishes !== false);
+
+      // Card Formatting
+      const rawCard = config.card || '4276123456789012';
+      const formatted = rawCard.replace(/(\d{4})(?=\d)/g, '$1 ');
+      document.getElementById('dispCardNum').querySelector('span').textContent = formatted;
+
+      // Inputs sync
+      if (document.getElementById('inpP1')) document.getElementById('inpP1').value = config.p1;
+      if (document.getElementById('inpP2')) document.getElementById('inpP2').value = config.p2;
+      if (document.getElementById('inpMono')) document.getElementById('inpMono').value = config.mono;
+      if (document.getElementById('inpDate')) document.getElementById('inpDate').value = config.date;
+      if (document.getElementById('inpTime')) document.getElementById('inpTime').value = config.time;
+      if (document.getElementById('inpVenue')) document.getElementById('inpVenue').value = config.venue;
+      if (document.getElementById('inpAddress')) document.getElementById('inpAddress').value = config.address;
+      if (document.getElementById('inpCard')) document.getElementById('inpCard').value = config.card;
+      if (document.getElementById('inpWa')) document.getElementById('inpWa').value = config.wa;
+      if (document.getElementById('inpGuest')) document.getElementById('inpGuest').value = config.guest || '';
+
+      // Yandex Map Link
+      const q = encodeURIComponent(config.venue + ', ' + config.address);
+      document.getElementById('btnYandexMap').href = `https://yandex.ru/maps/?text=${q}`;
+
+      // Date Format
+      try {
+        const d = new Date(config.date + 'T00:00:00');
+        const months = ['ЯНВАРЯ', 'ФЕВРАЛЯ', 'МАРТА', 'АПРЕЛЯ', 'МАЯ', 'ИЮНЯ', 'ИЮЛЯ', 'АВГУСТА', 'СЕНТЯБРЯ', 'ОКТЯБРЯ', 'НОЯБРЯ', 'ДЕКАБРЯ'];
+        document.getElementById('dispDateBadge').textContent = `${d.getDate()} ${months[d.getMonth()]} ${d.getFullYear()}`;
+      } catch(e) {}
+
+      startCountdown();
+    }
+
+    // LIVE TWO-WAY BINDING
+    function onCoupleNameChange() {
+      const p1 = document.getElementById('inpP1').value.trim();
+      const p2 = document.getElementById('inpP2').value.trim();
+      if (p1 && p2) {
+        const mono = p1[0].toUpperCase() + ' & ' + p2[0].toUpperCase();
+        document.getElementById('inpMono').value = mono;
+      }
+      liveUpdate();
+    }
+
+    function setGuestPreset(text) {
+      document.getElementById('inpGuest').value = text;
+      liveUpdate();
+    }
+
+    function liveUpdate() {
+      config.p1 = document.getElementById('inpP1').value.trim() || 'Александр';
+      config.p2 = document.getElementById('inpP2').value.trim() || 'Екатерина';
+      config.mono = document.getElementById('inpMono').value.trim() || 'А & Е';
+      config.guest = document.getElementById('inpGuest').value.trim();
+      config.date = document.getElementById('inpDate').value;
+      config.time = document.getElementById('inpTime').value.trim() || '16:30';
+      config.venue = document.getElementById('inpVenue').value.trim() || 'Усадьба «Вилла Ротонда»';
+      config.address = document.getElementById('inpAddress').value.trim();
+      config.card = document.getElementById('inpCard').value.trim() || '4276123456789012';
+      config.wa = document.getElementById('inpWa').value.trim();
+
+      if (document.getElementById('inpDressTitle')) config.dressTitle = document.getElementById('inpDressTitle').value.trim();
+      if (document.getElementById('inpDressDesc')) config.dressDesc = document.getElementById('inpDressDesc').value.trim();
+
+      applyConfig();
+      saveState();
+    }
+
+    // DRESS CODE PRESETS
+    function setDressPreset(title, desc, el) {
+      document.getElementById('inpDressTitle').value = title;
+      document.getElementById('inpDressDesc').value = desc;
+      if (el) {
+        el.parentElement.querySelectorAll('.theme-opt-card').forEach(c => c.classList.remove('active'));
+        el.classList.add('active');
+      }
+      liveUpdate();
+      toast('Стиль ' + title + ' применен!');
+    }
+
+    function applyPresetPalette(colors, names, el) {
+      config.dressColors = colors;
+      config.dressNames = names;
+      if (el) {
+        el.parentElement.querySelectorAll('.btn-shape-box').forEach(c => c.classList.remove('active'));
+        el.classList.add('active');
+      }
+      applyConfig();
+      saveState();
+      toast('Палитра применена!');
+    }
+
+    function previewColors() {
+      const colors = [];
+      const names = [];
+      for (let i = 0; i < 5; i++) {
+        colors.push(document.getElementById('colPick' + i).value);
+        names.push(document.getElementById('colName' + i).value.trim());
+      }
+      config.dressColors = colors;
+      config.dressNames = names;
+      applyConfig();
+      saveState();
+    }
+
+    function toggleModulePreview(secId, isVisible) {
+      if (secId === 'secStory') config.showStory = isVisible;
+      if (secId === 'secTimeline') config.showTimeline = isVisible;
+      if (secId === 'secDress') config.showDress = isVisible;
+      if (secId === 'bankSection') config.showGift = isVisible;
+      if (secId === 'secWishes') config.showWishes = isVisible;
+      applyConfig();
+      saveState();
+    }
+
+    // TIMELINE PRESETS
+    function applyTimelinePreset(steps, el) {
+      config.timelineSteps = steps;
+      if (el) {
+        el.parentElement.querySelectorAll('.theme-opt-card').forEach(c => c.classList.remove('active'));
+        el.classList.add('active');
+      }
+      renderTimelineDOM();
+      saveState();
+      toast('Сценарий обновлен!');
+    }
+
+    function renderTimelineDOM() {
+      const container = document.querySelector('.timeline-container');
+      if (!container || !config.timelineSteps) return;
+      const icons = ['🍸', '💍', '🥂', '🎂'];
+      let html = '';
+      config.timelineSteps.forEach((st, idx) => {
+        const ic = icons[idx % icons.length];
+        html += `
+          <div class="timeline-row">
+            <div class="timeline-icon">${ic}</div>
+            <div class="timeline-content">
+              <div class="timeline-time">${st.t}</div>
+              <div class="timeline-name font-title">${st.n}</div>
+              ${st.d ? `<div class="timeline-desc">${st.d}</div>` : ''}
+            </div>
+          </div>
+        `;
+      });
+      container.innerHTML = html;
+    }
+
+    // STUDIO TABS
+    function switchTab(tabId, el) {
+      document.querySelectorAll('.studio-tab-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.studio-section').forEach(s => s.classList.remove('active'));
+      el.classList.add('active');
+      const target = document.getElementById(tabId);
+      if (target) target.classList.add('active');
+    }
+
+    function openStudio() { document.getElementById('studioModal').classList.add('active'); }
+    function closeStudio() { document.getElementById('studioModal').classList.remove('active'); }
+
+    function saveStudioChanges() {
+      liveUpdate();
+      const shareUrl = saveState();
+      closeStudio();
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(shareUrl).then(() => {
+          toast('✓ Изменения сохранены! Ссылка для гостей скопирована.');
+        });
+      } else {
+        toast('✓ Настройки успешно сохранены!');
+      }
+    }
+
+    // THEME & FONTS SELECTION
+    function selectThemeWithCheck(th, isPro, el) {
+      if (isPro && !isProUnlocked && !isAdminLoggedIn) {
+        document.getElementById('proUnlockModal').classList.add('active');
+        return;
+      }
+      config.theme = th;
+      document.body.setAttribute('data-theme', th);
+      document.querySelectorAll('.theme-opt-card').forEach(c => c.classList.remove('active'));
+      if (el) el.classList.add('active');
+      saveState();
+    }
+
+    function setFont(fn, el) {
+      config.font = fn;
+      document.body.setAttribute('data-font', fn);
+      document.querySelectorAll('.font-opt-card').forEach(c => c.classList.remove('active'));
+      if (el) el.classList.add('active');
+      saveState();
+    }
+
+    function setBtnShape(shape, el) {
+      config.btnShape = shape;
+      document.body.setAttribute('data-btn-shape', shape);
+      document.querySelectorAll('.button-shape-options .btn-shape-box').forEach(c => c.classList.remove('active'));
+      if (el) el.classList.add('active');
+      saveState();
+    }
+
+    function setSeal(type, el) {
+      config.seal = type;
+      applyConfig();
+      el.parentElement.querySelectorAll('.btn-shape-box').forEach(c => c.classList.remove('active'));
+      el.classList.add('active');
+      saveState();
+    }
+
+    // AUDIO SYSTEM (LIGHTWEIGHT CHIME SYNTHESIZER - 0 LAG)
+    let audioCtx = null;
+    let isMusicPlaying = false;
+    let musicTimer = null;
+
+    function toggleWeddingMusic() {
+      if (!audioCtx) {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      }
+      if (audioCtx.state === 'suspended') {
+        audioCtx.resume();
+      }
+
+      const btn = document.getElementById('btnMusic');
+      if (isMusicPlaying) {
+        clearInterval(musicTimer);
+        musicTimer = null;
+        isMusicPlaying = false;
+        btn.style.borderColor = 'var(--card-border)';
+        btn.style.color = 'var(--text-main)';
+        toast('Музыка выключена');
+      } else {
+        isMusicPlaying = true;
+        btn.style.borderColor = 'var(--accent)';
+        btn.style.color = 'var(--accent)';
+        toast('♪ Романтическая музыка играет');
+        
+        const melody = [261.63, 329.63, 392.00, 523.25, 493.88, 392.00, 329.63];
+        let noteIdx = 0;
+        playChime(melody[0]);
+        musicTimer = setInterval(() => {
+          noteIdx = (noteIdx + 1) % melody.length;
+          playChime(melody[noteIdx]);
+        }, 850);
+      }
+    }
+
+    function playChime(freq) {
+      if (!audioCtx) return;
+      try {
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+        gain.gain.setValueAtTime(0.15, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 1.4);
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start();
+        osc.stop(audioCtx.currentTime + 1.4);
+      } catch (e) {}
+    }
+
+    // UNIFIED CABINET (GUEST & ADMIN)
+    function openUserCabinetModal() {
+      document.getElementById('cabinetModal').classList.add('active');
+      renderCabinetView();
+    }
+    function closeUserCabinetModal() {
+      document.getElementById('cabinetModal').classList.remove('active');
+    }
+
+    function switchAuthTab(tab) {
+      if (tab === 'login') {
+        document.getElementById('tabBtnLogin').classList.add('active');
+        document.getElementById('tabBtnRegister').classList.remove('active');
+        document.getElementById('formLoginTab').style.display = 'block';
+        document.getElementById('formRegisterTab').style.display = 'none';
+      } else {
+        document.getElementById('tabBtnRegister').classList.add('active');
+        document.getElementById('tabBtnLogin').classList.remove('active');
+        document.getElementById('formRegisterTab').style.display = 'block';
+        document.getElementById('formLoginTab').style.display = 'none';
+      }
+    }
+
+    function handleUserRegister() {
+      const login = document.getElementById('regLoginInput').value.trim().toLowerCase();
+      const pass = document.getElementById('regPassInput').value.trim();
+      const name = document.getElementById('regNameInput').value.trim() || login;
+
+      if (!login || !pass) { toast('Заполните логин и пароль!'); return; }
+      if (registeredUsers[login]) { toast('Такой логин уже занят! Войдите.'); return; }
+
+      const isAdmin = (login === 'admin' || adminUsernames.includes(login));
+      registeredUsers[login] = { pass: pass, name: name, isAdmin: isAdmin };
+      localStorage.setItem('wedding_all_users', JSON.stringify(registeredUsers));
+
+      currentUser = { login: login, name: name, isAdmin: isAdmin };
+      localStorage.setItem('wedding_current_user', JSON.stringify(currentUser));
+      if (isAdmin) { isProUnlocked = true; isAdminLoggedIn = true; }
+
+      toast('✓ Вы успешно зарегистрированы!');
+      renderCabinetView();
+    }
+
+    function handleUserLogin() {
+      const login = document.getElementById('authLoginInput').value.trim().toLowerCase();
+      const pass = document.getElementById('authPassInput').value.trim();
+
+      if (!login || !pass) { toast('Введите логин и пароль!'); return; }
+
+      const cleanLogin = login.replace(/\s+/g, '');
+      const isOwnerLogin = ADMIN_LOGINS.includes(cleanLogin);
+      const isOwnerPass = ADMIN_PASSWORDS.includes(pass);
+
+      if (isOwnerLogin && isOwnerPass) {
+        currentUser = { login: 'vasskass', name: 'vasskass (Владелец)', isAdmin: true };
+        isAdminLoggedIn = true;
+        isProUnlocked = true;
+        localStorage.setItem('wedding_is_admin', 'true');
+        localStorage.setItem('wedding_pro_unlocked', 'true');
+      } else if (registeredUsers[cleanLogin] && registeredUsers[cleanLogin].pass === pass) {
+        const u = registeredUsers[cleanLogin];
+        const isAdm = u.isAdmin || isOwnerLogin || adminUsernames.includes(cleanLogin);
+        currentUser = { login: cleanLogin, name: u.name, isAdmin: isAdm };
+        if (isAdm) {
+          isAdminLoggedIn = true;
+          isProUnlocked = true;
+          localStorage.setItem('wedding_is_admin', 'true');
+        }
+      } else {
+        toast('Неверный логин или пароль!');
+        return;
+      }
+
+      localStorage.setItem('wedding_current_user', JSON.stringify(currentUser));
+      if (currentUser.isAdmin) {
+        isAdminLoggedIn = true;
+        isProUnlocked = true;
+      }
+      toast('✓ Добро пожаловать, ' + currentUser.name + '!');
+      renderCabinetView();
+    }
+
+    function handleUserLogout() {
+      currentUser = null;
+      localStorage.removeItem('wedding_current_user');
+      isAdminLoggedIn = false;
+      toast('Вы вышли из личного кабинета.');
+      renderCabinetView();
+    }
+
+    function upgradeAccountToAdmin() {
+      const key = document.getElementById('inpUpgradeAdminPass').value.trim();
+      if (ADMIN_PASSWORDS.includes(key)) {
+        if (!currentUser) return;
+        currentUser.isAdmin = true;
+        adminUsernames.push(currentUser.login);
+        localStorage.setItem('wedding_admin_usernames', JSON.stringify(adminUsernames));
+        localStorage.setItem('wedding_current_user', JSON.stringify(currentUser));
+        if (registeredUsers[currentUser.login]) {
+          registeredUsers[currentUser.login].isAdmin = true;
+          localStorage.setItem('wedding_all_users', JSON.stringify(registeredUsers));
+        }
+        isAdminLoggedIn = true;
+        isProUnlocked = true;
+        toast('🎉 Поздравляем! Ваш аккаунт стал Главным Администратором.');
+        renderCabinetView();
+      } else {
+        toast('Неверный ключ администратора!');
+      }
+    }
+
+    function renderCabinetView() {
+      const authView = document.getElementById('cabinetAuthView');
+      const profileView = document.getElementById('cabinetProfileView');
+      const adminSec = document.getElementById('adminPanelInProfile');
+      const guestSec = document.getElementById('guestPanelInProfile');
+
+      if (!currentUser) {
+        authView.style.display = 'block';
+        profileView.style.display = 'none';
+      } else {
+        authView.style.display = 'none';
+        profileView.style.display = 'block';
+        document.getElementById('userProfileName').textContent = currentUser.name + ' (@' + currentUser.login + ')';
+        const badge = document.getElementById('userProfileBadge');
+
+        if (currentUser.isAdmin) {
+          badge.textContent = '👑 Администратор / Владелец сайта';
+          badge.style.background = '#fef3c7';
+          badge.style.color = '#b45309';
+          adminSec.style.display = 'block';
+          guestSec.style.display = 'none';
+          renderProfilePromoList();
+        } else {
+          badge.textContent = 'Гость / Пользователь';
+          badge.style.background = '#e5e7eb';
+          badge.style.color = '#374151';
+          adminSec.style.display = 'none';
+          guestSec.style.display = 'block';
+        }
+      }
+    }
+
+    function renderProfilePromoList() {
+      const c = document.getElementById('profilePromoListContainer');
+      if (!c) return;
+      c.innerHTML = '';
+      activePromos.forEach((p, idx) => {
+        const item = document.createElement('div');
+        item.className = 'promo-list-item';
+        item.innerHTML = `
+          <div><b>${p}</b> <span style="color:#10b981; font-size:0.75rem;">(Скидка 100%)</span></div>
+          <button class="promo-del-btn" onclick="deletePromo(${idx}); renderProfilePromoList();">&times;</button>
+        `;
+        c.appendChild(item);
+      });
+    }
+
+    function createProfilePromo() {
+      const inp = document.getElementById('inpProfileNewPromo');
+      const code = inp.value.trim().toUpperCase();
+      if (!code) { toast('Введите название промокода!'); return; }
+      if (activePromos.includes(code)) { toast('Такой промокод уже есть!'); return; }
+      activePromos.push(code);
+      localStorage.setItem('wedding_promos', JSON.stringify(activePromos));
+      inp.value = '';
+      renderProfilePromoList();
+      toast('✓ Промокод ' + code + ' создан!');
+    }
+
+    function deletePromo(idx) {
+      activePromos.splice(idx, 1);
+      localStorage.setItem('wedding_promos', JSON.stringify(activePromos));
+      renderProfilePromoList();
+      toast('Промокод удален.');
+    }
+
+    function saveProfileAdminCard() {
+      const card = document.getElementById('inpProfileAdminCard').value.trim();
+      if (card) {
+        localStorage.setItem('wedding_admin_card', card);
+        toast('✓ Карта администратора сохранена!');
+      }
+    }
+
+    // PROMO CODE ACTIVATION
+    function openPromoInputModal() {
+      document.getElementById('proUnlockModal').classList.remove('active');
+      document.getElementById('promoInputModal').classList.add('active');
+    }
+    function closePromoModal() {
+      document.getElementById('promoInputModal').classList.remove('active');
+    }
+    function applyUserPromo() {
+      const code = document.getElementById('inpUserPromo').value.trim().toUpperCase();
+      if (!code) { toast('Введите промокод!'); return; }
+      if (activePromos.includes(code)) {
+        isProUnlocked = true;
+        localStorage.setItem('wedding_pro_unlocked', 'true');
+        closePromoModal();
+        toast('🎉 Промокод ' + code + ' активирован! Все PRO-шаблоны открыты.');
+      } else {
+        toast('Неверный или недействительный промокод.');
+      }
+    }
+    function applyProfilePromo() {
+      const code = document.getElementById('inpProfilePromoInput').value.trim().toUpperCase();
+      if (activePromos.includes(code)) {
+        isProUnlocked = true;
+        localStorage.setItem('wedding_pro_unlocked', 'true');
+        toast('🎉 Промокод ' + code + ' активирован! Все PRO-шаблоны открыты.');
+      } else {
+        toast('Неверный промокод.');
+      }
+    }
+
+    function closeProModal() { document.getElementById('proUnlockModal').classList.remove('active'); }
+    function copyAdminPaymentCard() {
+      const c = localStorage.getItem('wedding_admin_card') || ADMIN_OFFICIAL_CARD;
+      if (navigator.clipboard) navigator.clipboard.writeText(c);
+      toast('✓ Карта администратора ' + c + ' скопирована!');
+    }
+    function confirmPaymentSent() {
+      closeProModal();
+      toast('Спасибо за оплату! Напишите нам в WhatsApp для мгновенного подтверждения.');
+    }
+
+    // ENVELOPE & COUNTDOWN
+    function openEnvelope() {
+      const seal = document.getElementById('dispSeal');
+      seal.style.transform = 'scale(0.85) rotate(-15deg)';
+      setTimeout(() => {
+        seal.style.transform = 'scale(1.05) rotate(0deg)';
+        document.getElementById('contentSection').scrollIntoView({ behavior: 'smooth' });
+      }, 150);
+    }
+
+    let countdownTimer = null;
+    function startCountdown() {
+      if (countdownTimer) clearInterval(countdownTimer);
+      function tick() {
+        const target = new Date(config.date + 'T' + (config.time || '16:00') + ':00').getTime();
+        const diff = target - new Date().getTime();
+        if (diff <= 0) {
+          document.getElementById('cdDays').textContent = '00';
+          document.getElementById('cdHours').textContent = '00';
+          document.getElementById('cdMinutes').textContent = '00';
+          document.getElementById('cdSeconds').textContent = '00';
+          return;
+        }
+        document.getElementById('cdDays').textContent = String(Math.floor(diff / (1000 * 60 * 60 * 24))).padStart(2, '0');
+        document.getElementById('cdHours').textContent = String(Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))).padStart(2, '0');
+        document.getElementById('cdMinutes').textContent = String(Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60))).padStart(2, '0');
+        document.getElementById('cdSeconds').textContent = String(Math.floor((diff % (1000 * 60)) / 1000)).padStart(2, '0');
+      }
+      tick();
+      countdownTimer = setInterval(tick, 1000);
+    }
+
+    // RSVP & MISC
+    let rsvpData = { food: '🥩 Нежное мясо', drink: '🥂 Белое & Игристое', transfer: '🚗 Приеду сам(а)' };
+    function selectChip(el, cat) {
+      el.parentElement.querySelectorAll('.chip-item').forEach(c => c.classList.remove('active'));
+      el.classList.add('active');
+      rsvpData[cat] = el.textContent.trim();
+    }
+
+    function sendRsvp(e) {
+      e.preventDefault();
+      const name = document.getElementById('rsvpName').value.trim();
+      const status = document.querySelector('input[name="rsvpStatus"]:checked').value;
+      const track = document.getElementById('rsvpTrack') ? document.getElementById('rsvpTrack').value.trim() : '';
+
+      const text = `🎉 *Ответ на свадебное приглашение!*\n` +
+        `👤 *Гость:* ${name}\n` +
+        `💌 *Статус:* ${status}\n` +
+        `🍽 *Меню:* ${rsvpData.food}\n` +
+        `🍷 *Напитки:* ${rsvpData.drink}\n` +
+        `🚐 *Трансфер:* ${rsvpData.transfer}\n` +
+        (track ? `🎵 *Песня:* ${track}\n` : '');
+
+      const wa = config.wa ? config.wa.replace(/\D/g, '') : '';
+      if (wa) window.open(`https://wa.me/${wa}?text=${encodeURIComponent(text)}`, '_blank');
+      else alert(text);
+      toast('Спасибо за ответ!');
+    }
+
+    function copyCard() {
+      const num = config.card || '4276123456789012';
+      if (navigator.clipboard) navigator.clipboard.writeText(num);
+      toast('✓ Номер карты молодоженов скопирован!');
+    }
+
+    function downloadIcs() {
+      const start = config.date.replace(/-/g, '') + 'T' + config.time.replace(':', '') + '00';
+      const endH = String(parseInt(config.time.split(':')[0] || '16') + 6).padStart(2, '0');
+      const end = config.date.replace(/-/g, '') + 'T' + endH + '0000';
+      const ics = `BEGIN:VCALENDAR\r\nVERSION:2.0\r\nBEGIN:VEVENT\r\nSUMMARY:Свадьба ${config.p1} и ${config.p2}\r\nLOCATION:${config.venue}\r\nDTSTART:${start}\r\nDTEND:${end}\r\nEND:VEVENT\r\nEND:VCALENDAR`;
+      const blob = new Blob([ics], { type: 'text/calendar;charset=utf-8' });
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = `Wedding.ics`;
+      a.click();
+      toast('Файл календаря скачан!');
+    }
+
+    function toast(txt) {
+      const t = document.getElementById('toast');
+      t.querySelector('span').textContent = txt;
+      t.classList.add('show');
+      setTimeout(() => t.classList.remove('show'), 3200);
+    }
+
+    
+    // INLINE DIRECT VISUAL BUILDER ENGINE
+    let isEditMode = true; // Enabled by default so users immediately see editing capabilities!
+    document.body.classList.add('edit-mode');
+
+    function toggleEditMode() {
+      isEditMode = !isEditMode;
+      document.body.classList.toggle('edit-mode', isEditMode);
+      const btn = document.getElementById('btnToggleEditMode');
+      if (isEditMode) {
+        btn.style.background = '#10b981';
+        btn.style.color = '#ffffff';
+        toast('✏️ Режим прямого редактирования включен: кликайте на текст для правки, стрелками ▲/▼ меняйте блоки местами, ✕ скрывайте блоки!');
+      } else {
+        btn.style.background = '';
+        btn.style.color = '';
+        toast('👁 Режим предпросмотра: сайт отображается чисто, как его увидят гости.');
+      }
+    }
+
+    function moveBlockUp(btn) {
+      const card = btn.closest('.card-block');
+      const prev = card.previousElementSibling;
+      if (prev && prev.classList.contains('card-block')) {
+        card.parentNode.insertBefore(card, prev);
+        toast('Блок поднят выше');
+        saveBlockOrder();
+      }
+    }
+
+    function moveBlockDown(btn) {
+      const card = btn.closest('.card-block');
+      const next = card.nextElementSibling;
+      if (next && next.classList.contains('card-block')) {
+        card.parentNode.insertBefore(next, card);
+        toast('Блок опущен ниже');
+        saveBlockOrder();
+      }
+    }
+
+    function removeBlock(btn) {
+      const card = btn.closest('.card-block');
+      card.style.display = 'none';
+      toast('Блок скрыт. Внизу появилась кнопка «Показать все скрытые блоки».');
+      document.getElementById('restoreBlocksBox').classList.add('has-hidden');
+      saveBlockOrder();
+    }
+
+    function restoreAllBlocks() {
+      document.querySelectorAll('#contentSection .card-block').forEach(b => {
+        b.style.display = 'block';
+      });
+      document.getElementById('restoreBlocksBox').classList.remove('has-hidden');
+      toast('Все блоки восстановлены!');
+      saveBlockOrder();
+    }
+
+    function saveBlockOrder() {
+      const blocks = [];
+      document.querySelectorAll('#contentSection .card-block').forEach(b => {
+        blocks.push({ id: b.id || '', display: b.style.display || 'block' });
+      });
+      localStorage.setItem('wedding_block_order', JSON.stringify(blocks));
+      saveState();
+    }
+
+    function saveInlineEdits() {
+      const p1 = document.getElementById('dispP1').textContent.trim();
+      const p2 = document.getElementById('dispP2').textContent.trim();
+      const guest = document.getElementById('dispGuestTag').textContent.trim();
+      const msg = document.getElementById('dispMessage').textContent.trim();
+
+      if (p1) { config.p1 = p1; document.getElementById('footerP1').textContent = p1; }
+      if (p2) { config.p2 = p2; document.getElementById('footerP2').textContent = p2; }
+      if (guest) config.guest = guest;
+      if (msg) config.msg = msg;
+
+      // Update monogram
+      if (p1 && p2) {
+        config.mono = p1[0].toUpperCase() + ' & ' + p2[0].toUpperCase();
+        document.getElementById('dispMonogram').textContent = config.mono;
+        if (config.seal === 'mono') {
+          document.getElementById('dispSeal').textContent = config.mono.replace(/\s+/g, '');
+        }
+      }
+
+      saveState();
+      toast('✓ Текст сохранен!');
+    }
+
+    window.addEventListener('DOMContentLoaded', loadState);
+  </script>
+</body>
+</html>
