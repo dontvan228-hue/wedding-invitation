@@ -1,0 +1,2637 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>Свадебное приглашение · Александр & Екатерина</title>
+  
+  <!-- Web Fonts: Luxury Editorial Collection -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600&family=Cinzel:wght@400;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,400&family=Great+Vibes&family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Prata&display=swap" rel="stylesheet">
+
+  <style>
+
+    :root {
+      --bg-page: #fcfbf9;
+      --text-main: #26221f;
+      --text-muted: #7a736e;
+      --accent: #c5a059;
+      --accent-dark: #9d7d3b;
+      --card-bg: #ffffff;
+      --card-border: rgba(197, 160, 89, 0.22);
+      --font-body: 'Cormorant Garamond', 'Playfair Display', Georgia, serif;
+      --font-head: 'Cormorant Garamond', 'Playfair Display', Georgia, serif;
+      --btn-radius: 9999px;
+      --shadow-soft: 0 10px 30px rgba(0, 0, 0, 0.04);
+      --shadow-hover: 0 14px 40px rgba(197, 160, 89, 0.15);
+    }
+
+    [data-theme="gold"] {
+      --bg-page: #fcfbf9;
+      --text-main: #26221f;
+      --text-muted: #7a736e;
+      --accent: #c5a059;
+      --accent-dark: #9d7d3b;
+      --card-bg: #ffffff;
+      --card-border: rgba(197, 160, 89, 0.25);
+    }
+
+    [data-theme="pearl"] {
+      --bg-page: #f8f9fa;
+      --text-main: #1a1a1a;
+      --text-muted: #666666;
+      --accent: #4a5568;
+      --accent-dark: #2d3748;
+      --card-bg: #ffffff;
+      --card-border: rgba(0, 0, 0, 0.08);
+    }
+
+    [data-theme="sage"] {
+      --bg-page: #f6f5f0;
+      --text-main: #2c352d;
+      --text-muted: #6b7a6c;
+      --accent: #5a6e5b;
+      --accent-dark: #3f5040;
+      --card-bg: #ffffff;
+      --card-border: rgba(90, 110, 91, 0.2);
+    }
+
+    [data-theme="marsala"] {
+      --bg-page: #2b0b15;
+      --text-main: #fcf6f8;
+      --text-muted: #d9b8c2;
+      --accent: #e5b869;
+      --accent-dark: #c99c4e;
+      --card-bg: rgba(255, 255, 255, 0.07);
+      --card-border: rgba(229, 184, 105, 0.28);
+    }
+
+    [data-theme="midnight"] {
+      --bg-page: #0a0f1d;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #e2b868;
+      --accent-dark: #c59b4c;
+      --card-bg: rgba(255, 255, 255, 0.05);
+      --card-border: rgba(226, 184, 104, 0.22);
+    }
+
+    [data-theme="rose"] {
+      --bg-page: #faf4f2;
+      --text-main: #3d2328;
+      --text-muted: #87636a;
+      --accent: #c27d88;
+      --accent-dark: #9b5a65;
+      --card-bg: #ffffff;
+      --card-border: rgba(194, 125, 136, 0.22);
+    }
+
+    [data-theme="black"] {
+      --bg-page: #121214;
+      --text-main: #ffffff;
+      --text-muted: #a1a1aa;
+      --accent: #d4af37;
+      --accent-dark: #aa882c;
+      --card-bg: #1c1c20;
+      --card-border: rgba(212, 175, 55, 0.32);
+    }
+
+    [data-font="serif"] { --font-head: 'Cormorant Garamond', Georgia, serif; }
+    [data-font="playfair"] { --font-head: 'Playfair Display', serif; }
+    [data-font="cinzel"] { --font-head: 'Cinzel', serif; }
+    [data-font="prata"] { --font-head: 'Prata', serif; }
+    [data-font="caveat"] { --font-head: 'Caveat', cursive; }
+    [data-font="vibes"] { --font-head: 'Great Vibes', cursive; }
+    [data-font="modern"] { --font-head: 'Montserrat', sans-serif; }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background-color: var(--bg-page);
+      color: var(--text-main);
+      line-height: 1.65;
+      font-size: 1.15rem;
+      min-height: 100vh;
+      overflow-x: hidden;
+      transition: background-color 0.4s ease, color 0.4s ease;
+      position: relative;
+    }
+
+    .font-title {
+      font-family: var(--font-head);
+      font-weight: 400;
+      letter-spacing: 0.04em;
+    }
+
+    .badge-sub {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.26em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.75rem;
+      display: inline-block;
+    }
+
+    /* 3D MAGICAL STORYBOOK INTRO OVERLAY */
+    .intro-book-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 99999;
+      background: radial-gradient(circle at center, #1c1722 0%, #0c0a0f 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      transition: opacity 0.8s ease, visibility 0.8s ease;
+      overflow: hidden;
+      padding: 1.5rem;
+    }
+
+    .intro-book-overlay.hidden {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    .particles-bg {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background-image: 
+        radial-gradient(2px 2px at 20px 30px, #ffd700, rgba(0,0,0,0)),
+        radial-gradient(2px 2px at 40px 70px, #ffffff, rgba(0,0,0,0)),
+        radial-gradient(2px 2px at 50px 160px, #ffdf80, rgba(0,0,0,0)),
+        radial-gradient(2px 2px at 90px 40px, #ffffff, rgba(0,0,0,0)),
+        radial-gradient(2px 2px at 130px 80px, #ffd700, rgba(0,0,0,0)),
+        radial-gradient(2px 2px at 160px 120px, #ffffff, rgba(0,0,0,0));
+      background-repeat: repeat;
+      background-size: 200px 200px;
+      opacity: 0.35;
+      animation: floatParticles 18s linear infinite;
+    }
+
+    @keyframes floatParticles {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(-200px); }
+    }
+
+    .book-stage-3d {
+      perspective: 1500px;
+      width: 290px;
+      height: 420px;
+      position: relative;
+      margin-bottom: 2rem;
+    }
+
+    .book-tome-3d {
+      width: 100%;
+      height: 100%;
+      position: relative;
+      transform-style: preserve-3d;
+      transition: transform 1.2s cubic-bezier(0.25, 1, 0.5, 1);
+      box-shadow: 0 25px 50px -12px rgba(0,0,0,0.8);
+      border-radius: 8px 16px 16px 8px;
+    }
+
+    .book-cover-3d {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, #2b111e 0%, #15060d 100%);
+      border-radius: 8px 16px 16px 8px;
+      box-shadow: -8px 15px 35px rgba(0,0,0,0.7), inset 4px 0 10px rgba(0,0,0,0.5);
+      transform-origin: left center;
+      transition: transform 1.3s cubic-bezier(0.4, 0, 0.2, 1);
+      z-index: 10;
+      cursor: pointer;
+      transform-style: preserve-3d;
+      padding: 18px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      border: 1px solid #785a28;
+    }
+
+    .book-foil-frame {
+      border: 2px solid #d4af37;
+      height: 100%;
+      border-radius: 6px;
+      padding: 1.25rem 0.85rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      text-align: center;
+      position: relative;
+      background: radial-gradient(circle at center, rgba(212,175,55,0.08) 0%, rgba(0,0,0,0.3) 100%);
+      box-shadow: inset 0 0 15px rgba(212,175,55,0.25);
+    }
+
+    .book-crown-corner {
+      position: absolute;
+      color: #d4af37;
+      font-size: 1.15rem;
+      text-shadow: 0 0 6px rgba(212,175,55,0.6);
+    }
+    .crown-tl { top: 6px; left: 6px; }
+    .crown-tr { top: 6px; right: 6px; }
+    .crown-bl { bottom: 6px; left: 6px; }
+    .crown-br { bottom: 6px; right: 6px; }
+
+    .book-gold-text {
+      color: #d4af37;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.8), 0 0 8px rgba(212,175,55,0.4);
+    }
+
+    .book-seal-clasp {
+      position: absolute;
+      right: -24px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 66px;
+      height: 66px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 35% 35%, #e63946, #800f1d);
+      border: 2px solid #d4af37;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.6), inset 0 0 8px rgba(0,0,0,0.5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-family: 'Playfair Display', serif;
+      font-size: 1.25rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      z-index: 15;
+    }
+
+    .book-seal-clasp:hover {
+      transform: translateY(-50%) scale(1.08);
+      box-shadow: 0 6px 20px rgba(212,175,55,0.5);
+    }
+
+    .book-page-3d {
+      position: absolute;
+      inset: 4px 4px 4px 14px;
+      background: #fdfbf7;
+      border-radius: 4px 12px 12px 4px;
+      box-shadow: inset 3px 0 8px rgba(0,0,0,0.15), 0 5px 15px rgba(0,0,0,0.3);
+      transform-origin: left center;
+      transition: transform 1.4s cubic-bezier(0.4, 0, 0.2, 1);
+      padding: 1.75rem 1.25rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      text-align: center;
+      color: #26221f;
+    }
+
+    .book-leaf-1 { z-index: 8; transition-delay: 0.1s; }
+    .book-leaf-2 { z-index: 6; transition-delay: 0.25s; }
+
+    .intro-book-overlay.opened .book-cover-3d { transform: rotateY(-155deg); }
+    .intro-book-overlay.opened .book-leaf-1 { transform: rotateY(-148deg); }
+    .intro-book-overlay.opened .book-leaf-2 { transform: rotateY(-140deg); }
+
+    .btn-open-fairytale {
+      background: linear-gradient(135deg, #d4af37 0%, #aa882c 100%);
+      color: #1a1505;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 0.85rem 1.85rem;
+      border-radius: 9999px;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 6px 20px rgba(212,175,55,0.35);
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .btn-open-fairytale:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(212,175,55,0.55);
+    }
+
+    /* TOP BAR */
+    .top-action-bar {
+      position: fixed;
+      top: 1rem;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 999;
+      background: rgba(255, 255, 255, 0.88);
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(197, 160, 89, 0.35);
+      border-radius: 9999px;
+      padding: 0.35rem 0.6rem;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+      max-width: 95vw;
+    }
+
+    [data-theme="marsala"] .top-action-bar,
+    [data-theme="midnight"] .top-action-bar,
+    [data-theme="black"] .top-action-bar {
+      background: rgba(20, 20, 24, 0.85);
+      border-color: rgba(212, 175, 55, 0.35);
+      color: #ffffff;
+    }
+
+    .nav-btn {
+      background: transparent;
+      border: none;
+      color: inherit;
+      padding: 0.45rem 0.75rem;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 500;
+      border-radius: 9999px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+      transition: all 0.2s ease;
+      white-space: nowrap;
+    }
+
+    .nav-btn:hover {
+      background: rgba(197, 160, 89, 0.15);
+      color: var(--accent-dark);
+    }
+
+    .nav-btn.active {
+      background: var(--accent);
+      color: #ffffff;
+    }
+
+    .music-waves {
+      display: inline-flex;
+      align-items: flex-end;
+      gap: 2px;
+      height: 12px;
+      margin-left: 2px;
+    }
+    .wave-bar {
+      width: 2px;
+      height: 100%;
+      background: currentColor;
+      border-radius: 1px;
+      animation: waveQuiet 0.8s ease-in-out infinite alternate;
+    }
+    .wave-bar:nth-child(2) { animation-delay: 0.2s; height: 60%; }
+    .wave-bar:nth-child(3) { animation-delay: 0.4s; height: 80%; }
+    @keyframes waveQuiet {
+      0% { height: 20%; }
+      100% { height: 100%; }
+    }
+
+    /* HERO */
+    .hero-container {
+      padding: 5.5rem 1.5rem 3rem 1.5rem;
+      text-align: center;
+      max-width: 680px;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    .hero-monogram-ring {
+      width: 84px;
+      height: 84px;
+      border-radius: 50%;
+      border: 1px solid var(--accent);
+      margin: 0 auto 1.5rem auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      box-shadow: 0 0 20px rgba(197, 160, 89, 0.15);
+    }
+
+    .hero-monogram-ring::before {
+      content: '';
+      position: absolute;
+      inset: -5px;
+      border-radius: 50%;
+      border: 1px dashed rgba(197, 160, 89, 0.35);
+    }
+
+    .hero-monogram-text {
+      font-size: 1.85rem;
+      font-family: var(--font-head);
+      color: var(--accent-dark);
+      letter-spacing: 0.05em;
+    }
+
+    .hero-title-names {
+      font-size: 3.2rem;
+      line-height: 1.15;
+      margin-bottom: 0.85rem;
+      font-family: var(--font-head);
+      color: var(--text-main);
+    }
+
+    .hero-amp {
+      font-family: 'Great Vibes', cursive;
+      color: var(--accent);
+      font-size: 0.85em;
+      margin: 0 0.3rem;
+    }
+
+    .hero-date-banner {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 2.25rem;
+    }
+
+    .countdown-grid {
+      display: flex;
+      justify-content: center;
+      gap: 0.75rem;
+      margin-top: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .countdown-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 14px;
+      padding: 0.85rem 1rem;
+      min-width: 72px;
+      box-shadow: var(--shadow-soft);
+      text-align: center;
+    }
+
+    .countdown-number {
+      font-size: 1.85rem;
+      font-family: var(--font-head);
+      color: var(--accent-dark);
+      line-height: 1.1;
+    }
+
+    .countdown-label {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.65rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-top: 0.25rem;
+    }
+
+    .content-wrapper {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 0 1.25rem 6rem 1.25rem;
+    }
+
+    .card-block {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 20px;
+      padding: 2.75rem 2rem;
+      margin: 2.25rem auto;
+      box-shadow: var(--shadow-soft);
+      position: relative;
+      transition: all 0.3s ease;
+      text-align: center;
+    }
+
+    .block-toolbar {
+      position: absolute;
+      top: 10px;
+      right: 12px;
+      display: none;
+      align-items: center;
+      gap: 5px;
+      background: rgba(255, 255, 255, 0.95);
+      border: 1px solid rgba(197, 160, 89, 0.4);
+      border-radius: 9999px;
+      padding: 3px 6px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      z-index: 50;
+    }
+
+    body.edit-mode .block-toolbar { display: flex; }
+
+    .toolbar-btn {
+      background: transparent;
+      border: none;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 0.85rem;
+      color: #4a5568;
+      transition: background 0.2s ease, color 0.2s ease;
+    }
+
+    .toolbar-btn:hover { background: #edf2f7; color: #1a202c; }
+    .toolbar-btn.btn-delete:hover { background: #fed7d7; color: #e53e3e; }
+
+    .block-color-picker-pop {
+      position: absolute;
+      top: 36px;
+      right: 0;
+      background: #ffffff;
+      border: 1px solid rgba(0,0,0,0.15);
+      border-radius: 12px;
+      padding: 8px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+      display: none;
+      gap: 6px;
+      z-index: 60;
+    }
+
+    .block-color-picker-pop.active { display: flex; }
+
+    .b-col-dot {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      border: 1px solid rgba(0,0,0,0.2);
+      cursor: pointer;
+      transition: transform 0.2s ease;
+    }
+    .b-col-dot:hover { transform: scale(1.2); }
+
+    body.edit-mode [contenteditable="true"] {
+      outline: 1px dashed rgba(197, 160, 89, 0.6);
+      outline-offset: 3px;
+      border-radius: 3px;
+      cursor: text;
+    }
+
+    .mini-calendar-table {
+      width: 100%;
+      max-width: 320px;
+      margin: 1.5rem auto;
+      border-collapse: collapse;
+      font-size: 0.95rem;
+    }
+
+    .mini-calendar-table th {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      padding: 0.4rem 0.2rem;
+      text-transform: uppercase;
+    }
+
+    .mini-calendar-table td {
+      padding: 0.5rem 0.2rem;
+      text-align: center;
+      color: var(--text-main);
+      font-family: var(--font-head);
+      font-size: 1.15rem;
+    }
+
+    .cal-active-day {
+      position: relative;
+      color: var(--accent-dark) !important;
+      font-weight: 700;
+    }
+
+    .cal-active-day::after {
+      content: '';
+      position: absolute;
+      inset: 2px 6px;
+      border: 1.5px solid var(--accent);
+      border-radius: 50%;
+      box-shadow: 0 0 8px rgba(197, 160, 89, 0.4);
+    }
+
+    .btn-action {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      background: var(--accent);
+      color: #ffffff;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.85rem 1.65rem;
+      border-radius: var(--btn-radius);
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      box-shadow: var(--shadow-soft);
+      transition: all 0.25s ease;
+      margin: 0.35rem;
+    }
+
+    .btn-action:hover {
+      background: var(--accent-dark);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-hover);
+    }
+
+    .btn-outline {
+      background: transparent;
+      border: 1px solid var(--accent);
+      color: var(--accent-dark);
+    }
+    .btn-outline:hover {
+      background: rgba(197, 160, 89, 0.1);
+      color: var(--accent-dark);
+    }
+
+    .timeline-stream {
+      position: relative;
+      margin: 2rem auto;
+      text-align: left;
+      padding-left: 2.5rem;
+    }
+
+    .timeline-stream::before {
+      content: '';
+      position: absolute;
+      top: 10px;
+      bottom: 10px;
+      left: 12px;
+      width: 2px;
+      background: linear-gradient(to bottom, transparent, var(--accent) 15%, var(--accent) 85%, transparent);
+    }
+
+    .timeline-item {
+      position: relative;
+      margin-bottom: 2rem;
+    }
+    .timeline-item:last-child { margin-bottom: 0; }
+
+    .timeline-dot {
+      position: absolute;
+      left: -2.5rem;
+      top: 2px;
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background: var(--card-bg);
+      border: 1.5px solid var(--accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.85rem;
+      box-shadow: 0 0 10px rgba(197, 160, 89, 0.25);
+    }
+
+    .timeline-time {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--accent);
+      letter-spacing: 0.1em;
+      margin-bottom: 0.2rem;
+    }
+
+    .timeline-title {
+      font-family: var(--font-head);
+      font-size: 1.4rem;
+      color: var(--text-main);
+      margin-bottom: 0.25rem;
+    }
+
+    .timeline-desc {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    .palette-row {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin: 1.75rem 0;
+      flex-wrap: wrap;
+    }
+
+    .palette-circle-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .color-swatch-circle {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.12);
+      border: 2px solid #ffffff;
+      transition: transform 0.2s ease;
+    }
+    .color-swatch-circle:hover { transform: scale(1.12); }
+
+    .palette-circle-label {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.68rem;
+      font-weight: 500;
+      color: var(--text-muted);
+    }
+
+    .rsvp-form-group {
+      margin-bottom: 1.25rem;
+      text-align: left;
+    }
+
+    .rsvp-label {
+      display: block;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 0.4rem;
+    }
+
+    .rsvp-input {
+      width: 100%;
+      padding: 0.85rem 1rem;
+      border: 1px solid var(--card-border);
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.7);
+      font-family: inherit;
+      font-size: 1.05rem;
+      color: var(--text-main);
+      outline: none;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .rsvp-input:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(197, 160, 89, 0.15);
+    }
+
+    .radio-pill-group {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    .radio-pill { flex: 1; min-width: 120px; text-align: center; }
+    .radio-pill input { display: none; }
+    .radio-pill label {
+      display: block;
+      padding: 0.75rem 0.5rem;
+      border: 1px solid var(--card-border);
+      border-radius: 10px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      color: var(--text-main);
+    }
+
+    .radio-pill input:checked + label {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #ffffff;
+      box-shadow: 0 4px 12px rgba(197, 160, 89, 0.25);
+    }
+
+    .ai-agent-fab {
+      position: fixed;
+      bottom: 1.5rem;
+      right: 1.5rem;
+      z-index: 998;
+      background: linear-gradient(135deg, #2b111e 0%, #15060d 100%);
+      color: #d4af37;
+      border: 1px solid #d4af37;
+      padding: 0.65rem 1.15rem;
+      border-radius: 9999px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
+      transition: all 0.3s ease;
+    }
+    .ai-agent-fab:hover {
+      transform: translateY(-3px) scale(1.03);
+      box-shadow: 0 12px 30px rgba(212, 175, 55, 0.4);
+    }
+
+    .ai-chat-window {
+      position: fixed;
+      bottom: 5.25rem;
+      right: 1.5rem;
+      width: 360px;
+      max-width: 90vw;
+      background: #ffffff;
+      border: 1px solid rgba(197, 160, 89, 0.35);
+      border-radius: 18px;
+      box-shadow: 0 15px 45px rgba(0,0,0,0.2);
+      display: none;
+      flex-direction: column;
+      z-index: 999;
+      overflow: hidden;
+      animation: popIn 0.3s cubic-bezier(0.2, 0.9, 0.3, 1.2);
+    }
+    .ai-chat-window.active { display: flex; }
+
+    @keyframes popIn {
+      0% { opacity: 0; transform: translateY(15px) scale(0.95); }
+      100% { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    .ai-chat-header {
+      background: linear-gradient(135deg, #2b111e 0%, #15060d 100%);
+      color: #d4af37;
+      padding: 0.9rem 1.15rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 600;
+    }
+
+    .ai-chat-body {
+      padding: 1.15rem;
+      max-height: 380px;
+      overflow-y: auto;
+      font-size: 0.95rem;
+      color: #2d3748;
+    }
+
+    .ai-chip-suggestions {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+      margin-top: 0.75rem;
+    }
+
+    .ai-chip-btn {
+      background: #f7fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      padding: 0.5rem 0.75rem;
+      font-size: 0.8rem;
+      text-align: left;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      color: #4a5568;
+    }
+    .ai-chip-btn:hover {
+      background: #edf2f7;
+      border-color: #cbd5e0;
+      color: #1a202c;
+    }
+
+    .ai-input-bar {
+      padding: 0.75rem;
+      border-top: 1px solid #edf2f7;
+      display: flex;
+      gap: 0.4rem;
+      background: #fafafa;
+    }
+
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(4px);
+      z-index: 10000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+    }
+    .modal-backdrop.active { display: flex; }
+
+    .modal-card {
+      background: #ffffff;
+      border-radius: 20px;
+      width: 100%;
+      max-width: 520px;
+      max-height: 90vh;
+      overflow-y: auto;
+      padding: 2rem;
+      position: relative;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+      color: #2d3748;
+    }
+
+    .modal-close-btn {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background: transparent;
+      border: none;
+      font-size: 1.4rem;
+      cursor: pointer;
+      color: #a0aec0;
+    }
+    .modal-close-btn:hover { color: #4a5568; }
+
+    .toast-popup {
+      position: fixed;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%) translateY(50px);
+      background: #1a202c;
+      color: #ffffff;
+      padding: 0.75rem 1.5rem;
+      border-radius: 9999px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 500;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+      z-index: 999999;
+      opacity: 0;
+      pointer-events: none;
+      transition: all 0.3s cubic-bezier(0.2, 0.9, 0.3, 1.2);
+    }
+    .toast-popup.show {
+      transform: translateX(-50%) translateY(0);
+      opacity: 1;
+    }
+
+  </style>
+</head>
+<body data-theme="gold" data-font="serif" class="edit-mode">
+
+  <!-- 3D MAGICAL STORYBOOK INTRO OVERLAY -->
+  <div class="intro-book-overlay" id="introBookOverlay">
+    <div class="particles-bg"></div>
+
+    <div class="book-stage-3d" onclick="animateOpenBookIntro()">
+      <div class="book-tome-3d" id="magicBookTome">
+        
+        <!-- INNER PAGE LEAF 2 (CHAPTER PREVIEW) -->
+        <div class="book-page-3d book-leaf-2">
+          <div class="badge-sub" style="font-size:0.65rem;">СВАДЕБНАЯ СКАЗКА</div>
+          <div class="font-title" style="font-size:1.6rem; color:var(--text-main); margin-bottom:0.4rem;">Наша История</div>
+          <p style="font-size:0.85rem; color:var(--text-muted); line-height:1.5; margin-bottom:0.75rem;">
+            В этот особенный день открывается новая глава нашей жизни, полная любви, нежности и радости...
+          </p>
+          <div style="font-size:0.75rem; font-weight:700; color:var(--accent-dark); text-transform:uppercase;">Глава I · Начало пути ↓</div>
+        </div>
+
+        <!-- INNER PAGE LEAF 1 (PROLOGUE) -->
+        <div class="book-page-3d book-leaf-1">
+          <div class="badge-sub" style="font-size:0.65rem;">ПРОЛОГ</div>
+          <div class="font-title" style="font-size:1.85rem; color:var(--accent-dark); margin:0.4rem 0;" id="dispBookNames">Александр &amp; Екатерина</div>
+          <div style="font-size:0.95rem; font-style:italic; color:var(--text-muted); margin-bottom:0.5rem;" id="dispGuestTag">Дорогие родные и близкие!</div>
+          <div style="font-size:0.75rem; letter-spacing:0.18em; color:var(--text-muted); text-transform:uppercase;">19 ИЮНЯ 2027 ГОДА</div>
+        </div>
+
+        <!-- 3D HARDCOVER WITH GOLD EMBOSSING & WAX SEAL -->
+        <div class="book-cover-3d">
+          <div class="book-foil-frame">
+            <div class="book-crown-corner crown-tl">❧</div>
+            <div class="book-crown-corner crown-tr">❧</div>
+            <div class="book-crown-corner crown-bl">❧</div>
+            <div class="book-crown-corner crown-br">❧</div>
+
+            <div class="badge-sub" style="color:#d4af37; margin-bottom:0.5rem;">СВАДЕБНАЯ СКАЗКА</div>
+            
+            <div style="margin: auto 0;">
+              <div class="font-title book-gold-text" style="font-size:1.9rem; line-height:1.2; margin-bottom:0.5rem;" id="dispBookCoverTitle">
+                НАША ИСТОРИЯ ЛЮБВИ
+              </div>
+              <div class="font-title book-gold-text" style="font-size:1.35rem; font-style:italic;">
+                Александр &amp; Екатерина
+              </div>
+            </div>
+
+            <div style="font-family:'Montserrat',sans-serif; font-size:0.72rem; letter-spacing:0.2em; color:#d4af37; text-transform:uppercase;">
+              19 · 06 · 2027
+            </div>
+          </div>
+
+          <!-- ROYAL WAX SEAL MONOGRAM CLASP -->
+          <div class="book-seal-clasp" id="dispSeal" title="Нажмите, чтобы открыть">
+            <span>А&amp;Е</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- CALL TO ACTION BUTTON -->
+    <button type="button" class="btn-open-fairytale" onclick="animateOpenBookIntro()">
+      <span>✨</span>
+      <span>Открыть свадебную сказку</span>
+    </button>
+  </div>
+
+  <!-- FLOATING TOP ACTION BAR -->
+  <header class="top-action-bar">
+    <button type="button" class="nav-btn" id="btnMusic" onclick="toggleWeddingMusic()" title="Музыкальное сопровождение">
+      <span>🎵</span>
+      <span class="music-waves" id="musicWaves" style="display:none;">
+        <span class="wave-bar"></span>
+        <span class="wave-bar"></span>
+        <span class="wave-bar"></span>
+      </span>
+    </button>
+    
+    <button type="button" class="nav-btn" onclick="showIntroBook()" title="Посмотреть книгу-сказку">
+      <span>📖</span>
+      <span>Сказка</span>
+    </button>
+
+    <button type="button" class="nav-btn" id="btnToggleEdit" onclick="toggleEditMode()" title="Режим редактирования блоков">
+      <span>✏️</span>
+      <span id="txtEditMode">Правка</span>
+    </button>
+
+    <button type="button" class="nav-btn" onclick="openStudio()" title="Настройки оформления">
+      <span>🎨</span>
+      <span>Стиль</span>
+    </button>
+
+    <button type="button" class="nav-btn" onclick="openUserCabinetModal()" title="Личный кабинет и ответы гостей">
+      <span>👤</span>
+      <span>Кабинет</span>
+    </button>
+
+    <button type="button" class="nav-btn" onclick="openShareModal()" title="Поделиться приглашением">
+      <span>📤</span>
+    </button>
+  </header>
+
+  <!-- HERO SECTION -->
+  <main class="hero-container" id="heroSec">
+    <div class="hero-monogram-ring">
+      <span class="hero-monogram-text" id="dispMonogram">А &amp; Е</span>
+    </div>
+
+    <div class="badge-sub">ПРИГЛАШЕНИЕ НА СВАДЬБУ</div>
+
+    <h1 class="hero-title-names font-title">
+      <span id="dispP1" contenteditable="true" onblur="saveInlineEdits()">Александр</span>
+      <span class="hero-amp">&amp;</span>
+      <span id="dispP2" contenteditable="true" onblur="saveInlineEdits()">Екатерина</span>
+    </h1>
+
+    <div class="hero-date-banner" id="dispDateBadge">
+      19 ИЮНЯ 2027 · СУББОТА
+    </div>
+
+    <!-- COUNTDOWN TIMER -->
+    <div class="countdown-grid">
+      <div class="countdown-card">
+        <div class="countdown-number" id="cdDays">00</div>
+        <div class="countdown-label">Дней</div>
+      </div>
+      <div class="countdown-card">
+        <div class="countdown-number" id="cdHours">00</div>
+        <div class="countdown-label">Часов</div>
+      </div>
+      <div class="countdown-card">
+        <div class="countdown-number" id="cdMinutes">00</div>
+        <div class="countdown-label">Минут</div>
+      </div>
+      <div class="countdown-card">
+        <div class="countdown-number" id="cdSeconds">00</div>
+        <div class="countdown-label">Секунд</div>
+      </div>
+    </div>
+  </main>
+
+  <!-- EDITORIAL CONTENT SECTIONS WRAPPER -->
+  <div class="content-wrapper" id="contentSection">
+
+    <!-- 1. PROLOGUE SECTION -->
+    <section class="card-block" id="secPrologue">
+      <div class="block-toolbar">
+        <button type="button" class="toolbar-btn" onclick="moveBlockUp(this)" title="Выше">▲</button>
+        <button type="button" class="toolbar-btn" onclick="moveBlockDown(this)" title="Ниже">▼</button>
+        <button type="button" class="toolbar-btn" onclick="toggleBlockColorPop(this)" title="Цвет">🎨</button>
+        <button type="button" class="toolbar-btn btn-delete" onclick="deleteBlockPermanently(this)" title="Удалить">🗑</button>
+        <div class="block-color-picker-pop">
+          <div class="b-col-dot" style="background:#ffffff;" onclick="setBlockBg(this, '#ffffff')"></div>
+          <div class="b-col-dot" style="background:#fcfbf9;" onclick="setBlockBg(this, '#fcfbf9')"></div>
+          <div class="b-col-dot" style="background:#f6f5f0;" onclick="setBlockBg(this, '#f6f5f0')"></div>
+          <div class="b-col-dot" style="background:#faf4f2;" onclick="setBlockBg(this, '#faf4f2')"></div>
+          <div class="b-col-dot" style="background:#0a0f1d; color:#fff;" onclick="setBlockBg(this, '#0a0f1d')"></div>
+        </div>
+      </div>
+
+      <div class="badge-sub">ПРОЛОГ</div>
+      <h2 class="font-title" style="font-size:2.2rem; margin-bottom:1rem;" contenteditable="true" onblur="saveInlineEdits()">
+        Дорогие родные и близкие!
+      </h2>
+      <p style="font-size:1.15rem; color:var(--text-muted); line-height:1.75; max-width:540px; margin:0 auto 1.5rem auto;" contenteditable="true" onblur="saveInlineEdits()">
+        Мы очень хотим разделить с вами один из самых важных и трогательных дней в нашей жизни. Будем счастливы видеть вас рядом, когда мы скажем друг другу заветное «да»!
+      </p>
+      <div style="font-family:'Great Vibes',cursive; font-size:2.2rem; color:var(--accent-dark);">
+        Мы женимся!
+      </div>
+    </section>
+
+    <!-- 2. MINI CALENDAR & SAVE THE DATE -->
+    <section class="card-block" id="secCalendar">
+      <div class="block-toolbar">
+        <button type="button" class="toolbar-btn" onclick="moveBlockUp(this)">▲</button>
+        <button type="button" class="toolbar-btn" onclick="moveBlockDown(this)">▼</button>
+        <button type="button" class="toolbar-btn" onclick="toggleBlockColorPop(this)">🎨</button>
+        <button type="button" class="toolbar-btn btn-delete" onclick="deleteBlockPermanently(this)">🗑</button>
+        <div class="block-color-picker-pop">
+          <div class="b-col-dot" style="background:#ffffff;" onclick="setBlockBg(this, '#ffffff')"></div>
+          <div class="b-col-dot" style="background:#fcfbf9;" onclick="setBlockBg(this, '#fcfbf9')"></div>
+          <div class="b-col-dot" style="background:#f6f5f0;" onclick="setBlockBg(this, '#f6f5f0')"></div>
+          <div class="b-col-dot" style="background:#faf4f2;" onclick="setBlockBg(this, '#faf4f2')"></div>
+          <div class="b-col-dot" style="background:#0a0f1d;" onclick="setBlockBg(this, '#0a0f1d')"></div>
+        </div>
+      </div>
+
+      <div class="badge-sub">КАЛЕНДАРЬ СОБЫТИЯ</div>
+      <h2 class="font-title" style="font-size:2rem; margin-bottom:0.75rem;">Июнь 2027</h2>
+
+      <table class="mini-calendar-table">
+        <thead>
+          <tr>
+            <th>Пн</th><th>Вт</th><th>Ср</th><th>Чт</th><th>Пт</th><th>Сб</th><th>Вс</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td style="color:#cbd5e0;">31</td><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td>
+          </tr>
+          <tr>
+            <td>7</td><td>8</td><td>9</td><td>10</td><td>11</td><td>12</td><td>13</td>
+          </tr>
+          <tr>
+            <td>14</td><td>15</td><td>16</td><td>17</td><td>18</td><td class="cal-active-day">19</td><td>20</td>
+          </tr>
+          <tr>
+            <td>21</td><td>22</td><td>23</td><td>24</td><td>25</td><td>26</td><td>27</td>
+          </tr>
+          <tr>
+            <td>28</td><td>29</td><td>30</td><td style="color:#cbd5e0;">1</td><td style="color:#cbd5e0;">2</td><td style="color:#cbd5e0;">3</td><td style="color:#cbd5e0;">4</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div style="margin-top:1.5rem;">
+        <button type="button" class="btn-action" onclick="addToGoogleCalendar()">
+          <span>📅</span>
+          <span>Google Календарь</span>
+        </button>
+        <button type="button" class="btn-action btn-outline" onclick="downloadIcs()">
+          <span>🍏</span>
+          <span>Apple / Outlook (.ics)</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- 3. OUR STORY SECTION -->
+    <section class="card-block" id="secStory">
+      <div class="block-toolbar">
+        <button type="button" class="toolbar-btn" onclick="moveBlockUp(this)">▲</button>
+        <button type="button" class="toolbar-btn" onclick="moveBlockDown(this)">▼</button>
+        <button type="button" class="toolbar-btn" onclick="toggleBlockColorPop(this)">🎨</button>
+        <button type="button" class="toolbar-btn btn-delete" onclick="deleteBlockPermanently(this)">🗑</button>
+        <div class="block-color-picker-pop">
+          <div class="b-col-dot" style="background:#ffffff;" onclick="setBlockBg(this, '#ffffff')"></div>
+          <div class="b-col-dot" style="background:#fcfbf9;" onclick="setBlockBg(this, '#fcfbf9')"></div>
+          <div class="b-col-dot" style="background:#f6f5f0;" onclick="setBlockBg(this, '#f6f5f0')"></div>
+          <div class="b-col-dot" style="background:#faf4f2;" onclick="setBlockBg(this, '#faf4f2')"></div>
+          <div class="b-col-dot" style="background:#0a0f1d;" onclick="setBlockBg(this, '#0a0f1d')"></div>
+        </div>
+      </div>
+
+      <div class="badge-sub">НАША ИСТОРИЯ</div>
+      <h2 class="font-title" style="font-size:2.2rem; margin-bottom:1.5rem;">Как все начиналось</h2>
+
+      <div style="display:flex; flex-direction:column; gap:1.75rem; text-align:left;">
+        <div style="border-left:2px solid var(--accent); padding-left:1.25rem;">
+          <div class="badge-sub" style="font-size:0.68rem; margin-bottom:0.2rem;">ГЛАВА I · 2023</div>
+          <div class="font-title" style="font-size:1.35rem; color:var(--text-main);" contenteditable="true" onblur="saveInlineEdits()">Первая встреча</div>
+          <p style="font-size:1rem; color:var(--text-muted); line-height:1.6;" contenteditable="true" onblur="saveInlineEdits()">
+            Случайный разговор за чашкой кофе, который затянулся на несколько часов и перевернул наши жизни навсегда.
+          </p>
+        </div>
+
+        <div style="border-left:2px solid var(--accent); padding-left:1.25rem;">
+          <div class="badge-sub" style="font-size:0.68rem; margin-bottom:0.2rem;">ГЛАВА II · 2025</div>
+          <div class="font-title" style="font-size:1.35rem; color:var(--text-main);" contenteditable="true" onblur="saveInlineEdits()">Заветное «Да»</div>
+          <p style="font-size:1rem; color:var(--text-muted); line-height:1.6;" contenteditable="true" onblur="saveInlineEdits()">
+            На закате у моря прозвучал самый главный вопрос, а в ответ прозвучало искреннее и счастливое согласие.
+          </p>
+        </div>
+
+        <div style="border-left:2px solid var(--accent); padding-left:1.25rem;">
+          <div class="badge-sub" style="font-size:0.68rem; margin-bottom:0.2rem;">ГЛАВА III · 2027</div>
+          <div class="font-title" style="font-size:1.35rem; color:var(--text-main);" contenteditable="true" onblur="saveInlineEdits()">День нашей свадьбы</div>
+          <p style="font-size:1rem; color:var(--text-muted); line-height:1.6;" contenteditable="true" onblur="saveInlineEdits()">
+            День, когда мы соберём самых близких людей, чтобы разделить наше счастье и начать новую прекрасную главу.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. TIMELINE OF THE DAY -->
+    <section class="card-block" id="secTimeline">
+      <div class="block-toolbar">
+        <button type="button" class="toolbar-btn" onclick="moveBlockUp(this)">▲</button>
+        <button type="button" class="toolbar-btn" onclick="moveBlockDown(this)">▼</button>
+        <button type="button" class="toolbar-btn" onclick="toggleBlockColorPop(this)">🎨</button>
+        <button type="button" class="toolbar-btn btn-delete" onclick="deleteBlockPermanently(this)">🗑</button>
+        <div class="block-color-picker-pop">
+          <div class="b-col-dot" style="background:#ffffff;" onclick="setBlockBg(this, '#ffffff')"></div>
+          <div class="b-col-dot" style="background:#fcfbf9;" onclick="setBlockBg(this, '#fcfbf9')"></div>
+          <div class="b-col-dot" style="background:#f6f5f0;" onclick="setBlockBg(this, '#f6f5f0')"></div>
+          <div class="b-col-dot" style="background:#faf4f2;" onclick="setBlockBg(this, '#faf4f2')"></div>
+          <div class="b-col-dot" style="background:#0a0f1d;" onclick="setBlockBg(this, '#0a0f1d')"></div>
+        </div>
+      </div>
+
+      <div class="badge-sub">ПРОГРАММА ДНЯ</div>
+      <h2 class="font-title" style="font-size:2.2rem; margin-bottom:1.5rem;">Тайминг торжества</h2>
+
+      <div class="timeline-stream" id="timelineListContainer">
+        <!-- RENDERED BY JAVASCRIPT -->
+      </div>
+    </section>
+
+    <!-- 5. VENUE & LOCATION -->
+    <section class="card-block" id="secVenue">
+      <div class="block-toolbar">
+        <button type="button" class="toolbar-btn" onclick="moveBlockUp(this)">▲</button>
+        <button type="button" class="toolbar-btn" onclick="moveBlockDown(this)">▼</button>
+        <button type="button" class="toolbar-btn" onclick="toggleBlockColorPop(this)">🎨</button>
+        <button type="button" class="toolbar-btn btn-delete" onclick="deleteBlockPermanently(this)">🗑</button>
+        <div class="block-color-picker-pop">
+          <div class="b-col-dot" style="background:#ffffff;" onclick="setBlockBg(this, '#ffffff')"></div>
+          <div class="b-col-dot" style="background:#fcfbf9;" onclick="setBlockBg(this, '#fcfbf9')"></div>
+          <div class="b-col-dot" style="background:#f6f5f0;" onclick="setBlockBg(this, '#f6f5f0')"></div>
+          <div class="b-col-dot" style="background:#faf4f2;" onclick="setBlockBg(this, '#faf4f2')"></div>
+          <div class="b-col-dot" style="background:#0a0f1d;" onclick="setBlockBg(this, '#0a0f1d')"></div>
+        </div>
+      </div>
+
+      <div class="badge-sub">ЛОКАЦИЯ</div>
+      <h2 class="font-title" style="font-size:2.2rem; margin-bottom:0.5rem;" id="dispVenue" contenteditable="true" onblur="saveInlineEdits()">
+        Усадьба «Вилла Ротонда»
+      </h2>
+      <p style="font-size:1.05rem; color:var(--text-muted); margin-bottom:1.75rem;" id="dispAddress" contenteditable="true" onblur="saveInlineEdits()">
+        Московская область, поселок Довиль, Приозерная ул., 1
+      </p>
+
+      <div style="background:rgba(0,0,0,0.03); border:1px solid var(--card-border); border-radius:14px; padding:1.5rem; margin-bottom:1.5rem;">
+        <div style="font-size:2.2rem; margin-bottom:0.5rem;">🏰</div>
+        <div style="font-size:0.95rem; color:var(--text-muted);">
+          Живописный берег озера, охраняемая парковка для гостей и трансфер от метро.
+        </div>
+      </div>
+
+      <div style="display:flex; justify-content:center; gap:0.5rem; flex-wrap:wrap;">
+        <a href="https://yandex.ru/maps/?text=Усадьба+Вилла+Ротонда+Довиль" target="_blank" class="btn-action">
+          <span>📍</span>
+          <span>Яндекс Карты</span>
+        </a>
+        <a href="https://2gis.ru/search/Вилла%20Ротонда" target="_blank" class="btn-action btn-outline">
+          <span>🧭</span>
+          <span>2ГИС</span>
+        </a>
+        <a href="https://maps.google.com/?q=Villa+Rotonda+Moscow" target="_blank" class="btn-action btn-outline">
+          <span>🗺️</span>
+          <span>Google Maps</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- 6. DRESS CODE SECTION -->
+    <section class="card-block" id="secDress">
+      <div class="block-toolbar">
+        <button type="button" class="toolbar-btn" onclick="moveBlockUp(this)">▲</button>
+        <button type="button" class="toolbar-btn" onclick="moveBlockDown(this)">▼</button>
+        <button type="button" class="toolbar-btn" onclick="toggleBlockColorPop(this)">🎨</button>
+        <button type="button" class="toolbar-btn btn-delete" onclick="deleteBlockPermanently(this)">🗑</button>
+        <div class="block-color-picker-pop">
+          <div class="b-col-dot" style="background:#ffffff;" onclick="setBlockBg(this, '#ffffff')"></div>
+          <div class="b-col-dot" style="background:#fcfbf9;" onclick="setBlockBg(this, '#fcfbf9')"></div>
+          <div class="b-col-dot" style="background:#f6f5f0;" onclick="setBlockBg(this, '#f6f5f0')"></div>
+          <div class="b-col-dot" style="background:#faf4f2;" onclick="setBlockBg(this, '#faf4f2')"></div>
+          <div class="b-col-dot" style="background:#0a0f1d;" onclick="setBlockBg(this, '#0a0f1d')"></div>
+        </div>
+      </div>
+
+      <div class="badge-sub">ДРЕСС-КОД</div>
+      <h2 class="font-title" style="font-size:2.2rem; margin-bottom:0.75rem;" id="dispDressTitle" contenteditable="true" onblur="saveInlineEdits()">
+        Black Tie Optional &amp; Пастель
+      </h2>
+      <p style="font-size:1.05rem; color:var(--text-muted); line-height:1.6; max-width:520px; margin:0 auto;" id="dispDressDesc" contenteditable="true" onblur="saveInlineEdits()">
+        Мы будем искренне признательны, если вы поддержите цветовую гамму нашей свадьбы в своих праздничных нарядах:
+      </p>
+
+      <div class="palette-row" id="dispDressPalette">
+        <!-- 5 LUXURY SWATCHES RENDERED BY SCRIPT -->
+      </div>
+
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin-top:1.5rem; text-align:left;">
+        <div style="background:rgba(0,0,0,0.02); padding:1rem; border-radius:12px; border:1px solid var(--card-border);">
+          <div style="font-size:0.8rem; font-weight:700; color:var(--accent-dark); margin-bottom:0.25rem;">ДЛЯ ДАМ</div>
+          <div style="font-size:0.9rem; color:var(--text-muted);">Коктейльные или вечерние платья пастельных и пудровых оттенков.</div>
+        </div>
+        <div style="background:rgba(0,0,0,0.02); padding:1rem; border-radius:12px; border:1px solid var(--card-border);">
+          <div style="font-size:0.8rem; font-weight:700; color:var(--accent-dark); margin-bottom:0.25rem;">ДЛЯ ДЖЕНТЛЬМЕНОВ</div>
+          <div style="font-size:0.9rem; color:var(--text-muted);">Классические костюмы, смокинги или светлые рубашки с брюками.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. WISHES & FLOWERS -->
+    <section class="card-block" id="secWishes">
+      <div class="block-toolbar">
+        <button type="button" class="toolbar-btn" onclick="moveBlockUp(this)">▲</button>
+        <button type="button" class="toolbar-btn" onclick="moveBlockDown(this)">▼</button>
+        <button type="button" class="toolbar-btn" onclick="toggleBlockColorPop(this)">🎨</button>
+        <button type="button" class="toolbar-btn btn-delete" onclick="deleteBlockPermanently(this)">🗑</button>
+        <div class="block-color-picker-pop">
+          <div class="b-col-dot" style="background:#ffffff;" onclick="setBlockBg(this, '#ffffff')"></div>
+          <div class="b-col-dot" style="background:#fcfbf9;" onclick="setBlockBg(this, '#fcfbf9')"></div>
+          <div class="b-col-dot" style="background:#f6f5f0;" onclick="setBlockBg(this, '#f6f5f0')"></div>
+          <div class="b-col-dot" style="background:#faf4f2;" onclick="setBlockBg(this, '#faf4f2')"></div>
+          <div class="b-col-dot" style="background:#0a0f1d;" onclick="setBlockBg(this, '#0a0f1d')"></div>
+        </div>
+      </div>
+
+      <div class="badge-sub">ПОЖЕЛАНИЯ</div>
+      <h2 class="font-title" style="font-size:2.2rem; margin-bottom:1rem;">Цветы и комплименты</h2>
+      <p style="font-size:1.05rem; color:var(--text-muted); line-height:1.75; max-width:520px; margin:0 auto 1.5rem auto;" contenteditable="true" onblur="saveInlineEdits()">
+        Пожалуйста, не дарите нам срезанные цветы — мы сразу отправляемся в свадебное путешествие и не успеем насладиться их красотой. Если вы хотите сделать нам комплимент, лучшим выбором будет бутылка вашего любимого вина или книга для домашней библиотеки.
+      </p>
+
+      <div style="display:flex; justify-content:center; gap:2rem; font-size:1.8rem;">
+        <span title="Вино">🍾</span>
+        <span title="Книги">📖</span>
+        <span title="Теплые улыбки">✨</span>
+      </div>
+    </section>
+
+    <!-- 8. WEDDING GIFT & ENVELOPE -->
+    <section class="card-block" id="bankSection">
+      <div class="block-toolbar">
+        <button type="button" class="toolbar-btn" onclick="moveBlockUp(this)">▲</button>
+        <button type="button" class="toolbar-btn" onclick="moveBlockDown(this)">▼</button>
+        <button type="button" class="toolbar-btn" onclick="toggleBlockColorPop(this)">🎨</button>
+        <button type="button" class="toolbar-btn btn-delete" onclick="deleteBlockPermanently(this)">🗑</button>
+        <div class="block-color-picker-pop">
+          <div class="b-col-dot" style="background:#ffffff;" onclick="setBlockBg(this, '#ffffff')"></div>
+          <div class="b-col-dot" style="background:#fcfbf9;" onclick="setBlockBg(this, '#fcfbf9')"></div>
+          <div class="b-col-dot" style="background:#f6f5f0;" onclick="setBlockBg(this, '#f6f5f0')"></div>
+          <div class="b-col-dot" style="background:#faf4f2;" onclick="setBlockBg(this, '#faf4f2')"></div>
+          <div class="b-col-dot" style="background:#0a0f1d;" onclick="setBlockBg(this, '#0a0f1d')"></div>
+        </div>
+      </div>
+
+      <div class="badge-sub">СВАДЕБНЫЙ ПОДАРОК</div>
+      <h2 class="font-title" style="font-size:2.2rem; margin-bottom:1rem;">Поздравление в конверте</h2>
+      <p style="font-size:1.05rem; color:var(--text-muted); line-height:1.75; max-width:520px; margin:0 auto 1.5rem auto;" contenteditable="true" onblur="saveInlineEdits()">
+        Ваше присутствие и теплые поздравления — главный подарок для нас! Но если вы хотите внести вклад в бюджет молодой семьи или медовый месяц, мы будем искренне благодарны за комплимент в конверте.
+      </p>
+
+      <div style="background:rgba(0,0,0,0.02); border:1px dashed var(--accent); border-radius:14px; padding:1.25rem; max-width:380px; margin:0 auto 1.25rem auto;">
+        <div style="font-size:0.75rem; font-weight:700; color:var(--accent-dark); text-transform:uppercase; margin-bottom:0.25rem;">
+          КАРТА МОЛОДОЖЕНОВ
+        </div>
+        <div style="font-family:'Montserrat',sans-serif; font-size:1.25rem; font-weight:600; letter-spacing:0.1em; color:var(--text-main);" id="dispCardNum">
+          4276 •••• •••• 9012
+        </div>
+      </div>
+
+      <button type="button" class="btn-action" onclick="copyCard()">
+        <span>💳</span>
+        <span>Скопировать номер карты</span>
+      </button>
+    </section>
+
+    <!-- 9. RSVP GUEST SURVEY -->
+    <section class="card-block" id="secRsvp">
+      <div class="block-toolbar">
+        <button type="button" class="toolbar-btn" onclick="moveBlockUp(this)">▲</button>
+        <button type="button" class="toolbar-btn" onclick="moveBlockDown(this)">▼</button>
+        <button type="button" class="toolbar-btn" onclick="toggleBlockColorPop(this)">🎨</button>
+        <button type="button" class="toolbar-btn btn-delete" onclick="deleteBlockPermanently(this)">🗑</button>
+        <div class="block-color-picker-pop">
+          <div class="b-col-dot" style="background:#ffffff;" onclick="setBlockBg(this, '#ffffff')"></div>
+          <div class="b-col-dot" style="background:#fcfbf9;" onclick="setBlockBg(this, '#fcfbf9')"></div>
+          <div class="b-col-dot" style="background:#f6f5f0;" onclick="setBlockBg(this, '#f6f5f0')"></div>
+          <div class="b-col-dot" style="background:#faf4f2;" onclick="setBlockBg(this, '#faf4f2')"></div>
+          <div class="b-col-dot" style="background:#0a0f1d;" onclick="setBlockBg(this, '#0a0f1d')"></div>
+        </div>
+      </div>
+
+      <div class="badge-sub">ОПРОС ГОСТЕЙ</div>
+      <h2 class="font-title" style="font-size:2.2rem; margin-bottom:0.5rem;">Подтверждение присутствия</h2>
+      <p style="font-size:1rem; color:var(--text-muted); margin-bottom:2rem;">
+        Пожалуйста, ответьте на несколько вопросов до 1 июня 2027 года:
+      </p>
+
+      <form onsubmit="sendRsvp(event)" style="max-width:480px; margin:0 auto;">
+        <div class="rsvp-form-group">
+          <label class="rsvp-label">Ваше Имя и Фамилия</label>
+          <input type="text" class="rsvp-input" id="rsvpName" required placeholder="Например: Анна и Михаил Смирновы">
+        </div>
+
+        <div class="rsvp-form-group">
+          <label class="rsvp-label">Сможете ли вы присутствовать?</label>
+          <div class="radio-pill-group">
+            <div class="radio-pill">
+              <input type="radio" id="stYes" name="rsvpStatus" value="Обязательно буду" checked>
+              <label for="stYes">✨ Обязательно буду</label>
+            </div>
+            <div class="radio-pill">
+              <input type="radio" id="stPair" name="rsvpStatus" value="Буду с парой (+1)">
+              <label for="stPair">👫 С парой (+1)</label>
+            </div>
+            <div class="radio-pill">
+              <input type="radio" id="stNo" name="rsvpStatus" value="К сожалению, не смогу">
+              <label for="stNo">🕊 Не смогу</label>
+            </div>
+          </div>
+        </div>
+
+        <div class="rsvp-form-group">
+          <label class="rsvp-label">Предпочтение по меню</label>
+          <div class="radio-pill-group">
+            <div class="radio-pill">
+              <input type="radio" id="fdMeat" name="rsvpFood" value="Мясо" checked>
+              <label for="fdMeat">🥩 Мясо</label>
+            </div>
+            <div class="radio-pill">
+              <input type="radio" id="fdFish" name="rsvpFood" value="Рыба">
+              <label for="fdFish">🐟 Рыба</label>
+            </div>
+            <div class="radio-pill">
+              <input type="radio" id="fdVeg" name="rsvpFood" value="Вегетарианское">
+              <label for="fdVeg">🥗 Овощи</label>
+            </div>
+          </div>
+        </div>
+
+        <div class="rsvp-form-group">
+          <label class="rsvp-label">Напитки для банкета</label>
+          <input type="text" class="rsvp-input" id="rsvpDrink" placeholder="Например: Сухое белое вино / Шампанское">
+        </div>
+
+        <div class="rsvp-form-group">
+          <label class="rsvp-label">Нужен ли трансфер?</label>
+          <div class="radio-pill-group">
+            <div class="radio-pill">
+              <input type="radio" id="trYes" name="rsvpTransfer" value="Нужен трансфер" checked>
+              <label for="trYes">🚐 Нужен</label>
+            </div>
+            <div class="radio-pill">
+              <input type="radio" id="trNo" name="rsvpTransfer" value="Доберусь сам">
+              <label for="trNo">🚗 На авто</label>
+            </div>
+          </div>
+        </div>
+
+        <div class="rsvp-form-group">
+          <label class="rsvp-label">Любимый трек для диджея / Пожелание</label>
+          <input type="text" class="rsvp-input" id="rsvpTrack" placeholder="Название песни или пару теплых слов">
+        </div>
+
+        <button type="submit" class="btn-action" style="width:100%; padding:1rem; margin-top:1rem;">
+          <span>💌</span>
+          <span>Отправить ответ</span>
+        </button>
+      </form>
+    </section>
+
+    <!-- 10. WEDDING COORDINATOR -->
+    <section class="card-block" id="secCoordinator">
+      <div class="block-toolbar">
+        <button type="button" class="toolbar-btn" onclick="moveBlockUp(this)">▲</button>
+        <button type="button" class="toolbar-btn" onclick="moveBlockDown(this)">▼</button>
+        <button type="button" class="toolbar-btn" onclick="toggleBlockColorPop(this)">🎨</button>
+        <button type="button" class="toolbar-btn btn-delete" onclick="deleteBlockPermanently(this)">🗑</button>
+        <div class="block-color-picker-pop">
+          <div class="b-col-dot" style="background:#ffffff;" onclick="setBlockBg(this, '#ffffff')"></div>
+          <div class="b-col-dot" style="background:#fcfbf9;" onclick="setBlockBg(this, '#fcfbf9')"></div>
+          <div class="b-col-dot" style="background:#f6f5f0;" onclick="setBlockBg(this, '#f6f5f0')"></div>
+          <div class="b-col-dot" style="background:#faf4f2;" onclick="setBlockBg(this, '#faf4f2')"></div>
+          <div class="b-col-dot" style="background:#0a0f1d;" onclick="setBlockBg(this, '#0a0f1d')"></div>
+        </div>
+      </div>
+
+      <div class="badge-sub">ОРГАНИЗАЦИЯ</div>
+      <h2 class="font-title" style="font-size:2.2rem; margin-bottom:0.75rem;">Свадебный координатор</h2>
+      <p style="font-size:1.05rem; color:var(--text-muted); line-height:1.6; max-width:520px; margin:0 auto 1.5rem auto;">
+        По любым вопросам в день свадьбы (навигация, трансфер, тайминг, поздравления):
+      </p>
+
+      <div style="font-family:var(--font-head); font-size:1.6rem; color:var(--text-main); margin-bottom:0.35rem;">
+        Анна (Свадебный координатор)
+      </div>
+      <div style="font-family:'Montserrat',sans-serif; font-size:1.1rem; color:var(--accent-dark); font-weight:600; margin-bottom:1.5rem;">
+        +7 (999) 123-45-67
+      </div>
+
+      <div style="display:flex; justify-content:center; gap:0.5rem;">
+        <a href="tel:+79991234567" class="btn-action">
+          <span>📞</span>
+          <span>Позвонить</span>
+        </a>
+        <a href="https://wa.me/79991234567" target="_blank" class="btn-action btn-outline">
+          <span>💬</span>
+          <span>WhatsApp</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- GLOBAL ADD NEW BLOCK BUTTON (VISIBLE IN EDIT MODE) -->
+    <div style="text-align:center; margin:2.5rem 0;" id="addBlockBtnContainer">
+      <button type="button" class="btn-action btn-outline" onclick="openAddBlockModal()">
+        <span>➕</span>
+        <span>Добавить новый блок</span>
+      </button>
+    </div>
+
+    <!-- 11. FOOTER -->
+    <footer style="text-align:center; padding:3rem 1.5rem 1rem 1.5rem; color:var(--text-muted);" id="secFooter">
+      <div class="font-title" style="font-size:2rem; color:var(--text-main); margin-bottom:0.5rem;">
+        <span id="footerP1">Александр</span> &amp; <span id="footerP2">Екатерина</span>
+      </div>
+      <div style="font-size:0.95rem; margin-bottom:1.5rem;">Ждём вас с нетерпением!</div>
+      <div style="font-size:0.75rem; letter-spacing:0.15em; text-transform:uppercase; color:var(--accent);">
+        Создано на платформе свадебных приглашений
+      </div>
+    </footer>
+
+  </div>
+
+  <!-- STANDALONE AI WEDDING ASSISTANT FLOATING BUTTON -->
+  <div class="ai-agent-fab" onclick="toggleAiChat()">
+    <span>✨</span>
+    <span>ИИ-Ассистент</span>
+  </div>
+
+  <!-- AI AGENT CHAT WINDOW -->
+  <div class="ai-chat-window" id="aiChatWindow">
+    <div class="ai-chat-header">
+      <div style="display:flex; align-items:center; gap:0.4rem;">
+        <span>✨</span>
+        <span>Свадебный ИИ-Ассистент</span>
+      </div>
+      <button type="button" style="background:transparent; border:none; color:#d4af37; font-size:1.1rem; cursor:pointer;" onclick="toggleAiChat()">✕</button>
+    </div>
+
+    <div class="ai-chat-body" id="aiChatBody">
+      <p style="font-size:0.9rem; color:#4a5568; margin-bottom:0.5rem;">
+        Привет! Я ваш умный свадебный редактор. Помогу составить идеальные тексты:
+      </p>
+
+      <div class="ai-chip-suggestions">
+        <button type="button" class="ai-chip-btn" onclick="askAiPrompt('prologue')">💌 Трогательное обращение к родным</button>
+        <button type="button" class="ai-chip-btn" onclick="askAiPrompt('humor')">✨ Приглашение с легким юмором</button>
+        <button type="button" class="ai-chip-btn" onclick="askAiPrompt('dress')">👗 Изящный дресс-код в пастели</button>
+        <button type="button" class="ai-chip-btn" onclick="askAiPrompt('wishes')">🌸 О цветах и подарках без неловкости</button>
+      </div>
+
+      <div id="aiResponseBox" style="margin-top:1rem; display:none; background:#f7fafc; border-left:3px solid var(--accent); padding:0.85rem; font-size:0.9rem; line-height:1.5;"></div>
+    </div>
+
+    <div class="ai-input-bar">
+      <input type="text" class="rsvp-input" id="inpAiQuery" placeholder="Спросите ИИ-ассистента..." style="font-size:0.85rem !important; padding:0.5rem 0.75rem;" onkeydown="if(event.key==='Enter') sendCustomAiQuery()">
+      <button type="button" class="btn-action" style="margin:0; padding:0.5rem 0.9rem;" onclick="sendCustomAiQuery()">➤</button>
+    </div>
+  </div>
+
+  <!-- CABINET & OWNER ADMIN MODAL -->
+  <div class="modal-backdrop" id="cabinetModal">
+    <div class="modal-card">
+      <button type="button" class="modal-close-btn" onclick="closeUserCabinetModal()">✕</button>
+
+      <!-- AUTH VIEW (FOR NON-LOGGED IN USERS) -->
+      <div id="cabinetAuthView">
+        <h3 class="font-title" style="font-size:1.85rem; margin-bottom:0.5rem; text-align:center;">Личный Кабинет</h3>
+        <p style="font-size:0.85rem; color:#718096; text-align:center; margin-bottom:1.5rem;">
+          Вход для молодоженов и администратора
+        </p>
+
+        <div style="display:flex; border-bottom:1px solid #e2e8f0; margin-bottom:1.25rem;">
+          <button type="button" class="nav-btn active" id="tabBtnLogin" style="flex:1; justify-content:center; border-radius:0;" onclick="switchAuthTab('login')">Вход</button>
+          <button type="button" class="nav-btn" id="tabBtnRegister" style="flex:1; justify-content:center; border-radius:0;" onclick="switchAuthTab('reg')">Регистрация</button>
+        </div>
+
+        <form id="formLoginTab" onsubmit="event.preventDefault(); handleUserLogin();">
+          <div class="rsvp-form-group">
+            <label class="rsvp-label">Логин или телефон</label>
+            <input type="text" class="rsvp-input" id="authLoginInput" placeholder="vasskass или +79789981150" required>
+          </div>
+          <div class="rsvp-form-group">
+            <label class="rsvp-label">Пароль</label>
+            <input type="password" class="rsvp-input" id="authPassInput" placeholder="Ваш пароль" required>
+          </div>
+          <button type="submit" class="btn-action" style="width:100%; padding:0.85rem; margin:0.5rem 0 0 0;">
+            Войти в кабинет
+          </button>
+        </form>
+
+        <form id="formRegisterTab" style="display:none;" onsubmit="event.preventDefault(); handleUserRegister();">
+          <div class="rsvp-form-group">
+            <label class="rsvp-label">Ваше Имя</label>
+            <input type="text" class="rsvp-input" id="regNameInput" placeholder="Иван и Мария" required>
+          </div>
+          <div class="rsvp-form-group">
+            <label class="rsvp-label">Логин или Телефон</label>
+            <input type="text" class="rsvp-input" id="regLoginInput" placeholder="ivan_maria" required>
+          </div>
+          <div class="rsvp-form-group">
+            <label class="rsvp-label">Пароль</label>
+            <input type="password" class="rsvp-input" id="regPassInput" placeholder="Придумайте пароль" required>
+          </div>
+          <button type="submit" class="btn-action" style="width:100%; padding:0.85rem; margin:0.5rem 0 0 0;">
+            Зарегистрироваться
+          </button>
+        </form>
+      </div>
+
+      <!-- PROFILE & ADMIN VIEW (WHEN LOGGED IN) -->
+      <div id="cabinetProfileView" style="display:none;">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1.25rem;">
+          <div>
+            <h3 class="font-title" style="font-size:1.6rem;" id="userProfileName">Кабинет</h3>
+            <span class="badge-sub" style="margin:0;" id="userProfileBadge">Пользователь</span>
+          </div>
+          <button type="button" class="btn-action btn-outline" style="font-size:0.75rem; padding:0.4rem 0.8rem;" onclick="handleUserLogout()">
+            Выйти
+          </button>
+        </div>
+
+        <!-- RSVP RESPONSES TRACKER (VISIBLE TO ALL LOGGED IN USERS) -->
+        <div style="background:#f7fafc; border:1px solid #e2e8f0; border-radius:14px; padding:1.25rem; margin-bottom:1.5rem;">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.75rem;">
+            <div style="font-weight:700; font-size:0.95rem; color:#2d3748;">💌 Ответы гостей (RSVP)</div>
+            <button type="button" class="nav-btn" style="font-size:0.72rem; padding:0.2rem 0.5rem;" onclick="clearRsvpResponses()">Очистить</button>
+          </div>
+          <div id="rsvpResponsesListContainer" style="max-height:220px; overflow-y:auto; font-size:0.85rem;">
+            <!-- RENDERED BY SCRIPT -->
+          </div>
+        </div>
+
+        <!-- OWNER ADMIN PANEL -->
+        <div id="adminPanelInProfile" style="display:none; background:#fffaf0; border:1px solid #ecc94b; border-radius:14px; padding:1.25rem; margin-bottom:1.5rem;">
+          <div style="font-weight:700; font-size:0.95rem; color:#b7791f; margin-bottom:0.5rem;">
+            👑 Панель Главного Администратора
+          </div>
+          <p style="font-size:0.8rem; color:#744210; margin-bottom:1rem;">
+            Вы вошли как владелец платформы. Управление промокодами и платежами:
+          </p>
+
+          <div style="display:flex; gap:0.4rem; margin-bottom:1rem;">
+            <input type="text" class="rsvp-input" id="inpProfileNewPromo" placeholder="Новый промокод (например VIP2027)" style="padding:0.5rem 0.75rem; font-size:0.85rem;">
+            <button type="button" class="btn-action" style="margin:0; padding:0.5rem 0.9rem;" onclick="createProfilePromo()">Создать</button>
+          </div>
+
+          <div id="profilePromoListContainer" style="font-size:0.8rem; margin-bottom:1rem;">
+            <!-- ACTIVE PROMOS -->
+          </div>
+
+          <div class="rsvp-form-group" style="margin-bottom:0;">
+            <label class="rsvp-label" style="font-size:0.7rem;">Карта для приема оплаты PRO (Т-Банк):</label>
+            <div style="display:flex; gap:0.4rem;">
+              <input type="text" class="rsvp-input" id="inpProfileAdminCard" value="2200701041704252" style="padding:0.5rem 0.75rem; font-size:0.85rem;">
+              <button type="button" class="btn-action" style="margin:0; padding:0.5rem 0.9rem;" onclick="saveProfileAdminCard()">Сохранить</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- PROMO ACTIVATION FOR USERS -->
+        <div style="margin-top:1rem; border-top:1px solid #edf2f7; padding-top:1rem;">
+          <label class="rsvp-label">Активация PRO-тарифа по промокоду</label>
+          <div style="display:flex; gap:0.4rem;">
+            <input type="text" class="rsvp-input" id="inpProfilePromoInput" placeholder="Введите промокод (например LOVE100)" style="padding:0.5rem 0.75rem; font-size:0.85rem;">
+            <button type="button" class="btn-action" style="margin:0; padding:0.5rem 0.9rem;" onclick="applyProfilePromo()">Применить</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STUDIO / THEMES MODAL -->
+  <div class="modal-backdrop" id="studioModal">
+    <div class="modal-card">
+      <button type="button" class="modal-close-btn" onclick="closeStudio()">✕</button>
+      <h3 class="font-title" style="font-size:1.85rem; margin-bottom:1rem; text-align:center;">Оформление и Темы</h3>
+
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:0.75rem; margin-bottom:1.5rem;">
+        <button type="button" class="btn-action btn-outline" style="margin:0;" onclick="selectThemeWithCheck('gold')">Шёлковая классика</button>
+        <button type="button" class="btn-action btn-outline" style="margin:0;" onclick="selectThemeWithCheck('pearl')">Жемчужная классика</button>
+        <button type="button" class="btn-action btn-outline" style="margin:0;" onclick="selectThemeWithCheck('sage')">Лесной шёпот</button>
+        <button type="button" class="btn-action btn-outline" style="margin:0;" onclick="selectThemeWithCheck('marsala')">Багровый бархат (PRO)</button>
+        <button type="button" class="btn-action btn-outline" style="margin:0;" onclick="selectThemeWithCheck('midnight')">Чернильный индиго (PRO)</button>
+        <button type="button" class="btn-action btn-outline" style="margin:0;" onclick="selectThemeWithCheck('rose')">Пыльная роза</button>
+        <button type="button" class="btn-action btn-outline" style="margin:0;" onclick="selectThemeWithCheck('black')">Гламур Нуар (PRO)</button>
+      </div>
+
+      <div class="badge-sub">ШРИФТЫ</div>
+      <div style="display:flex; gap:0.4rem; flex-wrap:wrap; margin-bottom:1.5rem;">
+        <button type="button" class="nav-btn" onclick="setFont('serif')">Cormorant</button>
+        <button type="button" class="nav-btn" onclick="setFont('playfair')">Playfair</button>
+        <button type="button" class="nav-btn" onclick="setFont('prata')">Prata</button>
+        <button type="button" class="nav-btn" onclick="setFont('cinzel')">Cinzel (PRO)</button>
+        <button type="button" class="nav-btn" onclick="setFont('caveat')">Caveat</button>
+        <button type="button" class="nav-btn" onclick="setFont('modern')">Montserrat</button>
+      </div>
+
+      <button type="button" class="btn-action" style="width:100%; margin:0;" onclick="closeStudio()">Готово</button>
+    </div>
+  </div>
+
+  <!-- ADD BLOCK MODAL -->
+  <div class="modal-backdrop" id="addBlockModal">
+    <div class="modal-card">
+      <button type="button" class="modal-close-btn" onclick="closeAddBlockModal()">✕</button>
+      <h3 class="font-title" style="font-size:1.85rem; margin-bottom:1rem; text-align:center;">Добавить новый блок</h3>
+
+      <div style="display:flex; flex-direction:column; gap:0.75rem;">
+        <button type="button" class="btn-action btn-outline" onclick="insertNewBlock('quote')">💬 Цитата или девиз свадьбы</button>
+        <button type="button" class="btn-action btn-outline" onclick="insertNewBlock('faq')">❓ Вопросы и ответы (FAQ)</button>
+        <button type="button" class="btn-action btn-outline" onclick="insertNewBlock('customText')">📝 Произвольный текстовый блок</button>
+        <button type="button" class="btn-action btn-outline" onclick="insertNewBlock('hotel')">🏨 Проживание и отели для гостей</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- PRO UNLOCK MODAL -->
+  <div class="modal-backdrop" id="proUnlockModal">
+    <div class="modal-card" style="text-align:center;">
+      <button type="button" class="modal-close-btn" onclick="closeProModal()">✕</button>
+      <div style="font-size:2.5rem; margin-bottom:0.5rem;">👑</div>
+      <h3 class="font-title" style="font-size:1.85rem; margin-bottom:0.5rem;">Премиум Доступ PRO</h3>
+      <p style="font-size:0.95rem; color:#718096; margin-bottom:1.5rem;">
+        Откройте все 7 премиум-тем, эксклюзивные шрифты и видео-галерею всего за <strong>990 ₽ единоразово</strong> (вместо 2 990 ₽ у конкурентов)!
+      </p>
+
+      <div style="background:#f7fafc; border:1px solid #e2e8f0; border-radius:12px; padding:1.25rem; margin-bottom:1.5rem; text-align:left;">
+        <div style="font-size:0.75rem; font-weight:700; color:#4a5568; margin-bottom:0.25rem;">ОПЛАТА ЧЕРЕЗ Т-БАНК:</div>
+        <div style="font-family:'Montserrat',sans-serif; font-size:1.2rem; font-weight:600; color:#1a202c;" id="dispAdminCardInModal">
+          2200 7010 4170 4252
+        </div>
+      </div>
+
+      <div style="display:flex; gap:0.5rem; justify-content:center;">
+        <button type="button" class="btn-action" onclick="copyAdminPaymentCard()">Скопировать карту</button>
+        <button type="button" class="btn-action btn-outline" onclick="confirmPaymentSent()">Я оплатил</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- SHARE MODAL -->
+  <div class="modal-backdrop" id="shareModal">
+    <div class="modal-card" style="text-align:center;">
+      <button type="button" class="modal-close-btn" onclick="closeShareModal()">✕</button>
+      <h3 class="font-title" style="font-size:1.85rem; margin-bottom:1rem;">Поделиться приглашением</h3>
+      <p style="font-size:0.95rem; color:#718096; margin-bottom:1.5rem;">
+        Отправьте готовую ссылку вашим гостям в мессенджер:
+      </p>
+
+      <div style="display:flex; flex-direction:column; gap:0.75rem;">
+        <button type="button" class="btn-action" onclick="shareViaWhatsApp()">💬 Отправить в WhatsApp</button>
+        <button type="button" class="btn-action btn-outline" onclick="shareViaTelegram()">✈️ Отправить в Telegram</button>
+        <button type="button" class="btn-action btn-outline" onclick="copyInviteLink()">📋 Скопировать ссылку</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOAST NOTIFICATION -->
+  <div class="toast-popup" id="toast">
+    <span>Уведомление</span>
+  </div>
+
+
+  <script>
+
+  /* =========================================================
+     MUSEUM-GRADE WEDDING PLATFORM ENGINE (INVITEHUB REPLICA)
+     ========================================================= */
+
+  const STORAGE_KEY = 'wedding_persistent_v5';
+  const ADMIN_OFFICIAL_CARD = '2200701041704252';
+  const ADMIN_LOGINS = ['vasskass', '+79789981150', '79789981150'];
+  const ADMIN_PASSWORDS = ['kar10022006'];
+
+  let isBookOpened = false;
+  let isEditMode = true;
+  let isProUnlocked = false;
+  let isAdminLoggedIn = false;
+  let currentUser = null;
+  let activePromos = ['LOVE100', 'VIP2027'];
+  let registeredUsers = {};
+  let rsvpResponses = [];
+
+  let config = {
+    p1: 'Александр',
+    p2: 'Екатерина',
+    mono: 'А & Е',
+    date: '2027-06-19',
+    time: '16:30',
+    venue: 'Усадьба «Вилла Ротонда»',
+    address: 'Московская область, поселок Довиль, Приозерная ул., 1',
+    theme: 'gold',
+    font: 'serif',
+    card: '4276123456789012',
+    wa: '79991234567',
+    dressTitle: 'Black Tie Optional & Пастель',
+    dressDesc: 'Мы будем искренне признательны, если вы поддержите цветовую гамму нашей свадьбы в своих праздничных нарядах:',
+    dressColors: ['#f7e7ce', '#9caf88', '#dcae96', '#c5a059', '#2e5339'],
+    dressNames: ['Шампань', 'Шалфей', 'Пудра', 'Песок', 'Изумруд'],
+    timelineSteps: [
+      { t: '15:30', n: 'Сбор гостей & Welcome Drink 🥂', d: 'Приветственные коктейли, легкие закуски и живая музыка.' },
+      { t: '16:30', n: 'Свадебная церемония 💍', d: 'Трогательные клятвы, обмен кольцами и поздравления.' },
+      { t: '17:30', n: 'Праздничный банкет 🍽️', d: 'Гастрономический ужин, тосты и развлекательная программа.' },
+      { t: '20:00', n: 'Свадебный торт & Первый танец 🎂', d: 'Романтический танец молодоженов и сладкий сюрприз.' },
+      { t: '22:30', n: 'Яркий финал ✨', d: 'Бенгальские огни, теплые объятия и праздничный салют.' }
+    ]
+  };
+
+  /* INITIALIZATION */
+  window.addEventListener('DOMContentLoaded', () => {
+    loadSavedState();
+    renderTimelineDOM();
+    renderDressPaletteDOM();
+    startCountdown();
+    renderRsvpResponses();
+    renderProfilePromoList();
+    autoElevateIfOwner();
+  });
+
+  function loadSavedState() {
+    try {
+      const savedConfig = localStorage.getItem(STORAGE_KEY + '_cfg');
+      if (savedConfig) Object.assign(config, JSON.parse(savedConfig));
+
+      const savedUsers = localStorage.getItem('wedding_users_db');
+      if (savedUsers) registeredUsers = JSON.parse(savedUsers);
+
+      const savedUser = localStorage.getItem('wedding_current_user');
+      if (savedUser) currentUser = JSON.parse(savedUser);
+
+      const savedPromos = localStorage.getItem('wedding_active_promos');
+      if (savedPromos) activePromos = JSON.parse(savedPromos);
+
+      const savedRsvp = localStorage.getItem('wedding_rsvp_responses');
+      if (savedRsvp) rsvpResponses = JSON.parse(savedRsvp);
+
+      if (localStorage.getItem('wedding_pro_unlocked') === 'true') isProUnlocked = true;
+      if (localStorage.getItem('wedding_is_admin') === 'true') isAdminLoggedIn = true;
+
+      document.body.setAttribute('data-theme', config.theme);
+      document.body.setAttribute('data-font', config.font);
+    } catch (e) {
+      console.warn('Error loading local state:', e);
+    }
+  }
+
+  function saveConfig() {
+    try {
+      localStorage.setItem(STORAGE_KEY + '_cfg', JSON.stringify(config));
+    } catch (e) {}
+  }
+
+  function autoElevateIfOwner() {
+    if (currentUser) {
+      const cleanLogin = (currentUser.login || '').replace(/\s+/g, '').toLowerCase();
+      if (ADMIN_LOGINS.includes(cleanLogin)) {
+        currentUser.isAdmin = true;
+        isAdminLoggedIn = true;
+        isProUnlocked = true;
+      }
+    }
+  }
+
+  /* 3D MAGICAL STORYBOOK INTRO ANIMATION */
+  function animateOpenBookIntro() {
+    const overlay = document.getElementById('introBookOverlay');
+    if (!overlay) return;
+
+    if (!isBookOpened) {
+      isBookOpened = true;
+      overlay.classList.add('opened');
+      playRomanticChime();
+      toast('📖 Сказка оживает... Страницы перелистываются!');
+
+      setTimeout(() => {
+        overlay.classList.add('hidden');
+        const hero = document.getElementById('heroSec');
+        if (hero) hero.scrollIntoView({ behavior: 'smooth' });
+      }, 1400);
+    } else {
+      overlay.classList.add('hidden');
+    }
+  }
+
+  function showIntroBook() {
+    const overlay = document.getElementById('introBookOverlay');
+    if (!overlay) return;
+    isBookOpened = false;
+    overlay.classList.remove('opened');
+    overlay.classList.remove('hidden');
+    toast('✨ Свадебная книга открыта снова.');
+  }
+
+  /* WEBAUDIO ROMANTIC SOUND EFFECT */
+  let audioCtx = null;
+  function playRomanticChime() {
+    try {
+      if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      if (audioCtx.state === 'suspended') audioCtx.resume();
+
+      const freqs = [523.25, 659.25, 783.99, 1046.50];
+      freqs.forEach((f, idx) => {
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(f, audioCtx.currentTime + idx * 0.12);
+        gain.gain.setValueAtTime(0.001, audioCtx.currentTime + idx * 0.12);
+        gain.gain.exponentialRampToValueAtTime(0.15, audioCtx.currentTime + idx * 0.12 + 0.05);
+        gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + idx * 0.12 + 1.2);
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start(audioCtx.currentTime + idx * 0.12);
+        osc.stop(audioCtx.currentTime + idx * 0.12 + 1.3);
+      });
+    } catch (e) {}
+  }
+
+  let isMusicPlaying = false;
+  let musicInterval = null;
+  function toggleWeddingMusic() {
+    isMusicPlaying = !isMusicPlaying;
+    const waves = document.getElementById('musicWaves');
+    if (isMusicPlaying) {
+      if (waves) waves.style.display = 'inline-flex';
+      playRomanticChime();
+      musicInterval = setInterval(playRomanticChime, 7000);
+      toast('🎵 Романтическая мелодия включена');
+    } else {
+      if (waves) waves.style.display = 'none';
+      if (musicInterval) clearInterval(musicInterval);
+      toast('Музыка приостановлена');
+    }
+  }
+
+  /* COUNTDOWN TIMER ENGINE */
+  let countdownTimer = null;
+  function startCountdown() {
+    if (countdownTimer) clearInterval(countdownTimer);
+    function tick() {
+      const target = new Date((config.date || '2027-06-19') + 'T' + (config.time || '16:30') + ':00').getTime();
+      const diff = target - new Date().getTime();
+      const elD = document.getElementById('cdDays');
+      const elH = document.getElementById('cdHours');
+      const elM = document.getElementById('cdMinutes');
+      const elS = document.getElementById('cdSeconds');
+
+      if (diff <= 0) {
+        if (elD) elD.textContent = '00';
+        if (elH) elH.textContent = '00';
+        if (elM) elM.textContent = '00';
+        if (elS) elS.textContent = '00';
+        return;
+      }
+
+      const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const h = Math.floor((diff / (1000 * 60 * 60)) % 24);
+      const m = Math.floor((diff / (1000 * 60)) % 60);
+      const s = Math.floor((diff / 1000) % 60);
+
+      if (elD) elD.textContent = String(d).padStart(2, '0');
+      if (elH) elH.textContent = String(h).padStart(2, '0');
+      if (elM) elM.textContent = String(m).padStart(2, '0');
+      if (elS) elS.textContent = String(s).padStart(2, '0');
+    }
+    tick();
+    countdownTimer = setInterval(tick, 1000);
+  }
+
+  /* RENDER TIMELINE DOM */
+  function renderTimelineDOM() {
+    const cont = document.getElementById('timelineListContainer');
+    if (!cont) return;
+    cont.innerHTML = '';
+    (config.timelineSteps || []).forEach((step, idx) => {
+      const item = document.createElement('div');
+      item.className = 'timeline-item';
+      item.innerHTML = `
+        <div class="timeline-dot">${idx + 1}</div>
+        <div class="timeline-time" contenteditable="true" onblur="updateTimelineStep(${idx}, 't', this.textContent)">${step.t}</div>
+        <div class="timeline-title font-title" contenteditable="true" onblur="updateTimelineStep(${idx}, 'n', this.textContent)">${step.n}</div>
+        <div class="timeline-desc" contenteditable="true" onblur="updateTimelineStep(${idx}, 'd', this.textContent)">${step.d}</div>
+      `;
+      cont.appendChild(item);
+    });
+  }
+
+  function updateTimelineStep(index, field, val) {
+    if (config.timelineSteps[index]) {
+      config.timelineSteps[index][field] = val.trim();
+      saveConfig();
+    }
+  }
+
+  /* RENDER DRESS CODE PALETTE DOM */
+  function renderDressPaletteDOM() {
+    const cont = document.getElementById('dispDressPalette');
+    if (!cont) return;
+    cont.innerHTML = '';
+    (config.dressColors || []).forEach((col, idx) => {
+      const name = (config.dressNames && config.dressNames[idx]) ? config.dressNames[idx] : '';
+      const dot = document.createElement('div');
+      dot.className = 'palette-circle-item';
+      dot.innerHTML = `
+        <div class="color-swatch-circle" style="background:${col};" title="${name}"></div>
+        <div class="palette-circle-label" contenteditable="true" onblur="updateDressColorName(${idx}, this.textContent)">${name}</div>
+      `;
+      cont.appendChild(dot);
+    });
+  }
+
+  function updateDressColorName(idx, name) {
+    if (!config.dressNames) config.dressNames = [];
+    config.dressNames[idx] = name.trim();
+    saveConfig();
+  }
+
+  /* ON-PAGE VISUAL BLOCK MANAGEMENT */
+  function toggleEditMode() {
+    isEditMode = !isEditMode;
+    document.body.classList.toggle('edit-mode', isEditMode);
+    const txt = document.getElementById('txtEditMode');
+    if (txt) txt.textContent = isEditMode ? 'Правка' : 'Просмотр';
+    toast(isEditMode ? '✏️ Режим правки включен: нажимайте на тексты для редактирования' : '👁️ Режим предпросмотра включен');
+  }
+
+  function moveBlockUp(btn) {
+    const card = btn.closest('.card-block');
+    if (!card) return;
+    const prev = card.previousElementSibling;
+    if (prev && prev.classList.contains('card-block')) {
+      card.parentNode.insertBefore(card, prev);
+      toast('↑ Блок поднят выше');
+    }
+  }
+
+  function moveBlockDown(btn) {
+    const card = btn.closest('.card-block');
+    if (!card) return;
+    const next = card.nextElementSibling;
+    if (next && next.classList.contains('card-block')) {
+      card.parentNode.insertBefore(next, card);
+      toast('↓ Блок опущен ниже');
+    }
+  }
+
+  function deleteBlockPermanently(btn) {
+    const card = btn.closest('.card-block');
+    if (!card) return;
+    card.remove();
+    toast('🗑 Блок удален с сайта');
+  }
+
+  function toggleBlockColorPop(btn) {
+    const toolbar = btn.closest('.block-toolbar');
+    if (!toolbar) return;
+    const pop = toolbar.querySelector('.block-color-picker-pop');
+    if (pop) pop.classList.toggle('active');
+  }
+
+  function setBlockBg(dot, color) {
+    const card = dot.closest('.card-block');
+    if (!card) return;
+    card.style.backgroundColor = color;
+    card.style.borderColor = color === '#0a0f1d' ? 'rgba(255,255,255,0.2)' : 'rgba(197, 160, 89, 0.25)';
+    card.style.color = (color === '#0a0f1d' || color === '#121214') ? '#ffffff' : 'inherit';
+    const pop = dot.closest('.block-color-picker-pop');
+    if (pop) pop.classList.remove('active');
+    toast('🎨 Цвет блока обновлен');
+  }
+
+  function openAddBlockModal() { document.getElementById('addBlockModal').classList.add('active'); }
+  function closeAddBlockModal() { document.getElementById('addBlockModal').classList.remove('active'); }
+
+  function insertNewBlock(type) {
+    closeAddBlockModal();
+    const cont = document.getElementById('contentSection');
+    const newCard = document.createElement('section');
+    newCard.className = 'card-block';
+
+    let contentHtml = '';
+    if (type === 'quote') {
+      contentHtml = `
+        <div class="badge-sub">МУДРОСТЬ ЛЮБВИ</div>
+        <h2 class="font-title" style="font-size:2rem; font-style:italic;" contenteditable="true">«Любовь — это когда счастье другого человека становится важнее твоего собственного.»</h2>
+        <div style="font-size:0.9rem; color:var(--text-muted); margin-top:0.5rem;" contenteditable="true">— Роберт Хайнлайн</div>
+      `;
+    } else if (type === 'faq') {
+      contentHtml = `
+        <div class="badge-sub">ВОПРОСЫ И ОТВЕТЫ</div>
+        <h2 class="font-title" style="font-size:2rem; margin-bottom:1rem;" contenteditable="true">Важные детали</h2>
+        <div style="text-align:left; line-height:1.6;" contenteditable="true">
+          <strong>Можно ли приехать на автомобиле?</strong><br>Да, на территории усадьбы предусмотрена охраняемая парковка.<br><br>
+          <strong>Будет ли ведущий и фотограф?</strong><br>Да, профессиональная съемка на протяжении всего вечера.
+        </div>
+      `;
+    } else if (type === 'hotel') {
+      contentHtml = `
+        <div class="badge-sub">ПРОЖИВАНИЕ</div>
+        <h2 class="font-title" style="font-size:2rem; margin-bottom:0.5rem;" contenteditable="true">Отели рядом</h2>
+        <p style="font-size:1rem; color:var(--text-muted);" contenteditable="true">Для иногородних гостей мы забронировали номера в отеле «Deauville Spa Hotel» со скидкой по коду WEDDING2027.</p>
+      `;
+    } else {
+      contentHtml = `
+        <div class="badge-sub">ДОПОЛНИТЕЛЬНО</div>
+        <h2 class="font-title" style="font-size:2rem; margin-bottom:0.5rem;" contenteditable="true">Заголовок нового блока</h2>
+        <p style="font-size:1rem; color:var(--text-muted);" contenteditable="true">Нажмите на этот текст, чтобы написать любую информацию для ваших гостей.</p>
+      `;
+    }
+
+    newCard.innerHTML = `
+      <div class="block-toolbar">
+        <button type="button" class="toolbar-btn" onclick="moveBlockUp(this)">▲</button>
+        <button type="button" class="toolbar-btn" onclick="moveBlockDown(this)">▼</button>
+        <button type="button" class="toolbar-btn" onclick="toggleBlockColorPop(this)">🎨</button>
+        <button type="button" class="toolbar-btn btn-delete" onclick="deleteBlockPermanently(this)">🗑</button>
+        <div class="block-color-picker-pop">
+          <div class="b-col-dot" style="background:#ffffff;" onclick="setBlockBg(this, '#ffffff')"></div>
+          <div class="b-col-dot" style="background:#fcfbf9;" onclick="setBlockBg(this, '#fcfbf9')"></div>
+          <div class="b-col-dot" style="background:#f6f5f0;" onclick="setBlockBg(this, '#f6f5f0')"></div>
+          <div class="b-col-dot" style="background:#faf4f2;" onclick="setBlockBg(this, '#faf4f2')"></div>
+          <div class="b-col-dot" style="background:#0a0f1d;" onclick="setBlockBg(this, '#0a0f1d')"></div>
+        </div>
+      </div>
+      ${contentHtml}
+    `;
+
+    const addBtnBox = document.getElementById('addBlockBtnContainer');
+    cont.insertBefore(newCard, addBtnBox);
+    toast('✓ Новый блок добавлен на сайт!');
+  }
+
+  function saveInlineEdits() {
+    const p1 = document.getElementById('dispP1');
+    const p2 = document.getElementById('dispP2');
+    if (p1 && p2) {
+      config.p1 = p1.textContent.trim();
+      config.p2 = p2.textContent.trim();
+      const fp1 = document.getElementById('footerP1');
+      const fp2 = document.getElementById('footerP2');
+      if (fp1) fp1.textContent = config.p1;
+      if (fp2) fp2.textContent = config.p2;
+      const bNames = document.getElementById('dispBookNames');
+      if (bNames) bNames.textContent = `${config.p1} & ${config.p2}`;
+      saveConfig();
+    }
+  }
+
+  /* STANDALONE WEDDING AI ASSISTANT */
+  function toggleAiChat() {
+    const win = document.getElementById('aiChatWindow');
+    if (win) win.classList.toggle('active');
+  }
+
+  function askAiPrompt(topic) {
+    const box = document.getElementById('aiResponseBox');
+    if (!box) return;
+    box.style.display = 'block';
+
+    let suggestion = '';
+    if (topic === 'prologue') {
+      suggestion = '«Дорогие родные и самые близкие! Наша любовь началась с одной улыбки, а теперь перерастает в семью. Для нас невероятно важно, чтобы этот день вы провели рядом с нами, согревая нас своим теплом и разделяя нашу радость!»';
+    } else if (topic === 'humor') {
+      suggestion = '«Мы долго думали, советовались и наконец решили: пора официально узаконить этот романтический переполох! Будет вкусно, весело, трогательно и до утра. Отговорки не принимаются — явка строго обязательна!»';
+    } else if (topic === 'dress') {
+      suggestion = '«Будем счастливы видеть вас в нарядах спокойной благородной палитры: пудровые, оливковые, бежевые и золотые оттенки. Девушек просим воздержаться от белого цвета, а мужчинам отлично подойдут светлые костюмы.»';
+    } else if (topic === 'wishes') {
+      suggestion = '«Не тратьте силы на букеты цветов: они завянут, пока мы будем лететь к океану. Лучше подарите нам бутылку вашего любимого вина или книгу, которая согреет наши уютные семейные вечера!»';
+    }
+
+    box.innerHTML = `
+      <div style="font-weight:600; color:var(--accent-dark); margin-bottom:0.35rem;">✨ Предложение ИИ:</div>
+      <div style="font-style:italic; margin-bottom:0.75rem;">${suggestion}</div>
+      <button type="button" class="btn-action" style="font-size:0.75rem; padding:0.4rem 0.8rem; margin:0;" onclick="applyAiSuggestion('${topic}')">
+        ✓ Применить этот текст
+      </button>
+    `;
+  }
+
+  function applyAiSuggestion(topic) {
+    if (topic === 'prologue') {
+      const p = document.querySelector('#secPrologue p');
+      if (p) {
+        p.textContent = 'Наша любовь началась с одной улыбки, а теперь перерастает в семью. Для нас невероятно важно, чтобы этот день вы провели рядом с нами, согревая нас своим теплом и разделяя нашу радость!';
+        toast('✓ Текст пролога обновлен!');
+      }
+    } else if (topic === 'dress') {
+      const d = document.getElementById('dispDressDesc');
+      if (d) {
+        d.textContent = 'Будем счастливы видеть вас в нарядах благородной палитры: пудровые, оливковые, бежевые и золотые оттенки.';
+        toast('✓ Описание дресс-кода обновлено!');
+      }
+    } else if (topic === 'wishes') {
+      const w = document.querySelector('#secWishes p');
+      if (w) {
+        w.textContent = 'Не тратьте силы на букеты цветов: они завянут, пока мы летим к океану. Лучше подарите бутылку вашего любимого вина или книгу для домашней библиотеки!';
+        toast('✓ Блок пожеланий обновлен!');
+      }
+    }
+  }
+
+  function sendCustomAiQuery() {
+    const inp = document.getElementById('inpAiQuery');
+    if (!inp || !inp.value.trim()) return;
+    const query = inp.value.trim();
+    inp.value = '';
+
+    const box = document.getElementById('aiResponseBox');
+    if (!box) return;
+    box.style.display = 'block';
+    box.innerHTML = `
+      <div style="font-weight:600; color:var(--accent-dark); margin-bottom:0.35rem;">✨ Ответ ИИ:</div>
+      <div>«Для запроса <strong>"${query}"</strong> рекомендуем сделать акцент на теплой атмосфере, искренности и персональном обращении к каждому гостю.»</div>
+    `;
+  }
+
+  /* RSVP RECORDING & MANAGEMENT */
+  function sendRsvp(e) {
+    e.preventDefault();
+    const nameInput = document.getElementById('rsvpName');
+    const statusRadio = document.querySelector('input[name="rsvpStatus"]:checked');
+    const foodRadio = document.querySelector('input[name="rsvpFood"]:checked');
+    const drinkInput = document.getElementById('rsvpDrink');
+    const transferRadio = document.querySelector('input[name="rsvpTransfer"]:checked');
+    const trackInput = document.getElementById('rsvpTrack');
+
+    const name = nameInput ? nameInput.value.trim() : 'Гость';
+    const status = statusRadio ? statusRadio.value : 'Обязательно буду';
+    const food = foodRadio ? foodRadio.value : 'Мясо';
+    const drink = drinkInput ? drinkInput.value.trim() : 'На выбор';
+    const transfer = transferRadio ? transferRadio.value : 'Самостоятельно';
+    const track = trackInput ? trackInput.value.trim() : '';
+
+    recordRsvpResponse(name, status, food, drink, transfer, track);
+    toast('✓ Спасибо! Ваш ответ успешно сохранён.');
+
+    if (config.wa) {
+      const msg = `💌 *Ответ на свадьбу:*\nГость: ${name}\nСтатус: ${status}\nМеню: ${food}\nНапитки: ${drink}\nТрансфер: ${transfer}` + (track ? `\nТрек/Пожелание: ${track}` : '');
+      const url = `https://wa.me/${config.wa.replace(/\D/g, '')}?text=${encodeURIComponent(msg)}`;
+      window.open(url, '_blank');
+    }
+  }
+
+  function recordRsvpResponse(name, status, food, drink, transfer, track) {
+    const entry = {
+      id: Date.now(),
+      name: name,
+      status: status,
+      food: food,
+      drink: drink,
+      transfer: transfer,
+      track: track,
+      time: new Date().toLocaleDateString('ru-RU')
+    };
+    rsvpResponses.push(entry);
+    try {
+      localStorage.setItem('wedding_rsvp_responses', JSON.stringify(rsvpResponses));
+    } catch (e) {}
+    renderRsvpResponses();
+  }
+
+  function renderRsvpResponses() {
+    const cont = document.getElementById('rsvpResponsesListContainer');
+    if (!cont) return;
+    if (rsvpResponses.length === 0) {
+      cont.innerHTML = '<div style="color:#a0aec0; text-align:center; padding:1rem;">Пока нет ответов от гостей.</div>';
+      return;
+    }
+    let html = '<div style="display:flex; flex-direction:column; gap:0.5rem;">';
+    rsvpResponses.forEach((r, idx) => {
+      html += `
+        <div style="background:#ffffff; border:1px solid #e2e8f0; border-radius:8px; padding:0.6rem 0.8rem;">
+          <div style="font-weight:600; color:#2d3748;">${idx + 1}. ${r.name} · <span style="color:var(--accent);">${r.status}</span></div>
+          <div style="font-size:0.75rem; color:#718096; margin-top:2px;">
+            Меню: ${r.food} | Напитки: ${r.drink || '—'} | Трансфер: ${r.transfer}
+          </div>
+        </div>
+      `;
+    });
+    html += '</div>';
+    cont.innerHTML = html;
+  }
+
+  function clearRsvpResponses() {
+    if (confirm('Очистить все сохраненные ответы гостей?')) {
+      rsvpResponses = [];
+      localStorage.removeItem('wedding_rsvp_responses');
+      renderRsvpResponses();
+      toast('Список ответов очищен.');
+    }
+  }
+
+  /* USER CABINET & OWNER ADMIN AUTHENTICATION */
+  function openUserCabinetModal() {
+    const m = document.getElementById('cabinetModal');
+    if (!m) return;
+    m.classList.add('active');
+    renderCabinetView();
+  }
+
+  function closeUserCabinetModal() {
+    const m = document.getElementById('cabinetModal');
+    if (m) m.classList.remove('active');
+  }
+
+  function switchAuthTab(tab) {
+    const btnL = document.getElementById('tabBtnLogin');
+    const btnR = document.getElementById('tabBtnRegister');
+    const formL = document.getElementById('formLoginTab');
+    const formR = document.getElementById('formRegisterTab');
+    if (tab === 'login') {
+      if (btnL) btnL.classList.add('active');
+      if (btnR) btnR.classList.remove('active');
+      if (formL) formL.style.display = 'block';
+      if (formR) formR.style.display = 'none';
+    } else {
+      if (btnL) btnL.classList.remove('active');
+      if (btnR) btnR.classList.add('active');
+      if (formL) formL.style.display = 'none';
+      if (formR) formR.style.display = 'block';
+    }
+  }
+
+  function handleUserLogin() {
+    const loginInp = document.getElementById('authLoginInput');
+    const passInp = document.getElementById('authPassInput');
+    const login = (loginInp ? loginInp.value.trim() : '').toLowerCase().replace(/\s+/g, '');
+    const pass = passInp ? passInp.value.trim() : '';
+
+    if (!login || !pass) { toast('Введите логин и пароль!'); return; }
+
+    const isOwner = ADMIN_LOGINS.includes(login) && ADMIN_PASSWORDS.includes(pass);
+    if (isOwner) {
+      currentUser = { login: 'vasskass', name: 'vasskass (Владелец)', isAdmin: true };
+      isAdminLoggedIn = true;
+      isProUnlocked = true;
+      localStorage.setItem('wedding_is_admin', 'true');
+      localStorage.setItem('wedding_pro_unlocked', 'true');
+      toast('👑 Добро пожаловать, Главный Администратор!');
+    } else if (registeredUsers[login] && registeredUsers[login].pass === pass) {
+      currentUser = { login: login, name: registeredUsers[login].name, isAdmin: false };
+      toast('✓ Добро пожаловать, ' + currentUser.name + '!');
+    } else {
+      toast('Неверный логин или пароль!');
+      return;
+    }
+
+    localStorage.setItem('wedding_current_user', JSON.stringify(currentUser));
+    renderCabinetView();
+  }
+
+  function handleUserRegister() {
+    const name = document.getElementById('regNameInput').value.trim();
+    const login = document.getElementById('regLoginInput').value.trim().toLowerCase().replace(/\s+/g, '');
+    const pass = document.getElementById('regPassInput').value.trim();
+
+    if (!name || !login || !pass) { toast('Заполните все поля регистрации!'); return; }
+
+    registeredUsers[login] = { name: name, pass: pass, isAdmin: false };
+    localStorage.setItem('wedding_users_db', JSON.stringify(registeredUsers));
+
+    currentUser = { login: login, name: name, isAdmin: false };
+    localStorage.setItem('wedding_current_user', JSON.stringify(currentUser));
+    toast('✓ Регистрация успешна! Добро пожаловать.');
+    renderCabinetView();
+  }
+
+  function handleUserLogout() {
+    currentUser = null;
+    isAdminLoggedIn = false;
+    localStorage.removeItem('wedding_current_user');
+    localStorage.removeItem('wedding_is_admin');
+    toast('Вы вышли из личного кабинета.');
+    renderCabinetView();
+  }
+
+  function renderCabinetView() {
+    const authView = document.getElementById('cabinetAuthView');
+    const profView = document.getElementById('cabinetProfileView');
+    const adminBox = document.getElementById('adminPanelInProfile');
+
+    if (!currentUser) {
+      if (authView) authView.style.display = 'block';
+      if (profView) profView.style.display = 'none';
+    } else {
+      if (authView) authView.style.display = 'none';
+      if (profView) profView.style.display = 'block';
+      const uName = document.getElementById('userProfileName');
+      const uBadge = document.getElementById('userProfileBadge');
+      if (uName) uName.textContent = currentUser.name;
+      if (uBadge) {
+        uBadge.textContent = currentUser.isAdmin ? '👑 Главный Администратор' : 'Молодожёны';
+        uBadge.style.color = currentUser.isAdmin ? '#d69e2e' : 'var(--accent)';
+      }
+      if (adminBox) adminBox.style.display = currentUser.isAdmin ? 'block' : 'none';
+    }
+  }
+
+  /* PROMO CODES ENGINE */
+  function applyProfilePromo() {
+    const inp = document.getElementById('inpProfilePromoInput');
+    const code = inp ? inp.value.trim().toUpperCase() : '';
+    if (activePromos.includes(code)) {
+      isProUnlocked = true;
+      localStorage.setItem('wedding_pro_unlocked', 'true');
+      toast('🎉 Промокод ' + code + ' активирован! Все PRO-шаблоны открыты навсегда.');
+      if (inp) inp.value = '';
+    } else {
+      toast('Неверный промокод.');
+    }
+  }
+
+  function createProfilePromo() {
+    const inp = document.getElementById('inpProfileNewPromo');
+    const code = inp ? inp.value.trim().toUpperCase() : '';
+    if (!code) { toast('Введите название промокода!'); return; }
+    if (!activePromos.includes(code)) {
+      activePromos.push(code);
+      localStorage.setItem('wedding_active_promos', JSON.stringify(activePromos));
+      toast('✓ Промокод ' + code + ' успешно создан!');
+      if (inp) inp.value = '';
+      renderProfilePromoList();
+    } else {
+      toast('Такой промокод уже существует.');
+    }
+  }
+
+  function deletePromo(code) {
+    activePromos = activePromos.filter(c => c !== code);
+    localStorage.setItem('wedding_active_promos', JSON.stringify(activePromos));
+    renderProfilePromoList();
+    toast('Промокод удален.');
+  }
+
+  function renderProfilePromoList() {
+    const cont = document.getElementById('profilePromoListContainer');
+    if (!cont) return;
+    let html = '<strong>Действующие промокоды:</strong><br>';
+    activePromos.forEach(p => {
+      html += `<span style="display:inline-flex; align-items:center; gap:4px; background:#edf2f7; border-radius:6px; padding:2px 6px; margin:2px 4px 2px 0;">
+        <code>${p}</code>
+        <button type="button" style="border:none; background:transparent; cursor:pointer; color:#e53e3e; font-size:10px;" onclick="deletePromo('${p}')">✕</button>
+      </span>`;
+    });
+    cont.innerHTML = html;
+  }
+
+  function saveProfileAdminCard() {
+    const inp = document.getElementById('inpProfileAdminCard');
+    const val = inp ? inp.value.trim() : '';
+    localStorage.setItem('wedding_admin_card', val);
+    toast('✓ Карта для приема оплаты PRO сохранена!');
+  }
+
+  /* THEMES & FONTS MODAL */
+  function openStudio() { document.getElementById('studioModal').classList.add('active'); }
+  function closeStudio() { document.getElementById('studioModal').classList.remove('active'); }
+
+  function selectThemeWithCheck(th) {
+    const proThemes = ['marsala', 'midnight', 'black'];
+    if (proThemes.includes(th) && !isProUnlocked && !isAdminLoggedIn) {
+      closeStudio();
+      openProModal();
+      return;
+    }
+    config.theme = th;
+    document.body.setAttribute('data-theme', th);
+    saveConfig();
+    toast('✓ Тема оформления обновлена!');
+  }
+
+  function setFont(f) {
+    const proFonts = ['cinzel'];
+    if (proFonts.includes(f) && !isProUnlocked && !isAdminLoggedIn) {
+      closeStudio();
+      openProModal();
+      return;
+    }
+    config.font = f;
+    document.body.setAttribute('data-font', f);
+    saveConfig();
+    toast('✓ Шрифт обновлен!');
+  }
+
+  /* PRO UNLOCK MODAL */
+  function openProModal() {
+    const m = document.getElementById('proUnlockModal');
+    if (m) {
+      const disp = document.getElementById('dispAdminCardInModal');
+      const c = localStorage.getItem('wedding_admin_card') || ADMIN_OFFICIAL_CARD;
+      if (disp) disp.textContent = c;
+      m.classList.add('active');
+    }
+  }
+
+  function closeProModal() {
+    const m = document.getElementById('proUnlockModal');
+    if (m) m.classList.remove('active');
+  }
+
+  function copyAdminPaymentCard() {
+    const c = localStorage.getItem('wedding_admin_card') || ADMIN_OFFICIAL_CARD;
+    if (navigator.clipboard) navigator.clipboard.writeText(c);
+    toast('✓ Карта для оплаты PRO скопирована!');
+  }
+
+  function confirmPaymentSent() {
+    closeProModal();
+    toast('Спасибо за оплату! Мы активируем PRO после проверки платежа.');
+  }
+
+  /* UTILITY ACTIONS */
+  function copyCard() {
+    const c = config.card || '4276123456789012';
+    if (navigator.clipboard) navigator.clipboard.writeText(c);
+    toast('✓ Номер карты молодожёнов скопирован!');
+  }
+
+  function downloadIcs() {
+    const start = (config.date || '2027-06-19').replace(/-/g, '') + 'T' + (config.time || '16:30').replace(':', '') + '00';
+    const ics = `BEGIN:VCALENDAR\r\nVERSION:2.0\r\nBEGIN:VEVENT\r\nSUMMARY:Свадьба ${config.p1} и ${config.p2}\r\nLOCATION:${config.venue}\r\nDTSTART:${start}\r\nDTEND:${start}\r\nEND:VEVENT\r\nEND:VCALENDAR`;
+    const blob = new Blob([ics], { type: 'text/calendar;charset=utf-8' });
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = 'wedding.ics';
+    a.click();
+    toast('✓ Файл календаря (.ics) скачан!');
+  }
+
+  function addToGoogleCalendar() {
+    const start = (config.date || '2027-06-19').replace(/-/g, '') + 'T' + (config.time || '16:30').replace(':', '') + '00';
+    const title = encodeURIComponent(`Свадьба ${config.p1} и ${config.p2}`);
+    const loc = encodeURIComponent(config.address || config.venue);
+    const url = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${title}&dates=${start}/${start}&location=${loc}`;
+    window.open(url, '_blank');
+  }
+
+  function openShareModal() { document.getElementById('shareModal').classList.add('active'); }
+  function closeShareModal() { document.getElementById('shareModal').classList.remove('active'); }
+
+  function copyInviteLink() {
+    if (navigator.clipboard) navigator.clipboard.writeText(window.location.href);
+    toast('✓ Ссылка на приглашение скопирована!');
+    closeShareModal();
+  }
+
+  function shareViaWhatsApp() {
+    const text = encodeURIComponent(`Приглашаем вас на нашу свадьбу: ${window.location.href}`);
+    window.open(`https://wa.me/?text=${text}`, '_blank');
+    closeShareModal();
+  }
+
+  function shareViaTelegram() {
+    const text = encodeURIComponent(`Приглашаем вас на нашу свадьбу!`);
+    window.open(`https://t.me/share/url?url=${encodeURIComponent(window.location.href)}&text=${text}`, '_blank');
+    closeShareModal();
+  }
+
+  function toast(msg) {
+    const t = document.getElementById('toast');
+    if (!t) return;
+    t.querySelector('span').textContent = msg;
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 3000);
+  }
+
+  </script>
+</body>
+</html>
