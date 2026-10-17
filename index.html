@@ -1,0 +1,1528 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>VASSKASS • FLOW v6</title>
+    <style>
+        :root {
+            --cherry: #690627;
+            --cherry-dark: #4a041c;
+            --salad: #bdd999;
+            --salad-dim: rgba(189, 217, 153, 0.15);
+            --bg-app: #550520; /* Deep rich cherry background for the app */
+            --card-bg: #690627; /* Matching card background */
+            --card-border: #851336;
+            --cream: #f4f1ea;
+            --text-muted: #d4b2be;
+            --danger: #ff6b6b;
+            --warning: #f1c40f;
+            --water: #5dade2;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background-color: var(--bg-app);
+            color: var(--cream);
+            padding-bottom: 95px;
+            max-width: 480px;
+            margin: 0 auto;
+            min-height: 100vh;
+        }
+
+        /* SPLASH SCREEN */
+        #splashScreen {
+            position: fixed;
+            inset: 0;
+            background-color: var(--cherry-dark);
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+            text-align: center;
+            transition: opacity 0.5s ease, visibility 0.5s ease;
+        }
+
+        #splashScreen.fade-out {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .splash-logo {
+            font-size: 3.4rem;
+            font-weight: 900;
+            letter-spacing: 2px;
+            color: var(--salad);
+            line-height: 1;
+            margin-bottom: 24px;
+            text-transform: uppercase;
+        }
+
+        .splash-quote {
+            font-size: 1.1rem;
+            color: var(--cream);
+            font-weight: 500;
+            max-width: 310px;
+            line-height: 1.5;
+            border-top: 1px solid rgba(189, 217, 153, 0.4);
+            padding-top: 16px;
+        }
+
+        /* HEADER */
+        header {
+            padding: 18px 16px 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--card-border);
+            position: sticky;
+            top: 0;
+            background: rgba(85, 5, 32, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 50;
+        }
+
+        .brand-title {
+            font-size: 1.25rem;
+            font-weight: 900;
+            letter-spacing: 1.5px;
+            color: var(--salad);
+        }
+
+        .brand-sub {
+            font-size: 0.74rem;
+            color: var(--text-muted);
+            margin-top: 2px;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .icon-btn {
+            background: var(--cherry-dark);
+            border: 1px solid var(--card-border);
+            color: var(--salad);
+            padding: 6px 12px;
+            border-radius: 12px;
+            font-size: 0.78rem;
+            cursor: pointer;
+            font-weight: 700;
+        }
+
+        .container {
+            padding: 14px;
+        }
+
+        .tab-view {
+            display: none;
+        }
+
+        .tab-view.active {
+            display: block;
+            animation: fadeIn 0.2s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(4px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 18px;
+            padding: 16px;
+            margin-bottom: 14px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .card-title {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: var(--cream);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        /* Mode Switcher */
+        .mode-switch {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            background: var(--cherry-dark);
+            padding: 4px;
+            border-radius: 12px;
+            border: 1px solid var(--card-border);
+            margin-bottom: 14px;
+        }
+
+        .mode-btn {
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            padding: 9px;
+            border-radius: 9px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .mode-btn.active {
+            background: var(--card-bg);
+            color: var(--salad);
+            border: 1px solid var(--card-border);
+            font-weight: 700;
+        }
+
+        /* Calorie Stats */
+        .cal-main {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            margin-bottom: 12px;
+        }
+
+        .cal-left-big {
+            font-size: 2.2rem;
+            font-weight: 800;
+            line-height: 1;
+            color: var(--cream);
+        }
+
+        .cal-left-label {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            margin-top: 4px;
+        }
+
+        .progress-bar-bg {
+            width: 100%;
+            height: 10px;
+            background: var(--cherry-dark);
+            border-radius: 99px;
+            overflow: hidden;
+            margin: 10px 0;
+            border: 1px solid var(--card-border);
+        }
+
+        .progress-bar-fill {
+            height: 100%;
+            background: var(--salad);
+            border-radius: 99px;
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        .macros-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+            margin-top: 12px;
+            padding-top: 12px;
+            border-top: 1px solid var(--card-border);
+        }
+
+        .macro-box {
+            background: var(--cherry-dark);
+            padding: 8px 6px;
+            border-radius: 10px;
+            text-align: center;
+            border: 1px solid var(--card-border);
+        }
+
+        .macro-val {
+            font-size: 0.88rem;
+            font-weight: 700;
+            color: var(--salad);
+        }
+
+        .macro-lbl {
+            font-size: 0.68rem;
+            color: var(--text-muted);
+        }
+
+        /* Drinks */
+        .drinks-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        .drink-box {
+            background: var(--cherry-dark);
+            border: 1px solid var(--card-border);
+            border-radius: 14px;
+            padding: 12px;
+        }
+
+        .drink-title {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            margin-bottom: 6px;
+        }
+
+        .drink-count {
+            font-size: 1.15rem;
+            font-weight: 800;
+            margin-bottom: 8px;
+            color: var(--salad);
+        }
+
+        .btn-small {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            color: var(--cream);
+            padding: 6px 10px;
+            border-radius: 8px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            cursor: pointer;
+            margin-right: 4px;
+        }
+
+        .btn-primary {
+            background: var(--salad);
+            color: var(--cherry-dark);
+            border: none;
+            padding: 11px 16px;
+            border-radius: 12px;
+            font-size: 0.86rem;
+            font-weight: 800;
+            cursor: pointer;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: opacity 0.2s;
+        }
+
+        .btn-primary:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        /* Chips */
+        .presets-scroll {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 7px;
+            margin-bottom: 14px;
+        }
+
+        .chip {
+            background: var(--cherry-dark);
+            border: 1px solid var(--card-border);
+            color: var(--cream);
+            padding: 7px 10px;
+            border-radius: 11px;
+            font-size: 0.76rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .chip span.kcal {
+            color: var(--salad);
+            font-weight: 700;
+        }
+
+        /* Inputs */
+        input[type="text"], input[type="number"], input[type="password"], select, textarea {
+            background: var(--cherry-dark);
+            border: 1px solid var(--card-border);
+            color: var(--cream);
+            padding: 10px 12px;
+            border-radius: 10px;
+            font-size: 0.85rem;
+            outline: none;
+            width: 100%;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            border-color: var(--salad);
+        }
+
+        .input-group {
+            display: grid;
+            grid-template-columns: 1fr 85px 42px;
+            gap: 8px;
+            margin-top: 8px;
+        }
+
+        .btn-add {
+            background: var(--salad);
+            color: var(--cherry-dark);
+            border: none;
+            border-radius: 10px;
+            font-weight: 800;
+            font-size: 1.2rem;
+            cursor: pointer;
+        }
+
+        /* Food List */
+        .food-list {
+            list-style: none;
+            margin-top: 10px;
+        }
+
+        .food-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 9px 0;
+            border-bottom: 1px solid var(--card-border);
+            font-size: 0.84rem;
+        }
+
+        .food-item:last-child {
+            border-bottom: none;
+        }
+
+        .food-kcal {
+            font-weight: 700;
+            color: var(--salad);
+            margin-right: 8px;
+        }
+
+        .btn-del {
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            cursor: pointer;
+        }
+
+        /* Weight */
+        .weight-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+
+        .weight-stat {
+            text-align: center;
+        }
+
+        .weight-stat .val {
+            font-size: 1.2rem;
+            font-weight: 800;
+            color: var(--salad);
+        }
+
+        .weight-stat .lbl {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+        }
+
+        /* Camera / Photo Scanner */
+        .upload-zone {
+            border: 2px dashed var(--card-border);
+            background: var(--cherry-dark);
+            border-radius: 16px;
+            padding: 20px 14px;
+            text-align: center;
+            cursor: pointer;
+            margin-bottom: 12px;
+            transition: border-color 0.2s;
+            display: block;
+        }
+
+        .upload-zone:hover {
+            border-color: var(--salad);
+        }
+
+        .preview-img {
+            max-width: 100%;
+            max-height: 240px;
+            border-radius: 12px;
+            display: none;
+            margin: 10px auto;
+            object-fit: cover;
+        }
+
+        .ai-result-box {
+            background: var(--cherry-dark);
+            border: 1px solid var(--salad);
+            border-radius: 14px;
+            padding: 14px;
+            margin-top: 12px;
+            display: none;
+        }
+
+        /* Body & Face Check */
+        .bf-badge-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 8px;
+            margin-bottom: 12px;
+        }
+
+        .bf-stat-card {
+            background: var(--cherry-dark);
+            border: 1px solid var(--card-border);
+            border-radius: 12px;
+            padding: 10px;
+            text-align: center;
+        }
+
+        .bf-stat-card .num {
+            font-size: 1.15rem;
+            font-weight: 800;
+            color: var(--salad);
+        }
+
+        .bf-stat-card .sub {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            margin-top: 2px;
+        }
+
+        .milestone-list {
+            list-style: none;
+            margin-top: 8px;
+        }
+
+        .milestone-item {
+            background: var(--cherry-dark);
+            border-left: 3px solid var(--salad);
+            padding: 9px 11px;
+            border-radius: 8px;
+            margin-bottom: 8px;
+            font-size: 0.8rem;
+            line-height: 1.4;
+            border: 1px solid var(--card-border);
+        }
+
+        /* Budget & Geo Styles */
+        .geo-banner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: var(--cherry-dark);
+            border: 1px solid var(--card-border);
+            padding: 10px 12px;
+            border-radius: 12px;
+            margin-bottom: 12px;
+            font-size: 0.8rem;
+        }
+
+        .store-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 9px 10px;
+            background: var(--cherry-dark);
+            border-radius: 10px;
+            margin-bottom: 6px;
+            font-size: 0.82rem;
+            border: 1px solid var(--card-border);
+        }
+
+        .store-price {
+            font-weight: 700;
+            color: var(--salad);
+        }
+
+        /* Chat Styles */
+        .chat-box {
+            height: 350px;
+            overflow-y: auto;
+            background: var(--cherry-dark);
+            border: 1px solid var(--card-border);
+            border-radius: 14px;
+            padding: 12px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .msg {
+            max-width: 85%;
+            padding: 10px 13px;
+            border-radius: 14px;
+            font-size: 0.84rem;
+            line-height: 1.4;
+        }
+
+        .msg.ai {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            align-self: flex-start;
+            border-bottom-left-radius: 4px;
+        }
+
+        .msg.user {
+            background: var(--salad);
+            color: var(--cherry-dark);
+            align-self: flex-end;
+            border-bottom-right-radius: 4px;
+            font-weight: 700;
+        }
+
+        /* Bottom Nav (5 tabs) */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            max-width: 480px;
+            background: rgba(74, 4, 28, 0.98);
+            backdrop-filter: blur(12px);
+            border-top: 1px solid var(--card-border);
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            padding: 8px 4px 14px;
+            z-index: 100;
+        }
+
+        .nav-item {
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            font-size: 0.65rem;
+            font-weight: 600;
+            cursor: pointer;
+            padding: 4px 2px;
+        }
+
+        .nav-item.active {
+            color: var(--salad);
+        }
+
+        .nav-icon {
+            font-size: 1.15rem;
+        }
+
+        /* Modal */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.8);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 16px;
+            z-index: 200;
+        }
+
+        .modal-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 18px;
+            padding: 20px;
+            width: 100%;
+            max-width: 400px;
+        }
+
+        .helper-text {
+            font-size: 0.76rem;
+            color: var(--text-muted);
+            line-height: 1.4;
+            margin: 8px 0 12px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- SPLASH SCREEN -->
+    <div id="splashScreen">
+        <div class="splash-logo">VASSKASS</div>
+        <div class="splash-quote">«Ты с каждым днем будешь прекраснее чем вчера»</div>
+    </div>
+
+    <header>
+        <div>
+            <div class="brand-title">
+                VASSKASS • FLOW
+            </div>
+            <div class="brand-sub" id="nyCountdown">🎄 До НГ: -- дн. • Цель: 68 → 60 кг</div>
+        </div>
+        <div class="header-actions">
+            <button class="icon-btn" onclick="openModal()" id="apiKeyBtn">🔑 ИИ-ключ</button>
+        </div>
+    </header>
+
+    <div class="container">
+
+        <!-- Вкладка 1: Дневник калорий -->
+        <div class="tab-view active" id="tab-diary">
+            <div class="mode-switch">
+                <button class="mode-btn active" id="modeShift" onclick="setMode(1450, 'shift')">⚡ Смена 13ч (1450 ккал)</button>
+                <button class="mode-btn" id="modeOff" onclick="setMode(1600, 'off')">🌿 Выходной (1600 ккал)</button>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">🔥 Бюджет калорий</div>
+                    <button class="btn-small" onclick="resetDay()">Новый день</button>
+                </div>
+                <div class="cal-main">
+                    <div>
+                        <div class="cal-left-big" id="calRemaining">1450</div>
+                        <div class="cal-left-label" id="calStatusText">ккал осталось на сегодня</div>
+                    </div>
+                    <div style="text-align: right;">
+                        <div style="font-size: 0.78rem; color: var(--text-muted);">Съедено</div>
+                        <div style="font-size: 1.15rem; font-weight: 700;" id="calConsumed">0 / 1450</div>
+                    </div>
+                </div>
+                <div class="progress-bar-bg">
+                    <div class="progress-bar-fill" id="calBar"></div>
+                </div>
+                <div class="macros-grid">
+                    <div class="macro-box">
+                        <div class="macro-val" id="savedSugarCals">0 ккал</div>
+                        <div class="macro-lbl">Сэкономлено Zero</div>
+                    </div>
+                    <div class="macro-box">
+                        <div class="macro-val" id="mealsCount">0</div>
+                        <div class="macro-lbl">Приемов пищи</div>
+                    </div>
+                    <div class="macro-box">
+                        <div class="macro-val" id="projectedLoss">-0.0 кг</div>
+                        <div class="macro-lbl">Темп в неделю</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Энергетики и Вода -->
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">⚡ Станция: Энергетики & Вода</div>
+                </div>
+                <div class="drinks-row">
+                    <div class="drink-box">
+                        <div class="drink-title">Банок Zero сегодня</div>
+                        <div class="drink-count" id="zeroCount">0 шт</div>
+                        <button class="btn-small" onclick="addZeroDrink()">+ Zero (10 ккал)</button>
+                    </div>
+                    <div class="drink-box">
+                        <div class="drink-title">Стаканов воды</div>
+                        <div class="drink-count" style="color: var(--water);" id="waterCount">0 / 6</div>
+                        <button class="btn-small" onclick="addWater(1)">+ Стакан</button>
+                        <button class="btn-small" onclick="addWater(-1)">-</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Быстрые кнопки -->
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">🍱 Быстрые кнопки</div>
+                </div>
+                <div class="presets-scroll">
+                    <button class="chip" onclick="quickAdd('Энергетик с сахаром 0.5', 230)">🥫 Обычный энергетик <span class="kcal">230</span></button>
+                    <button class="chip" onclick="quickAdd('Сладкая вода 0.5', 210)">🥤 Сладкая вода <span class="kcal">210</span></button>
+                    <button class="chip" onclick="quickAdd('Шаурма / Ролл с курицей', 480)">🌯 Ролл с курицей <span class="kcal">480</span></button>
+                    <button class="chip" onclick="quickAdd('Роллы Филадельфия (8 шт)', 420)">🍣 Филадельфия <span class="kcal">420</span></button>
+                    <button class="chip" onclick="quickAdd('Маки с лососем/огурцом', 260)">🥢 Маки роллы <span class="kcal">260</span></button>
+                    <button class="chip" onclick="quickAdd('Горячий сэндвич с ветчиной', 340)">🥪 Сэндвич <span class="kcal">340</span></button>
+                    <button class="chip" onclick="quickAdd('Паста с курицей / Боул', 490)">🍝 Паста / Боул <span class="kcal">490</span></button>
+                    <button class="chip" onclick="quickAdd('Протеиновый пудинг/батончик', 180)">🍫 Прот. десерт <span class="kcal">180</span></button>
+                    <button class="chip" onclick="quickAdd('Пельмени / Наггетсы (порция)', 350)">🥟 Быстрый ужин <span class="kcal">350</span></button>
+                </div>
+
+                <div class="input-group">
+                    <input type="text" id="customName" placeholder="Что скушала?">
+                    <input type="number" id="customKcal" placeholder="ккал">
+                    <button class="btn-add" onclick="addCustomFood()">+</button>
+                </div>
+
+                <ul class="food-list" id="foodList"></ul>
+            </div>
+
+            <!-- Вес -->
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">⚖️ Мой вес</div>
+                </div>
+                <div class="weight-row">
+                    <div class="weight-stat"><div class="val">78.0</div><div class="lbl">Старт</div></div>
+                    <div class="weight-stat"><div class="val" id="currentWeightDisplay">78.0</div><div class="lbl">Сейчас</div></div>
+                    <div class="weight-stat"><div class="val">68.0</div><div class="lbl">К НГ</div></div>
+                    <div class="weight-stat"><div class="val" style="color: var(--warning);">60.0</div><div class="lbl">Цель</div></div>
+                </div>
+                <div class="progress-bar-bg">
+                    <div class="progress-bar-fill" id="weightBar" style="width: 5%;"></div>
+                </div>
+                <div class="input-group" style="grid-template-columns: 1fr 105px;">
+                    <input type="number" step="0.1" id="weightInput" placeholder="Утренний вес (кг)">
+                    <button class="btn-small" style="background: var(--salad); color: var(--cherry-dark); font-weight: 700;" onclick="updateWeight()">Обновить</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Вкладка 2: ИИ-Фото Сканер Еды -->
+        <div class="tab-view" id="tab-photo">
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">📸 Сфоткай еду — я посчитаю калории</div>
+                </div>
+                <p class="helper-text">
+                    Сфотографируй свою тарелку, доставку, шаурму или баночку напитка. Я распознаю порцию, посчитаю калории и БЖУ, и ты сможешь в один клик добавить блюдо в свой дневник!
+                </p>
+
+                <label class="upload-zone" for="foodPhotoInput">
+                    <div style="font-size: 2rem; margin-bottom: 6px;">📷</div>
+                    <div style="font-weight: 700; font-size: 0.9rem;">Нажми, чтобы сделать фото еды или выбрать из галереи</div>
+                    <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 4px;">Поддерживаются любые фото еды и этикеток</div>
+                </label>
+                <input type="file" id="foodPhotoInput" accept="image/*" capture="environment" style="display: none;" onchange="previewFoodPhoto(event)">
+                <img id="photoPreview" class="preview-img" alt="Предпросмотр еды">
+
+                <input type="text" id="photoNote" placeholder="Комментарий (необязательно, напр: съела половину)" style="margin-bottom: 10px;">
+
+                <button class="btn-primary" id="analyzePhotoBtn" onclick="analyzeFoodPhoto()">
+                    ✨ Рассчитать калории по фото
+                </button>
+
+                <div class="ai-result-box" id="photoResultBox">
+                    <div style="font-weight: 800; color: var(--salad); font-size: 1rem; margin-bottom: 6px;" id="resDishName">Блюдо</div>
+                    <div style="font-size: 0.84rem; line-height: 1.45; margin-bottom: 12px;" id="resDishDesc">Описание...</div>
+                    <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--card-border); padding-top: 10px;">
+                        <span style="font-size: 1.1rem; font-weight: 800;" id="resDishKcal">0 ккал</span>
+                        <button class="btn-small" style="background: var(--salad); color: var(--cherry-dark); font-weight: 800; padding: 8px 14px;" onclick="addScannedFoodToDiary()">+ Добавить в дневник</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Вкладка 3: Скан Лица и Тела (Здоровье, Отеки, % Жира) -->
+        <div class="tab-view" id="tab-body">
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">🪞 ИИ-чекап лица и фигуры</div>
+                </div>
+                <p class="helper-text">
+                    Загрузи селфи или фото фигуры в зеркале. Я бережно разберу: где на самом деле <b>обычный отек и задержка воды</b>, а где жировая ткань, оценю текущий % жира и покажу, после скольких сброшенных кг изменится овал лица и талия.
+                </p>
+
+                <div class="bf-badge-grid">
+                    <div class="bf-stat-card">
+                        <div class="num" id="bfPercentDisplay">~33.5%</div>
+                        <div class="sub">Оценка % жира сейчас</div>
+                    </div>
+                    <div class="bf-stat-card">
+                        <div class="num" style="color: var(--water);" id="waterRetentionEst">2.0–3.0 кг</div>
+                        <div class="sub">Из них лишняя вода/отек</div>
+                    </div>
+                </div>
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; margin-bottom: 12px;">
+                    <div>
+                        <label style="font-size: 0.7rem; color: var(--text-muted);">Талия (см)</label>
+                        <input type="number" id="waistInput" placeholder="Напр. 82" onchange="updateBodyMetrics()">
+                    </div>
+                    <div>
+                        <label style="font-size: 0.7rem; color: var(--text-muted);">Бедра (см)</label>
+                        <input type="number" id="hipsInput" placeholder="Напр. 106" onchange="updateBodyMetrics()">
+                    </div>
+                    <div>
+                        <label style="font-size: 0.7rem; color: var(--text-muted);">Сон сегодня (ч)</label>
+                        <input type="number" id="sleepInput" placeholder="Напр. 6" onchange="updateBodyMetrics()">
+                    </div>
+                </div>
+
+                <div class="mode-switch" style="margin-bottom: 12px;">
+                    <button class="mode-btn active" id="scanTypeFace" onclick="setScanType('face')">😊 Разбор лица (отеки/свежесть)</button>
+                    <button class="mode-btn" id="scanTypeBody" onclick="setScanType('body')">👗 Разбор фигуры (% жира/пропорции)</button>
+                </div>
+
+                <label class="upload-zone" for="bodyPhotoInput">
+                    <div style="font-size: 2rem; margin-bottom: 6px;">🤳</div>
+                    <div style="font-weight: 700; font-size: 0.88rem;">Сделать фото лица / тела или выбрать из галереи</div>
+                    <div style="font-size: 0.73rem; color: var(--text-muted); margin-top: 4px;">Фото никуда не публикуется — разбор только для тебя</div>
+                </label>
+                <input type="file" id="bodyPhotoInput" accept="image/*" style="display: none;" onchange="previewBodyPhoto(event)">
+                <img id="bodyPhotoPreview" class="preview-img" alt="Предпросмотр селфи/тела">
+
+                <input type="text" id="bodyConcernInput" placeholder="Что самой не нравится? (напр: пухлые щеки утром, живот к вечеру)" style="margin-bottom: 10px;">
+
+                <button class="btn-primary" id="analyzeBodyBtn" onclick="analyzeBodyAndFace()">
+                    🔍 Разобрать фото + рассчитать сколько убрать
+                </button>
+
+                <div class="ai-result-box" id="bodyResultBox" style="white-space: pre-wrap; font-size: 0.83rem; line-height: 1.5;"></div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">✨ Когда и как будет меняться внешность</div>
+                </div>
+                <p class="helper-text">При росте 165 см и старте 78 кг твое лицо и тело реагируют на каждый шаг вот так:</p>
+                <ul class="milestone-list">
+                    <li class="milestone-item">
+                        <b>Шаг 1: Минус первые 2.5–3 кг (до 75 кг за первые 10–14 дней)</b><br>
+                        Уходит отек. Сразу открываются глаза по утрам, уходит припухлость под глазами и в нижней трети лица.
+                    </li>
+                    <li class="milestone-item">
+                        <b>Шаг 2: Минус 6–8 кг (вес 70–72 кг)</b><br>
+                        Четко прорисовываются скулы и угол челюсти, живот становится площе.
+                    </li>
+                    <li class="milestone-item">
+                        <b>Шаг 3: Минус 10–12 кг (вес 66–68 кг к Новому году)</b><br>
+                        Здоровый фитнес-уровень жира. Тонкая талия, легкая походка.
+                    </li>
+                    <li class="milestone-item">
+                        <b>Шаг 4: Финал 60–63 кг</b><br>
+                        Твоя студенческая форма 2023 года и точеные черты лица.
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Вкладка 4: Бюджет, Цены и Геолокация -->
+        <div class="tab-view" id="tab-budget">
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">📍 Моя локация и магазины рядом</div>
+                </div>
+                <div class="geo-banner">
+                    <div>
+                        <div style="font-weight: 700;" id="geoCityText">📍 Симферополь / Крым</div>
+                        <div style="font-size: 0.72rem; color: var(--text-muted);" id="geoCoordsText">Магазины: ПУД, Яблоко, Магазины у дома</div>
+                    </div>
+                    <button class="btn-small" onclick="detectGeolocation()">🎯 Определить GPS</button>
+                </div>
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 12px;">
+                    <div>
+                        <label style="font-size: 0.74rem; color: var(--text-muted);">Бюджет на неделю (₽)</label>
+                        <input type="number" id="weeklyBudgetInput" value="3500" onchange="updateBudgetState()">
+                    </div>
+                    <div>
+                        <label style="font-size: 0.74rem; color: var(--text-muted);">Лимит на день (₽)</label>
+                        <input type="text" id="dailyBudgetCalc" value="500 ₽ / день" disabled>
+                    </div>
+                </div>
+
+                <div style="margin-bottom: 12px;">
+                    <label style="font-size: 0.74rem; color: var(--text-muted);">Твои пожелания (что любишь или что есть дома):</label>
+                    <input type="text" id="budgetPrefs" placeholder="Напр: хочу пасту с курицей, тосты, сырки и энергетики Zero">
+                </div>
+
+                <button class="btn-primary" id="genBudgetBtn" onclick="generateSmartMenuAndPrices()">
+                    🛒 Составить меню + смету по моим магазинам
+                </button>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">🧾 Справочник местных цен и готовый набор</div>
+                </div>
+                <p class="helper-text">Быстрый ориентир цен (ПУД / Яблоко / Симферополь) на продукты для 13-часовых смен:</p>
+                <div id="defaultPricesList">
+                    <div class="store-item"><span>🍗 Филе куриное / Индейка (1 кг)</span><span class="store-price">~390 ₽</span></div>
+                    <div class="store-item"><span>🌯 Лаваш армянский + творожный сыр</span><span class="store-price">~210 ₽</span></div>
+                    <div class="store-item"><span>🥚 Яйца С1 (10 шт) + Тостовый хлеб</span><span class="store-price">~185 ₽</span></div>
+                    <div class="store-item"><span>🍝 Паста твердых сортов + соус томатный</span><span class="store-price">~190 ₽</span></div>
+                    <div class="store-item"><span>⚡ Энергетик Zero / Без сахара (банка 0.5)</span><span class="store-price">~95–120 ₽</span></div>
+                    <div class="store-item"><span>🍫 Протеиновый пудинг / сырок к чаю</span><span class="store-price">~85–130 ₽</span></div>
+                    <div class="store-item"><span>🥟 Наггетсы / пельмени с курицей (пачка)</span><span class="store-price">~260 ₽</span></div>
+                </div>
+
+                <div class="ai-result-box" id="budgetAiResult" style="display: none; white-space: pre-wrap; font-size: 0.83rem; line-height: 1.5;"></div>
+            </div>
+        </div>
+
+        <!-- Вкладка 5: Личный чат со мной (Gemini) -->
+        <div class="tab-view" id="tab-chat">
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">💬 Твой ИИ-напарник (всегда рядом)</div>
+                </div>
+                <div class="chat-box" id="chatBox">
+                    <div class="msg ai">
+                        Привет, Карина! 💚 Я всегда на связи. «Ты с каждым днем будешь прекраснее чем вчера» — помни об этом на каждой смене! Пиши мне по любым вопросам.
+                    </div>
+                </div>
+                <div style="display: grid; grid-template-columns: 1fr 48px; gap: 8px;">
+                    <input type="text" id="chatInput" placeholder="Напиши мне..." onkeypress="if(event.key==='Enter') sendChatMessage()">
+                    <button class="btn-add" onclick="sendChatMessage()">➤</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Нижняя панель навигации (5 вкладок) -->
+    <nav class="bottom-nav">
+        <button class="nav-item active" onclick="switchTab('diary', this)">
+            <span class="nav-icon">🔥</span>
+            <span>Дневник</span>
+        </button>
+        <button class="nav-item" onclick="switchTab('photo', this)">
+            <span class="nav-icon">📸</span>
+            <span>Еда по фото</span>
+        </button>
+        <button class="nav-item" onclick="switchTab('body', this)">
+            <span class="nav-icon">🪞</span>
+            <span>Лицо & Тело</span>
+        </button>
+        <button class="nav-item" onclick="switchTab('budget', this)">
+            <span class="nav-icon">🛒</span>
+            <span>Бюджет</span>
+        </button>
+        <button class="nav-item" onclick="switchTab('chat', this)">
+            <span class="nav-icon">💬</span>
+            <span>Чат</span>
+        </button>
+    </nav>
+
+    <!-- Модальное окно для ключа Gemini API -->
+    <div class="modal-overlay" id="apiModal">
+        <div class="modal-card">
+            <div class="card-title" style="margin-bottom: 8px;">🔑 Подключение мозгов Gemini</div>
+            <p class="helper-text">
+                Чтобы я мог распознавать твои фото еды, делать разбор лица/фигуры по фото и генерировать списки покупок прямо из этого файла на телефоне, вставь сюда бесплатный ключ <b>Gemini API Key</b> (с сайта <i>aistudio.google.com</i>). Ключ хранится только на твоем устройстве.
+            </p>
+            <input type="password" id="apiKeyInput" placeholder="AIzaSy..." style="margin-bottom: 12px;">
+            <div style="display: flex; gap: 8px;">
+                <button class="btn-primary" onclick="saveApiKey()">Сохранить ключ</button>
+                <button class="btn-small" onclick="closeModal()">Закрыть</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Splash screen auto-hide after 2.2 seconds
+        window.addEventListener('DOMContentLoaded', () => {
+            setTimeout(() => {
+                const splash = document.getElementById('splashScreen');
+                if (splash) {
+                    splash.classList.add('fade-out');
+                    setTimeout(() => splash.remove(), 500);
+                }
+            }, 2200);
+        });
+
+        let state = {
+            targetKcal: 1450,
+            mode: 'shift',
+            foods: [],
+            zeroCount: 0,
+            waterCount: 0,
+            currentWeight: 78.0,
+            weeklyBudget: 3500,
+            locationName: 'Симферополь / Крым',
+            coords: null,
+            waist: '',
+            hips: '',
+            sleep: '',
+            scanType: 'face'
+        };
+
+        let currentImageBase64 = null;
+        let currentImageMime = 'image/jpeg';
+        let lastScannedFood = { name: 'Блюдо по фото', kcal: 350 };
+
+        let bodyImageBase64 = null;
+        let bodyImageMime = 'image/jpeg';
+
+        function loadState() {
+            const saved = localStorage.getItem('vasskass_tracker_v6') || localStorage.getItem('vasskass_tracker_v5');
+            if (saved) {
+                state = { ...state, ...JSON.parse(saved) };
+            }
+            const key = localStorage.getItem('karina_gemini_key');
+            if (key) {
+                document.getElementById('apiKeyInput').value = key;
+                document.getElementById('apiKeyBtn').innerText = '✅ ИИ активен';
+            }
+            updateCountdown();
+            render();
+        }
+
+        function saveState() {
+            localStorage.setItem('vasskass_tracker_v6', JSON.stringify(state));
+            render();
+        }
+
+        function switchTab(tabId, btnEl) {
+            document.querySelectorAll('.tab-view').forEach(el => el.classList.remove('active'));
+            document.getElementById('tab-' + tabId).classList.add('active');
+            document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
+            btnEl.classList.add('active');
+        }
+
+        function openModal() {
+            document.getElementById('apiModal').style.display = 'flex';
+        }
+
+        function closeModal() {
+            document.getElementById('apiModal').style.display = 'none';
+        }
+
+        function saveApiKey() {
+            const key = document.getElementById('apiKeyInput').value.trim();
+            if (key) {
+                localStorage.setItem('karina_gemini_key', key);
+                document.getElementById('apiKeyBtn').innerText = '✅ ИИ активен';
+            }
+            closeModal();
+        }
+
+        function updateCountdown() {
+            const now = new Date();
+            const ny = new Date(now.getFullYear() + 1, 0, 1);
+            const diff = Math.ceil((ny - now) / (1000 * 60 * 60 * 24));
+            document.getElementById('nyCountdown').innerText = `🎄 До НГ: ${diff} дн. • Цель: 68 → 60 кг`;
+        }
+
+        function setMode(kcal, modeName) {
+            state.targetKcal = kcal;
+            state.mode = modeName;
+            saveState();
+        }
+
+        function quickAdd(name, kcal) {
+            state.foods.push({ name, kcal, id: Date.now() });
+            saveState();
+        }
+
+        function addCustomFood() {
+            const nameEl = document.getElementById('customName');
+            const kcalEl = document.getElementById('customKcal');
+            const name = nameEl.value.trim() || 'Перекус';
+            const kcal = parseInt(kcalEl.value);
+            if (!isNaN(kcal) && kcal > 0) {
+                state.foods.push({ name, kcal, id: Date.now() });
+                nameEl.value = '';
+                kcalEl.value = '';
+                saveState();
+            }
+        }
+
+        function removeFood(id) {
+            state.foods = state.foods.filter(f => f.id !== id);
+            saveState();
+        }
+
+        function addZeroDrink() {
+            state.zeroCount += 1;
+            state.foods.push({ name: '⚡ Энергетик / Газировка Zero', kcal: 10, id: Date.now() });
+            saveState();
+        }
+
+        function addWater(delta) {
+            state.waterCount = Math.max(0, state.waterCount + delta);
+            saveState();
+        }
+
+        function resetDay() {
+            if (confirm('Начать новый день и обнулить список съеденного за сегодня?')) {
+                state.foods = [];
+                state.zeroCount = 0;
+                state.waterCount = 0;
+                saveState();
+            }
+        }
+
+        function updateWeight() {
+            const val = parseFloat(document.getElementById('weightInput').value);
+            if (!isNaN(val) && val > 40 && val < 150) {
+                state.currentWeight = val;
+                document.getElementById('weightInput').value = '';
+                saveState();
+            }
+        }
+
+        function updateBudgetState() {
+            const val = parseInt(document.getElementById('weeklyBudgetInput').value) || 3500;
+            state.weeklyBudget = val;
+            saveState();
+        }
+
+        function updateBodyMetrics() {
+            state.waist = document.getElementById('waistInput').value;
+            state.hips = document.getElementById('hipsInput').value;
+            state.sleep = document.getElementById('sleepInput').value;
+            saveState();
+        }
+
+        function setScanType(type) {
+            state.scanType = type;
+            document.getElementById('scanTypeFace').classList.toggle('active', type === 'face');
+            document.getElementById('scanTypeBody').classList.toggle('active', type === 'body');
+        }
+
+        function calculateBodyFatPercentage(weightKg) {
+            const heightM = 1.65;
+            const bmi = weightKg / (heightM * heightM);
+            const bf = (1.20 * bmi) + (0.23 * 20) - 5.4;
+            return Math.max(16, Math.min(45, bf)).toFixed(1);
+        }
+
+        function detectGeolocation() {
+            const cityEl = document.getElementById('geoCityText');
+            const coordsEl = document.getElementById('geoCoordsText');
+            if (!navigator.geolocation) {
+                alert('Геолокация не поддерживается браузером');
+                return;
+            }
+            cityEl.innerText = '📡 Определяю координаты...';
+            navigator.geolocation.getCurrentPosition(
+                async (pos) => {
+                    const lat = pos.coords.latitude.toFixed(4);
+                    const lon = pos.coords.longitude.toFixed(4);
+                    state.coords = `${lat}, ${lon}`;
+                    try {
+                        const res = await fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}&accept-language=ru`);
+                        const data = await res.json();
+                        const city = data.address.city || data.address.town || data.address.village || 'Симферополь';
+                        const road = data.address.road || '';
+                        state.locationName = `${city}${road ? ', ' + road : ''}`;
+                    } catch (e) {
+                        state.locationName = `Координаты: ${lat}, ${lon}`;
+                    }
+                    saveState();
+                },
+                () => {
+                    cityEl.innerText = '📍 Симферополь (по умолчанию)';
+                    coordsEl.innerText = 'Доступ к GPS не выдан — использую базу цен Симферополя';
+                }
+            );
+        }
+
+        function previewFoodPhoto(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+            currentImageMime = file.type || 'image/jpeg';
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const preview = document.getElementById('photoPreview');
+                preview.src = e.target.result;
+                preview.style.display = 'block';
+                currentImageBase64 = e.target.result.split(',')[1];
+            };
+            reader.readAsDataURL(file);
+        }
+
+        async function analyzeFoodPhoto() {
+            const key = localStorage.getItem('karina_gemini_key');
+            if (!currentImageBase64) {
+                alert('Сначала сфотографируй или выбери фото еды!');
+                return;
+            }
+            if (!key) {
+                openModal();
+                return;
+            }
+
+            const btn = document.getElementById('analyzePhotoBtn');
+            btn.disabled = true;
+            btn.innerText = '⏳ Рассчитываю калории и вес порции...';
+
+            const note = document.getElementById('photoNote').value.trim();
+            const prompt = `Ты личный диетолог и друг Карины. Определи блюдо на фото ${note ? '(Уточнение от Карины: ' + note + ')' : ''}. 
+Ответь СТРОГО в формате JSON без markdown-обертки:
+{"name": "Короткое название блюда и примерный вес", "kcal": число_калорий_целым_числом, "details": "Разбор БЖУ, из чего состоит и дружеский совет для похудения без стресса"}`;
+
+            try {
+                const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${key}`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        contents: [{
+                            parts: [
+                                { text: prompt },
+                                { inline_data: { mime_type: currentImageMime, data: currentImageBase64 } }
+                            ]
+                        }]
+                    })
+                });
+                const data = await response.json();
+                const rawText = data.candidates[0].content.parts[0].text.replace(/```json|```/g, '').trim();
+                const parsed = JSON.parse(rawText);
+
+                lastScannedFood = { name: '📸 ' + parsed.name, kcal: parseInt(parsed.kcal) || 350 };
+                document.getElementById('resDishName').innerText = parsed.name;
+                document.getElementById('resDishDesc').innerText = parsed.details;
+                document.getElementById('resDishKcal').innerText = `${lastScannedFood.kcal} ккал`;
+                document.getElementById('photoResultBox').style.display = 'block';
+            } catch (err) {
+                alert('Не удалось распознать фото. Проверь интернет или правильность ИИ-ключа!');
+            } finally {
+                btn.disabled = false;
+                btn.innerText = '✨ Рассчитать калории по фото';
+            }
+        }
+
+        function addScannedFoodToDiary() {
+            state.foods.push({ name: lastScannedFood.name, kcal: lastScannedFood.kcal, id: Date.now() });
+            saveState();
+            alert(`Добавлено в дневник: ${lastScannedFood.name} (${lastScannedFood.kcal} ккал)`);
+        }
+
+        function previewBodyPhoto(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+            bodyImageMime = file.type || 'image/jpeg';
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const preview = document.getElementById('bodyPhotoPreview');
+                preview.src = e.target.result;
+                preview.style.display = 'block';
+                bodyImageBase64 = e.target.result.split(',')[1];
+            };
+            reader.readAsDataURL(file);
+        }
+
+        async function analyzeBodyAndFace() {
+            const key = localStorage.getItem('karina_gemini_key');
+            const outBox = document.getElementById('bodyResultBox');
+            const concern = document.getElementById('bodyConcernInput').value.trim();
+            const bf = calculateBodyFatPercentage(state.currentWeight);
+            const to68 = Math.max(0, (state.currentWeight - 68).toFixed(1));
+            const to63 = Math.max(0, (state.currentWeight - 63).toFixed(1));
+
+            outBox.style.display = 'block';
+
+            if (!key || !bodyImageBase64) {
+                outBox.innerText = `🪞 ПЕРСОНАЛЬНЫЙ РАЗБОР (Рост 165 см, Вес ${state.currentWeight} кг):
+
+1. Что сейчас дает визуальный объем и усталый вид:
+• Из твоих ${state.currentWeight} кг примерно 2.5–3 кг — это НЕ жир, а межклеточная жидкость (лимфатический застой от 13 часов сидения + задержка воды от сахара и энергетиков).
+• На лице это проявляется утренней припухлостью век и мягкостью нижней трети лица.
+
+2. Твой уровень жира сейчас и здоровая норма:
+• Расчетный процент жира сейчас: ~${bf}%.
+• Здоровый эстетичный уровень для девушки 20 лет: 22–26%.
+
+3. Сколько нужно убрать, чтобы это изменилось:
+• Чтобы сошел отек с лица и глаз: первые 2–3 кг (7–10 дней после перехода на Zero).
+• Чтобы ушли бока и подтянулся живот: убрать ${to68} кг (дойти до 68 кг к Новому году).
+• Финал 60 кг: убрать ${to63} кг.
+
+💡 (Подключи бесплатный ИИ-ключ сверху, чтобы я делал детальный разбор прямо по твоим фото!)`;
+                return;
+            }
+
+            const btn = document.getElementById('analyzeBodyBtn');
+            btn.disabled = true;
+            btn.innerText = '⏳ Внимательно разбираю фото...';
+
+            const prompt = `Ты бережный, тактичный, но честный эксперт по эстетике лица, тела и здоровью для 20-летней девушки Карины (рост 165 см, вес сейчас ${state.currentWeight} кг, сидячая работа по 13 часов в день).
+Тип фото: ${state.scanType === 'face' ? 'Лицо / Селфи' : 'Фигура / Тело'}.
+Замеры: талия ${state.waist || 'не указана'} см, бедра ${state.hips || 'не указана'} см.
+Вопрос: ${concern || 'хочет понять, что выглядит отекшим, какой процент жира и сколько кг убрать'}.
+
+Сделай разбор по фото с теплотой и поддержкой:
+1. Визуальные маркеры отечности и усталости.
+2. Оценка процента жира (соотнеси с ~${bf}%).
+3. План в килограммах: вода и жир.
+4. Два быстрых действия на сегодня.`;
+
+            try {
+                const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${key}`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        contents: [{
+                            parts: [
+                                { text: prompt },
+                                { inline_data: { mime_type: bodyImageMime, data: bodyImageBase64 } }
+                            ]
+                        }]
+                    })
+                });
+                const data = await response.json();
+                outBox.innerText = data.candidates[0].content.parts[0].text;
+            } catch (e) {
+                outBox.innerText = 'Не удалось отправить фото на разбор. Проверь подключение к интернету или ИИ-ключ.';
+            } finally {
+                btn.disabled = false;
+                btn.innerText = '🔍 Разобрать фото + рассчитать сколько убрать';
+            }
+        }
+
+        async function generateSmartMenuAndPrices() {
+            const key = localStorage.getItem('karina_gemini_key');
+            const budget = state.weeklyBudget;
+            const prefs = document.getElementById('budgetPrefs').value.trim() || 'Вкусная простая еда на 13-часовую смену, роллы в лаваше, паста, энергетики Zero';
+            const outBox = document.getElementById('budgetAiResult');
+            outBox.style.display = 'block';
+
+            if (!key) {
+                const daily = Math.round(budget / 7);
+                outBox.innerText = `📍 Локация: ${state.locationName}
+💰 Твой бюджет: ${budget} ₽ на неделю (~${daily} ₽ в день)
+
+🛒 Готовый план закупки в супермаркетах (ПУД / Яблоко / у дома) на 1450 ккал/день:
+1. Куриное филе или индейка (1.2 кг) — ~460 ₽
+2. Армянский лаваш (2 уп) + творожный сыр — ~320 ₽
+3. Яйца (10 шт) + тостовый хлеб — ~185 ₽
+4. Макароны твердых сортов + соус — ~210 ₽
+5. Наггетсы или пельмени с курицей — ~280 ₽
+6. Упаковка энергетиков Zero (6-7 банок) — ~650 ₽
+7. Протеиновые пудинги / сырки — ~550 ₽
+
+Итого по корзине: ~2850 ₽ (остается еще ${Math.max(0, budget - 2850)} ₽ на доставку роллов в выходной!).`;
+                return;
+            }
+
+            const btn = document.getElementById('genBudgetBtn');
+            btn.disabled = true;
+            btn.innerText = '⏳ Подбираю цены и меню по локации...';
+
+            const prompt = `Ты помощник Карины (20 лет, работает по 13 часов, худеет на 1450 ккал, любит энергетики Zero).
+Локация: ${state.locationName}. Бюджет на неделю: ${budget} рублей. Пожелания: ${prefs}.
+Составь список покупок с ценами в местных супермаркетах и уложись в бюджет.`;
+
+            try {
+                const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${key}`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] })
+                });
+                const data = await response.json();
+                outBox.innerText = data.candidates[0].content.parts[0].text;
+            } catch (e) {
+                outBox.innerText = 'Ошибка соединения с ИИ.';
+            } finally {
+                btn.disabled = false;
+                btn.innerText = '🛒 Составить меню + смету по моим магазинам';
+            }
+        }
+
+        async function sendChatMessage() {
+            const inputEl = document.getElementById('chatInput');
+            const text = inputEl.value.trim();
+            if (!text) return;
+
+            const box = document.getElementById('chatBox');
+            box.innerHTML += `<div class="msg user">${text}</div>`;
+            inputEl.value = '';
+            box.scrollTop = box.scrollHeight;
+
+            const consumed = state.foods.reduce((a, b) => a + b.kcal, 0);
+            const rem = state.targetKcal - consumed;
+            const key = localStorage.getItem('karina_gemini_key');
+
+            if (!key) {
+                box.innerHTML += `<div class="msg ai">Карина, у тебя осталось <b>${rem} ккал</b>. «Ты с каждым днем будешь прекраснее чем вчера»! Подключи ИИ-ключ сверху для живого диалога. 💚</div>`;
+                box.scrollTop = box.scrollHeight;
+                return;
+            }
+
+            const sysContext = `Ты теплый ИИ-друг Карины. Осталось калорий: ${rem} из ${state.targetKcal}. Вес: ${state.currentWeight} кг. Вопрос: ${text}`;
+
+            try {
+                const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${key}`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ contents: [{ parts: [{ text: sysContext }] }] })
+                });
+                const data = await response.json();
+                box.innerHTML += `<div class="msg ai">${data.candidates[0].content.parts[0].text}</div>`;
+                box.scrollTop = box.scrollHeight;
+            } catch (e) {
+                box.innerHTML += `<div class="msg ai">Ошибка соединения.</div>`;
+            }
+        }
+
+        function render() {
+            document.getElementById('modeShift').classList.toggle('active', state.mode === 'shift');
+            document.getElementById('modeOff').classList.toggle('active', state.mode === 'off');
+
+            const consumed = state.foods.reduce((acc, item) => acc + item.kcal, 0);
+            const remaining = state.targetKcal - consumed;
+
+            const remEl = document.getElementById('calRemaining');
+            const statusEl = document.getElementById('calStatusText');
+
+            if (remaining >= 0) {
+                remEl.innerText = remaining;
+                remEl.style.color = 'var(--cream)';
+                statusEl.innerText = 'ккал осталось на сегодня';
+            } else {
+                remEl.innerText = '+' + Math.abs(remaining);
+                remEl.style.color = 'var(--warning)';
+                statusEl.innerText = 'ккал сверх дневной цели';
+            }
+
+            document.getElementById('calConsumed').innerText = `${consumed} / ${state.targetKcal}`;
+            const pct = Math.min(100, Math.round((consumed / state.targetKcal) * 100));
+            document.getElementById('calBar').style.width = pct + '%';
+
+            const savedCals = state.zeroCount * 220;
+            document.getElementById('savedSugarCals').innerText = `${savedCals} ккал`;
+            document.getElementById('mealsCount').innerText = state.foods.length;
+
+            const dailyDeficit = Math.max(0, 1850 - (consumed > 0 ? consumed : state.targetKcal));
+            const weeklyLoss = ((dailyDeficit * 7) / 7700).toFixed(2);
+            document.getElementById('projectedLoss').innerText = `-${weeklyLoss} кг`;
+
+            document.getElementById('zeroCount').innerText = `${state.zeroCount} шт`;
+            document.getElementById('waterCount').innerText = `${state.waterCount} / 6`;
+
+            const listEl = document.getElementById('foodList');
+            listEl.innerHTML = '';
+            state.foods.slice().reverse().forEach(item => {
+                const li = document.createElement('li');
+                li.className = 'food-item';
+                li.innerHTML = `
+                    <span>${item.name}</span>
+                    <div>
+                        <span class="food-kcal">${item.kcal} ккал</span>
+                        <button class="btn-del" onclick="removeFood(${item.id})">✕</button>
+                    </div>
+                `;
+                listEl.appendChild(li);
+            });
+
+            document.getElementById('currentWeightDisplay').innerText = state.currentWeight.toFixed(1);
+            const totalToLose = 78.0 - 60.0;
+            const lostSoFar = Math.max(0, 78.0 - state.currentWeight);
+            const weightPct = Math.min(100, Math.max(4, Math.round((lostSoFar / totalToLose) * 100)));
+            document.getElementById('weightBar').style.width = weightPct + '%';
+
+            const bf = calculateBodyFatPercentage(state.currentWeight);
+            document.getElementById('bfPercentDisplay').innerText = `~${bf}%`;
+
+            document.getElementById('weeklyBudgetInput').value = state.weeklyBudget;
+            document.getElementById('dailyBudgetCalc').value = `${Math.round(state.weeklyBudget / 7)} ₽ / день`;
+            document.getElementById('geoCityText').innerText = `📍 ${state.locationName}`;
+            if (state.coords) {
+                document.getElementById('geoCoordsText').innerText = `GPS: ${state.coords} • Местные супермаркеты`;
+            }
+
+            if (state.waist) document.getElementById('waistInput').value = state.waist;
+            if (state.hips) document.getElementById('hipsInput').value = state.hips;
+            if (state.sleep) document.getElementById('sleepInput').value = state.sleep;
+        }
+
+        loadState();
+    </script>
+</body>
+</html>
