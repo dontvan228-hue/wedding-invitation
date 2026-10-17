@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>VASSKASS • FLOW</title>
+    <style>
+        :root {
+            --bg-color: #690627;
+            --accent-lime: #bdd999;
+            --card-bg: rgba(255, 255, 255, 0.08);
+            --card-border: rgba(189, 217, 153, 0.25);
+            --text-main: #ffffff;
+            --text-muted: rgba(255, 255, 255, 0.7);
+            --danger: #ff6b6b;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; }
+        body { background-color: var(--bg-color); color: var(--text-main); min-height: 100vh; display: flex; flex-direction: column; overflow-x: hidden; }
+        
+        /* Премиальный Splash Screen */
+        #splash {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(135deg, #4a041c 0%, #690627 100%);
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            z-index: 9999; opacity: 1; transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .splash-logo { font-size: 36px; font-weight: 900; letter-spacing: 3px; color: var(--accent-lime); margin-bottom: 12px; text-transform: uppercase; animation: pulseGlow 2s infinite alternate; }
+        .splash-quote { font-size: 15px; color: var(--text-muted); text-align: center; padding: 0 40px; font-style: italic; margin-bottom: 30px; opacity: 0; animation: fadeInText 1s ease 0.3s forwards; }
+        .loader-bar { width: 140px; height: 4px; background: rgba(255,255,255,0.2); border-radius: 2px; overflow: hidden; position: relative; }
+        .loader-fill { position: absolute; top: 0; left: 0; height: 100%; width: 0%; background: var(--accent-lime); animation: loadProgress 1.6s ease forwards; }
+
+        @keyframes pulseGlow { 0% { transform: scale(0.95); text-shadow: 0 0 10px rgba(189,217,153,0.3); } 100% { transform: scale(1.05); text-shadow: 0 0 25px rgba(189,217,153,0.7); } }
+        @keyframes fadeInText { to { opacity: 1; } }
+        @keyframes loadProgress { to { width: 100%; } }
+
+        /* Шапка */
+        header { padding: 14px 20px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--card-border); background: rgba(105, 6, 39, 0.9); backdrop-filter: blur(12px); position: sticky; top: 0; z-index: 100; }
+        .logo { font-size: 18px; font-weight: 800; letter-spacing: 1px; color: var(--accent-lime); }
+        .header-actions { display: flex; gap: 8px; align-items: center; }
+        .notif-btn { background: rgba(189, 217, 153, 0.2); color: var(--accent-lime); padding: 6px 12px; border-radius: 20px; font-size: 11px; font-weight: 700; border: 1px solid var(--accent-lime); cursor: pointer; }
+
+        /* Контейнер */
+        .container { flex: 1; padding: 16px; padding-bottom: 110px; overflow-y: auto; max-width: 600px; margin: 0 auto; width: 100%; }
+        .tab-content { display: none; animation: fadeInTab 0.3s ease; }
+        .tab-content.active { display: block; }
+
+        @keyframes fadeInTab { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* Карточки */
+        .card { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 18px; padding: 20px; margin-bottom: 16px; backdrop-filter: blur(12px); box-shadow: 0 8px 32px rgba(0,0,0,0.15); }
+        .card-title { font-size: 15px; font-weight: 700; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; color: var(--accent-lime); }
+
+        /* Предупреждение о срыве */
+        .strict-banner { background: rgba(255, 107, 107, 0.15); border: 1px solid var(--danger); border-radius: 16px; padding: 16px; margin-bottom: 16px; display: none; animation: shakeAlert 0.5s ease; }
+        .strict-banner.visible { display: block; }
+        .strict-title { color: var(--danger); font-weight: 800; font-size: 15px; margin-bottom: 6px; }
+        .strict-text { font-size: 13px; color: #fff; line-height: 1.4; margin-bottom: 10px; }
+
+        @keyframes shakeAlert { 0%, 100% { transform: translateX(0); } 20%, 60% { transform: translateX(-6px); } 40%, 80% { transform: translateX(6px); } }
+
+        /* Чат */
+        .chat-container { display: flex; flex-direction: column; height: calc(100vh - 220px); min-height: 380px; }
+        .chat-messages { flex: 1; overflow-y: auto; padding-bottom: 10px; display: flex; flex-direction: column; gap: 12px; }
+        .msg { max-width: 82%; padding: 13px 16px; border-radius: 16px; font-size: 14px; line-height: 1.4; word-break: break-word; }
+        .msg.user { background: var(--accent-lime); color: #222; align-self: flex-end; border-bottom-right-radius: 4px; font-weight: 500; }
+        .msg.ai { background: rgba(255, 255, 255, 0.15); color: #fff; align-self: flex-start; border-bottom-left-radius: 4px; border: 1px solid var(--card-border); }
+        .msg.ai-strict { background: rgba(255, 107, 107, 0.2); border: 1px solid var(--danger); color: #fff; }
+        
+        .chat-input-area { display: flex; gap: 8px; margin-top: 10px; }
+        .chat-input-area input { flex: 1; background: rgba(0,0,0,0.25); border: 1px solid var(--card-border); border-radius: 14px; padding: 14px 16px; color: #fff; font-size: 14px; outline: none; }
+        .chat-input-area button { background: var(--accent-lime); color: #222; border: none; border-radius: 14px; padding: 0 20px; font-weight: 800; cursor: pointer; }
+
+        /* Нижняя навигация (исправлен синтаксис тега) */
+        nav { position: fixed; bottom: 0; left: 0; width: 100%; background: rgba(105, 6, 39, 0.98); backdrop-filter: blur(20px); border-top: 1px solid var(--card-border); display: flex; justify-content: space-around; padding: 12px 0; z-index: 1000; }
+        .nav-item { background: none; border: none; color: var(--text-muted); font-size: 11px; display: flex; flex-direction: column; align-items: center; gap: 4px; cursor: pointer; flex: 1; transition: color 0.2s; }
+        .nav-item.active { color: var(--accent-lime); font-weight: 800; }
+        .nav-item span.icon { font-size: 20px; }
+
+        .btn-primary { width: 100%; background: var(--accent-lime); color: #222; border: none; border-radius: 14px; padding: 15px; font-weight: 800; font-size: 15px; cursor: pointer; margin-top: 10px; box-shadow: 0 4px 15px rgba(189,217,153,0.3); }
+        .btn-danger { background: rgba(255, 107, 107, 0.2); color: #ffb1b1; border: 1px solid var(--danger); }
+    </style>
+</head>
+<body>
+
+    <!-- Заставка -->
+    <div id="splash">
+        <div class="splash-logo">VASSKASS</div>
+        <div class="splash-quote">«Ты с каждым днем будешь прекраснее чем вчера»</div>
+        <div class="loader-bar"><div class="loader-fill"></div></div>
+    </div>
+
+    <header>
+        <div class="logo">VASSKASS • FLOW</div>
+        <div class="header-actions">
+            <button class="notif-btn" onclick="requestNotificationPermission()">🔔 Пуши</button>
+        </div>
+    </header>
+
+    <div class="container">
+        <!-- ТАБ 1: ДНЕВНИК -->
+        <div id="tab-diary" class="tab-content active">
+            
+            <div class="strict-banner" id="strictBanner">
+                <div class="strict-title">🚨 ТЫ ЧЕ ТВОРИШЬ?!</div>
+                <div class="strict-text">Эй? А как ты потом одежду заказывать будешь, если опять сорвешься на углеводы? Вспомни цель: 60 кг к Новому году!</div>
+                <button class="btn-primary" style="margin-top:0; background: var(--danger); color:#fff;" onclick="dismissStrict()">Поняла, держусь 🛑</button>
+            </div>
+
+            <div class="card">
+                <div class="card-title">🔥 Бюджет калорий на смену</div>
+                <div style="font-size: 30px; font-weight: 900; margin-bottom: 6px;">1450 ккал</div>
+                <div style="font-size: 13px; color: var(--text-muted); margin-bottom: 15px;">Цель: 78 кг ➔ 60 кг (До НГ: 76 дн.)</div>
+                <button class="btn-primary btn-danger" onclick="triggerOvereatAlert()">🍔 Я сорвалась и поела лишнего</button>
+            </div>
+
+            <div class="card">
+                <div class="card-title">⚡ Станция: Энергетики & Вода</div>
+                <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 12px;">Контроль отеков на 13-часовой смене</p>
+                <button class="btn-primary" onclick="alert('Отлично! Вода выведет застой жидкости, лицо будет сиять.')">+ Выпить стакан воды (0/6)</button>
+                <button class="btn-primary" style="background: rgba(255,255,255,0.15); color: #fff; margin-top: 8px;" onclick="sendTestNotification()">📲 Тест пуш-уведомления</button>
+            </div>
+        </div>
+
+        <!-- ТАБ 2: ЧАТ С ИИ -->
+        <div id="tab-chat" class="tab-content">
+            <div class="card chat-container">
+                <div class="card-title">💬 Твой бескомпромиссный ИИ-тренер</div>
+                <div class="chat-messages" id="chatMessages">
+                    <div class="msg ai">Привет, Карина! Я здесь. Нажми вверху «🔔 Пуши», чтобы включить уведомления на главный экран, и пиши мне в любой момент!</div>
+                </div>
+                <div class="chat-input-area">
+                    <input type="text" id="userInput" placeholder="Напиши что-нибудь..." onkeypress="if(event.key==='Enter') sendMessage()">
+                    <button onclick="sendMessage()">➤</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Нижняя навигация (исправлено: правильный тег nav вместо nav>) -->
+    <nav>
+        <button class="nav-item active" onclick="switchTab('diary', this)">
+            <span class="icon">🔥</span>Дневник
+        </button>
+        <button class="nav-item" onclick="switchTab('chat', this)">
+            <span class="icon">💬</span>Чат с ИИ
+        </button>
+    </nav>
+
+    <script>
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                const splash = document.getElementById('splash');
+                splash.style.opacity = '0';
+                splash.style.transform = 'scale(1.05)';
+                setTimeout(() => splash.style.display = 'none', 800);
+            }, 1800);
+        });
+
+        function switchTab(tabId, btn) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
+            document.getElementById('tab-' + tabId).classList.add('active');
+            btn.classList.add('active');
+        }
+
+        function requestNotificationPermission() {
+            if (!("Notification" in window)) {
+                alert("Этот браузер не поддерживает системные уведомления.");
+                return;
+            }
+            Notification.requestPermission().then(permission => {
+                if (permission === "granted") {
+                    alert("Уведомления включены! Теперь приложение будет присылать предупреждения.");
+                    new Notification("VASSKASS • FLOW", {
+                        body: "Уведомления активированы. Мы идем к цели в 60 кг!"
+                    });
+                } else {
+                    alert("Доступ к уведомлениям отклонен в настройках телефона.");
+                }
+            });
+        }
+
+        function sendTestNotification() {
+            if (Notification.permission === "granted") {
+                new Notification("🚨 ТЫ ЧЕ ТВОРИШЬ?!", {
+                    body: "Эй? А как ты потом одежду заказывать будешь? Вспомни про цель в 60 кг!"
+                });
+            } else {
+                alert("Сначала нажми кнопку «🔔 Пуши» вверху экрана!");
+                requestNotificationPermission();
+            }
+        }
+
+        function triggerOvereatAlert() {
+            const banner = document.getElementById('strictBanner');
+            banner.classList.add('visible');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            
+            if (Notification.permission === "granted") {
+                new Notification("🚨 ТЫ ЧЕ ТВОРИШЬ?!", {
+                    body: "Опять лишние калории на смене? А как потом одежда сидеть будет?"
+                });
+            }
+
+            const messages = document.getElementById('chatMessages');
+            const aiMsg = document.createElement('div');
+            aiMsg.className = 'msg ai msg-strict';
+            aiMsg.textContent = "🚨 ТЫ ЧЕ ТВОРИШЬ?! Карина, ну серьезно! Эй? А как ты потом одежду заказывать будешь? Вместо оверсайза будем худеть к Новому году! Бери воду Zero и возвращайся к плану!";
+            messages.appendChild(aiMsg);
+            messages.scrollTop = messages.scrollHeight;
+        }
+
+        function dismissStrict() {
+            document.getElementById('strictBanner').classList.remove('visible');
+        }
+
+        function sendMessage() {
+            const input = document.getElementById('userInput');
+            const text = input.value.trim();
+            if (!text) return;
+
+            const messages = document.getElementById('chatMessages');
+            const userMsg = document.createElement('div');
+            userMsg.className = 'msg user';
+            userMsg.textContent = text;
+            messages.appendChild(userMsg);
+            input.value = '';
+            messages.scrollTop = messages.scrollHeight;
+
+            setTimeout(() => {
+                const aiMsg = document.createElement('div');
+                aiMsg.className = 'msg ai';
+                
+                const lower = text.toLowerCase();
+                if (lower.includes('торт') || lower.includes('сладк') || lower.includes('жру') || lower.includes('еда') || lower.includes('бургер') || lower.includes('пицц')) {
+                    aiMsg.className = 'msg ai msg-strict';
+                    aiMsg.textContent = "Эй! Опять за старое? 😡 Вспомни про 78 кг и цель в 60! Никаких поблажек, пиши сколько воды выпила и марш на прогулку!";
+                    if (Notification.permission === "granted") {
+                        new Notification("🚨 ВНИМАНИЕ!", { body: "Хватит срываться! Думай о гардеробе и цели 60 кг!" });
+                    }
+                } else if (lower.includes('вес') || lower.includes('кг')) {
+                    aiMsg.textContent = "Карина, вес уйдет только тогда, когда мы перестанем срываться в ночные смены. Держим 1450 ккал, и к Новому году ты будешь неотразима!";
+                } else {
+                    aiMsg.textContent = "Я бдю за тобой, Карина! Твое приложение настроено на результат. Никаких компромиссов с лишними калориями, идем к 60 кг! 💚";
+                }
+
+                messages.appendChild(aiMsg);
+                messages.scrollTop = messages.scrollHeight;
+            }, 600);
+        }
+    </script>
+</body>
+</html>
